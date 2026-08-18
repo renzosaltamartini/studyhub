@@ -1,91 +1,655 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#080b12">
-  <title>StudyHub — Todo en un solo lugar</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>StudyHub</title>
 
-  <style>
-    :root{--bg:#080b12;--surface:#0f1420;--surface-2:#131a29;--line:rgba(255,255,255,.09);--text:#f5f7fb;--muted:#929bad;--blue:#6c8cff;--violet:#a77bf3;--green:#57d7a0;--amber:#f7c96b;--red:#ff7185;--radius:26px}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:"Manrope",sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}a{color:inherit;text-decoration:none}button{font:inherit}.text-muted-custom{color:var(--muted)!important}
-    body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 18% 8%,rgba(108,140,255,.14),transparent 28%),radial-gradient(circle at 85% 32%,rgba(167,123,243,.1),transparent 30%);z-index:-1}
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
 
-    .site-header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:16px 20px}.nav-shell{max-width:1180px;height:66px;margin:auto;padding:0 12px 0 20px;display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:20px;background:rgba(12,16,26,.72);box-shadow:0 18px 60px rgba(0,0,0,.28);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:-.03em}.brand-mark{width:36px;height:36px;display:grid;place-items:center;border-radius:11px;background:linear-gradient(135deg,var(--blue),var(--violet));box-shadow:0 8px 24px rgba(108,140,255,.25);font-size:13px}.brand-name{font-size:15px}.desktop-nav{display:flex;gap:4px}.desktop-nav a{padding:10px 15px;border-radius:11px;color:var(--muted);font-size:13px;font-weight:600;transition:.2s}.desktop-nav a:hover,.desktop-nav a.active{color:var(--text);background:rgba(255,255,255,.07)}.start-btn{display:inline-flex;align-items:center;gap:9px;border:0;border-radius:12px;padding:11px 16px;background:#f5f7fb;color:#090c12;font-size:13px;font-weight:800;transition:.25s}.start-btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(255,255,255,.12)}.menu-btn{display:none;width:42px;height:42px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.05);color:var(--text)}
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
 
-    .hero{position:relative;min-height:100svh;padding:145px 24px 70px;display:grid;place-items:center}.hero-inner{width:100%;max-width:1120px;text-align:center}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.035);color:#c5cbd6;font-size:12px;font-weight:600}.eyebrow-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(87,215,160,.1)}.hero h1{max-width:1000px;margin:26px auto 0;font-size:clamp(3rem,7.2vw,6.6rem);font-weight:800;line-height:.98;letter-spacing:-.075em}.hero h1 .soft{color:#747d90}.dynamic-line{min-height:1.25em;display:flex;justify-content:center;align-items:center}.dynamic-word{display:inline-flex;align-items:center;gap:.15em;color:var(--blue);text-shadow:0 0 42px rgba(108,140,255,.22)}.dynamic-word:after{content:"";width:.12em;height:.12em;border-radius:50%;background:currentColor;box-shadow:0 0 0 .09em rgba(108,140,255,.13);animation:pulse 1.5s infinite}.hero-copy{max-width:640px;margin:30px auto 0;color:var(--muted);font-size:clamp(15px,2vw,18px);line-height:1.75}.hero-actions{margin-top:34px;display:flex;justify-content:center;gap:12px}.primary-cta,.secondary-cta{min-height:50px;padding:0 20px;border-radius:14px;display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:700}.primary-cta{background:linear-gradient(135deg,var(--blue),#7c6cf4);box-shadow:0 14px 38px rgba(108,140,255,.22)}.secondary-cta{border:1px solid var(--line);background:rgba(255,255,255,.04);color:#ccd2dd}.scroll-cue{position:absolute;bottom:25px;left:50%;transform:translateX(-50%);color:#657086;font-size:18px;animation:float 2s ease-in-out infinite}
+    <!-- Manrope -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
 
-    .section-wrap{max-width:1180px;margin:auto;padding:115px 24px}.section-kicker{display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;color:var(--blue);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.section-title{max-width:720px;margin:0;font-size:clamp(2.1rem,4vw,3.65rem);font-weight:800;line-height:1.08;letter-spacing:-.055em}.section-lead{max-width:620px;margin:20px 0 0;color:var(--muted);line-height:1.8;font-size:15px}.feature-grid{margin-top:52px;display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.feature-card{grid-column:span 4;min-height:265px;padding:28px;position:relative;overflow:hidden;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));transition:.3s}.feature-card:hover{transform:translateY(-5px);border-color:rgba(255,255,255,.16);background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025))}.feature-card.wide{grid-column:span 8}.feature-card:after{content:"";position:absolute;width:160px;height:160px;border-radius:50%;right:-80px;top:-80px;background:var(--card-color);filter:blur(45px);opacity:.12}.icon-box{width:48px;height:48px;display:grid;place-items:center;border-radius:15px;background:color-mix(in srgb,var(--card-color) 14%,transparent);color:var(--card-color);font-size:18px}.feature-card h3{margin:45px 0 10px;font-size:18px;font-weight:700;letter-spacing:-.025em}.feature-card p{max-width:520px;margin:0;color:var(--muted);font-size:13px;line-height:1.75}
-
-    .showcase{border-block:1px solid var(--line);background:rgba(255,255,255,.018)}.showcase-grid{display:grid;grid-template-columns:.88fr 1.12fr;align-items:center;gap:70px}.showcase.reverse .showcase-copy{order:2}.showcase.reverse .app-window{order:1}.tag{display:inline-flex;gap:8px;align-items:center;padding:7px 11px;border-radius:999px;background:rgba(87,215,160,.09);color:var(--green);font-size:12px;font-weight:700}.showcase h2{margin:20px 0 0;font-size:clamp(2rem,4vw,3.4rem);font-weight:800;line-height:1.1;letter-spacing:-.055em}.showcase-copy>p{margin:20px 0 0;color:var(--muted);line-height:1.8}.app-window{padding:12px;border:1px solid var(--line);border-radius:30px;background:#0a0e16;box-shadow:0 30px 70px rgba(0,0,0,.34)}.window-inner{padding:24px;border:1px solid var(--line);border-radius:21px;background:var(--surface)}.window-top{display:flex;justify-content:space-between;align-items:center;padding-bottom:20px;border-bottom:1px solid var(--line)}.window-title{display:flex;align-items:center;gap:12px}.window-logo{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:rgba(108,140,255,.1);color:var(--blue)}.window-title strong,.folder-data strong,.file-data strong{display:block;font-size:13px}.window-title span,.folder-data span,.file-data span{display:block;margin-top:3px;color:#697386;font-size:10px}.mini-btn{width:34px;height:34px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.04);color:var(--muted)}.page-tree{padding-top:16px}.tree-row{display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:11px;color:#dbe0e9;font-size:13px}.tree-row i{width:14px;color:#6e788b;text-align:center}.tree-row.child{margin-left:31px;color:#8f99ab;border-left:1px solid var(--line);border-radius:0}.folder-block{margin-top:18px;padding:16px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.025)}.folder-head,.file-row{display:flex;align-items:center;justify-content:space-between}.folder-main,.file-main{display:flex;align-items:center;gap:12px}.folder-icon,.pdf-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:12px}.folder-icon{background:rgba(247,201,107,.1);color:var(--amber)}.file-row{margin-top:14px;padding:12px;border-radius:12px;background:#0b0f18}.pdf-icon{background:rgba(255,113,133,.1);color:var(--red)}
-
-    .site-footer{border-top:1px solid var(--line)}.footer-inner{max-width:1180px;margin:auto;padding:36px 24px;display:flex;align-items:center;justify-content:space-between;color:#727c8f;font-size:12px}.footer-brand{display:flex;align-items:center;gap:10px;color:#cbd1dc;font-weight:700}
-    .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}.reveal.visible{opacity:1;transform:none}@keyframes pulse{50%{transform:scale(1.45);opacity:.5}}@keyframes float{50%{transform:translate(-50%,7px)}}@keyframes wordIn{from{opacity:0;transform:translateY(12px);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}.word-enter{animation:wordIn .48s ease}
-
-    @media(max-width:900px){.desktop-nav{display:none}.menu-btn{display:grid;place-items:center}.start-btn{display:none}.nav-shell.open{height:auto;min-height:66px;align-items:flex-start;flex-wrap:wrap;padding-top:14px;padding-bottom:14px}.nav-shell.open .desktop-nav{display:flex;order:3;width:100%;flex-direction:column;padding-top:12px}.hero h1{letter-spacing:-.06em}.feature-card{grid-column:span 6}.feature-card.wide{grid-column:span 12}.showcase-grid{grid-template-columns:1fr;gap:45px}.showcase.reverse .showcase-copy,.showcase.reverse .app-window{order:initial}}
-    @media(max-width:600px){.site-header{padding:10px}.nav-shell{height:60px;border-radius:17px;padding-left:14px}.brand-name{display:none}.hero{padding:120px 18px 65px}.hero h1{font-size:clamp(2.75rem,14vw,4.1rem);letter-spacing:-.065em}.hero-copy{font-size:14px}.hero-actions{flex-direction:column}.primary-cta,.secondary-cta{justify-content:center;width:100%}.section-wrap{padding:85px 18px}.feature-grid{margin-top:36px}.feature-card,.feature-card.wide{grid-column:span 12;min-height:235px}.feature-card h3{margin-top:34px}.showcase-grid{gap:32px}.app-window{padding:8px;border-radius:22px}.window-inner{padding:16px;border-radius:16px}.tree-row{padding-inline:5px}.footer-inner{flex-direction:column;gap:12px;text-align:center}}
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
-  </style>
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-  <header class="site-header">
-    <nav class="nav-shell" id="navShell" aria-label="Navegación principal">
-      <a class="brand" href="/" aria-label="StudyHub, inicio"><span class="brand-mark">SH</span><span class="brand-name">StudyHub</span></a>
-      <div class="desktop-nav" id="desktopNav"><a href="/" class="active">Inicio</a><a href="/nosotros/">Nosotros</a><a href="/ayuda/">Ayuda</a></div>
-      <button class="start-btn" type="button">Comenzar <i class="fa-solid fa-arrow-right"></i></button>
-      <button class="menu-btn" id="menuBtn" type="button" aria-label="Abrir menú" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
-    </nav>
-  </header>
 
-  <main>
-    <section class="hero">
-      <div class="hero-inner">
-        <span class="eyebrow"><span class="eyebrow-dot"></span> Tu espacio de estudio inteligente</span>
-        <h1>Con nosotros podrás <span class="dynamic-line"><span id="dynamicWord" class="dynamic-word word-enter"><span id="wordText">crear</span></span></span><span class="soft">en un solo lugar.</span></h1>
-        <p class="hero-copy">Organiza materias, recordatorios, páginas y archivos en un espacio simple, pensado para acompañarte durante toda la facultad.</p>
-        <div class="hero-actions"><a class="primary-cta" href="#hub">Explorar StudyHub <i class="fa-solid fa-arrow-down"></i></a><a class="secondary-cta" href="/nosotros/">Conocernos</a></div>
-      </div>
-      <a class="scroll-cue" href="#hub" aria-label="Ver más"><i class="fa-solid fa-chevron-down"></i></a>
-    </section>
+    <!-- NAVBAR -->
+    <header class="navbar-header">
 
-    <section id="hub" class="section-wrap">
-      <div class="reveal"><span class="section-kicker"><i class="fa-solid fa-layer-group"></i> Tu espacio</span><h2 class="section-title">Todo comienza en tu Hub.</h2><p class="section-lead">Tu Hub es el centro de StudyHub. Desde ahí puedes organizar tus recordatorios, calendario, páginas, archivos y todo lo relacionado con tu estudio.</p></div>
-      <div class="feature-grid">
-        <article class="feature-card reveal" style="--card-color:var(--violet)"><div class="icon-box"><i class="fa-regular fa-bell"></i></div><h3>Recordatorios</h3><p>Agenda tus próximos recordatorios y mantén siempre visible aquello que tienes pendiente.</p></article>
-        <article class="feature-card reveal" style="--card-color:var(--blue)"><div class="icon-box"><i class="fa-regular fa-calendar"></i></div><h3>Calendario</h3><p>Visualiza tus días y agrega actividades, tareas, entregas o cualquier cosa que debas realizar.</p></article>
-        <article class="feature-card reveal" style="--card-color:var(--green)"><div class="icon-box"><i class="fa-regular fa-file-lines"></i></div><h3>Páginas</h3><p>Crea páginas y subpáginas para organizar materias, clases, apuntes y todo tu contenido.</p></article>
-        <article class="feature-card reveal" style="--card-color:var(--amber)"><div class="icon-box"><i class="fa-regular fa-folder-open"></i></div><h3>Archivos</h3><p>Guarda PDFs y otros archivos dentro de tus materias, con acceso rápido y vista previa.</p></article>
-        <article class="feature-card wide reveal" style="--card-color:var(--red)"><div class="icon-box"><i class="fa-regular fa-trash-can"></i></div><h3>Borrar Hub</h3><p>¿Quieres comenzar desde cero? Puedes reiniciar tu Hub y eliminar todo el contenido que hayas creado.</p></article>
-      </div>
-    </section>
+        <nav class="navbar-container">
 
-    <section class="showcase">
-      <div class="section-wrap showcase-grid">
-        <div class="showcase-copy reveal"><span class="tag"><i class="fa-regular fa-file-lines"></i> Páginas</span><h2>Organiza cada materia a tu manera.</h2><p>Crea una página principal para cada materia y dentro de ella agrega todas las subpáginas que necesites.</p></div>
-        <div class="app-window reveal"><div class="window-inner"><div class="window-top"><div class="window-title"><div class="window-logo"><i class="fa-solid fa-book-open"></i></div><div><strong>Mis páginas</strong><span>StudyHub</span></div></div><button class="mini-btn" aria-label="Agregar página"><i class="fa-solid fa-plus"></i></button></div><div class="page-tree"><div class="tree-row"><i class="fa-solid fa-chevron-down"></i><i class="fa-regular fa-file"></i> Álgebra</div><div class="tree-row child"><i class="fa-regular fa-file-lines"></i> Clase 1</div><div class="tree-row child"><i class="fa-regular fa-file-lines"></i> Clase 2</div><div class="tree-row"><i class="fa-solid fa-chevron-down"></i><i class="fa-regular fa-file"></i> Física</div><div class="tree-row child"><i class="fa-regular fa-file-lines"></i> Clase 1</div></div></div></div>
-      </div>
-    </section>
+            <!-- LOGO -->
+            <a href="/" class="navbar-logo">
 
-    <section class="showcase reverse">
-      <div class="section-wrap showcase-grid">
-        <div class="showcase-copy reveal"><span class="tag" style="color:var(--amber);background:rgba(247,201,107,.09)"><i class="fa-regular fa-folder-open"></i> Archivos</span><h2>Tus archivos, siempre donde los necesitas.</h2><p>Guarda documentos dentro de tus materias y accede a ellos sin tener que buscarlos entre carpetas distintas.</p></div>
-        <div class="app-window reveal"><div class="window-inner"><div class="window-top"><div class="window-title"><div class="window-logo"><i class="fa-regular fa-folder-open"></i></div><div><strong>Archivos</strong><span>Tus documentos organizados</span></div></div><button class="mini-btn" aria-label="Subir archivo"><i class="fa-solid fa-arrow-up-from-bracket"></i></button></div><div class="folder-block"><div class="folder-head"><div class="folder-main"><div class="folder-icon"><i class="fa-regular fa-folder"></i></div><div class="folder-data"><strong>Álgebra</strong><span>1 archivo</span></div></div></div><div class="file-row"><div class="file-main"><div class="pdf-icon"><i class="fa-regular fa-file-pdf"></i></div><div class="file-data"><strong>clase.pdf</strong><span>PDF</span></div></div><i class="fa-regular fa-eye text-muted-custom"></i></div></div></div></div>
-      </div>
-    </section>
-  </main>
+                <span class="logo-short">
+                    SH
+                </span>
 
-  <footer class="site-footer"><div class="footer-inner"><div class="footer-brand"><span class="brand-mark">SH</span> StudyHub</div><span>Todo en un solo lugar.</span></div></footer>
+                <span class="logo-divider"></span>
 
-  <script>
-    const words=[{text:"crear",color:"#6c8cff"},{text:"imaginar",color:"#a77bf3"},{text:"estudiar",color:"#57d7a0"},{text:"aprender",color:"#f7c96b"},{text:"organizar",color:"#ff7185"}];
-    let wordIndex=0;const dynamicWord=document.getElementById("dynamicWord"),wordText=document.getElementById("wordText");
-    if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches){setInterval(()=>{dynamicWord.classList.remove("word-enter");dynamicWord.style.opacity="0";setTimeout(()=>{wordIndex=(wordIndex+1)%words.length;wordText.textContent=words[wordIndex].text;dynamicWord.style.color=words[wordIndex].color;dynamicWord.style.opacity="1";void dynamicWord.offsetWidth;dynamicWord.classList.add("word-enter")},240)},2400)}
-    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("visible");observer.unobserve(entry.target)}}),{threshold:.12});document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
-    const menuBtn=document.getElementById("menuBtn"),navShell=document.getElementById("navShell");menuBtn.addEventListener("click",()=>{const open=navShell.classList.toggle("open");menuBtn.setAttribute("aria-expanded",open);menuBtn.innerHTML=open?'<i class="fa-solid fa-xmark"></i>':'<i class="fa-solid fa-bars"></i>'});
-  </script>
+                <span class="logo-name">
+                    StudyHub
+                </span>
+
+            </a>
+
+
+            <!-- NAVEGACIÓN -->
+            <div class="navbar-links">
+
+            <a href="/" class="nav-link-item active">
+                Inicio
+            </a>
+
+            <a href="/nosotros/" class="nav-link-item">
+                Nosotros
+            </a>
+
+            <a href="/ayuda/" class="nav-link-item">
+                Ayuda
+            </a>
+
+            </div>
+
+
+            <!-- INGRESAR -->
+            <button type="button" class="login-button">
+                <span>Comenzar</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <!-- HERO -->
+        <section id="inicio" class="hero">
+
+            <div class="hero-content">
+
+                <h1 class="hero-title">
+
+                    Con nosotros podrás
+
+                    <span class="dynamic-word-container">
+
+                        <span id="dynamicWord" class="dynamic-word word-enter">
+
+                            <span class="pulse-container">
+
+                                <span
+                                    id="pulseRing"
+                                    class="pulse-ring"
+                                ></span>
+
+                                <span
+                                    id="pulseDot"
+                                    class="pulse-dot"
+                                ></span>
+
+                            </span>
+
+                            <span id="wordText">
+                                crear
+                            </span>
+
+                        </span>
+
+                    </span>
+
+                    en un solo lugar.
+
+                </h1>
+
+            </div>
+
+        </section>
+
+
+        <!-- HUB CENTRAL -->
+        <section id="nosotros" class="hub-section">
+
+            <div class="section-heading">
+
+                <span class="section-badge neutral">
+
+                    <i class="fa-solid fa-layer-group"></i>
+
+                    Tu espacio
+
+                </span>
+
+                <h2>
+                    Todo comienza en tu Hub.
+                </h2>
+
+                <p>
+                    Tu Hub es el centro de StudyHub. Desde ahí puedes organizar tus
+                    recordatorios, calendario, páginas, archivos y todo lo relacionado
+                    con tu estudio.
+                </p>
+
+            </div>
+
+
+            <div class="features-grid">
+
+                <!-- RECORDATORIOS -->
+                <article class="feature-card">
+
+                    <div class="feature-icon violet">
+
+                        <i class="fa-regular fa-bell"></i>
+
+                    </div>
+
+                    <h3>
+                        Recordatorios
+                    </h3>
+
+                    <p>
+                        Agenda tus próximos recordatorios y mantén siempre visible
+                        aquello que tienes pendiente.
+                    </p>
+
+                </article>
+
+
+                <!-- CALENDARIO -->
+                <article class="feature-card">
+
+                    <div class="feature-icon blue">
+
+                        <i class="fa-regular fa-calendar"></i>
+
+                    </div>
+
+                    <h3>
+                        Calendario
+                    </h3>
+
+                    <p>
+                        Visualiza tus días y agrega actividades, tareas,
+                        entregas o cualquier cosa que debas realizar.
+                    </p>
+
+                </article>
+
+
+                <!-- PAGINAS -->
+                <article class="feature-card">
+
+                    <div class="feature-icon green">
+
+                        <i class="fa-regular fa-file-lines"></i>
+
+                    </div>
+
+                    <h3>
+                        Páginas
+                    </h3>
+
+                    <p>
+                        Crea páginas y subpáginas para organizar materias,
+                        clases, apuntes y todo tu contenido.
+                    </p>
+
+                </article>
+
+
+                <!-- ARCHIVOS -->
+                <article class="feature-card">
+
+                    <div class="feature-icon yellow">
+
+                        <i class="fa-regular fa-folder-open"></i>
+
+                    </div>
+
+                    <h3>
+                        Archivos
+                    </h3>
+
+                    <p>
+                        Guarda PDFs y otros archivos dentro de tus materias,
+                        con acceso rápido y vista previa.
+                    </p>
+
+                </article>
+
+
+                <!-- BORRAR HUB -->
+                <article class="feature-card feature-large">
+
+                    <div class="feature-icon red">
+
+                        <i class="fa-regular fa-trash-can"></i>
+
+                    </div>
+
+                    <h3>
+                        Borrar Hub
+                    </h3>
+
+                    <p>
+                        ¿Quieres comenzar desde cero? Puedes reiniciar tu Hub
+                        y eliminar todo el contenido que hayas creado.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- PAGINAS -->
+        <section class="pages-section">
+
+            <div class="content-grid">
+
+                <!-- TEXTO -->
+                <div class="content-info">
+
+                    <span class="section-badge green-badge">
+
+                        <i class="fa-regular fa-file-lines"></i>
+
+                        Páginas
+
+                    </span>
+
+                    <h2>
+                        Organiza cada materia a tu manera.
+                    </h2>
+
+                    <p>
+                        Crea una página principal para cada materia y dentro de ella
+                        agrega todas las subpáginas que necesites.
+                    </p>
+
+                </div>
+
+
+                <!-- EJEMPLO -->
+                <div class="preview-wrapper">
+
+                    <div class="preview-card">
+
+                        <div class="preview-header">
+
+                            <div class="preview-title">
+
+                                <div class="preview-main-icon">
+
+                                    <i class="fa-solid fa-book-open"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Mis páginas
+                                    </strong>
+
+                                    <span>
+                                        StudyHub
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <button class="icon-button">
+
+                                <i class="fa-solid fa-plus"></i>
+
+                            </button>
+
+                        </div>
+
+
+                        <!-- ALGEBRA -->
+                        <div class="page-group">
+
+                            <div class="page-parent">
+
+                                <i class="fa-solid fa-chevron-down arrow-small"></i>
+
+                                <i class="fa-regular fa-file"></i>
+
+                                <span>
+                                    Álgebra
+                                </span>
+
+                            </div>
+
+
+                            <div class="subpages">
+
+                                <div class="subpage">
+
+                                    <i class="fa-regular fa-file-lines"></i>
+
+                                    Clase 1
+
+                                </div>
+
+                                <div class="subpage">
+
+                                    <i class="fa-regular fa-file-lines"></i>
+
+                                    Clase 2
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- FISICA -->
+                        <div class="page-group">
+
+                            <div class="page-parent">
+
+                                <i class="fa-solid fa-chevron-down arrow-small"></i>
+
+                                <i class="fa-regular fa-file"></i>
+
+                                <span>
+                                    Física
+                                </span>
+
+                            </div>
+
+
+                            <div class="subpages">
+
+                                <div class="subpage">
+
+                                    <i class="fa-regular fa-file-lines"></i>
+
+                                    Clase 1
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ARCHIVOS -->
+        <section class="files-section">
+
+            <div class="content-grid">
+
+                <!-- EJEMPLO -->
+                <div class="files-preview">
+
+                    <div class="files-inner">
+
+                        <div class="files-header">
+
+                            <div>
+
+                                <strong>
+                                    Archivos
+                                </strong>
+
+                                <span>
+                                    Tus documentos organizados
+                                </span>
+
+                            </div>
+
+
+                            <button class="upload-button">
+
+                                <i class="fa-solid fa-arrow-up-from-bracket"></i>
+
+                                Subir
+
+                            </button>
+
+                        </div>
+
+
+                        <div class="folder-card">
+
+                            <div class="folder-heading">
+
+                                <div class="folder-icon">
+
+                                    <i class="fa-regular fa-folder"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Álgebra
+                                    </strong>
+
+                                    <span>
+                                        1 archivo
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="file-row">
+
+                                <div class="file-info">
+
+                                    <div class="pdf-icon">
+
+                                        <i class="fa-regular fa-file-pdf"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            clase.pdf
+                                        </strong>
+
+                                        <span>
+                                            PDF
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <button class="icon-button">
+
+                                    <i class="fa-regular fa-eye"></i>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TEXTO -->
+                <div class="content-info">
+
+                    <span class="section-badge yellow-badge">
+
+                        <i class="fa-regular fa-folder-open"></i>
+
+                        Archivos
+
+                    </span>
+
+                    <h2>
+                        Tus archivos, siempre donde los necesitas.
+                    </h2>
+
+                    <p>
+                        Guarda documentos dentro de tus materias y accede a ellos
+                        sin tener que buscarlos entre carpetas distintas.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer class="footer">
+
+            <div class="footer-content">
+
+                <div class="footer-logo">
+
+                    <span class="logo-short">
+                        SH
+                    </span>
+
+                    <span class="logo-divider"></span>
+
+                    <span>
+                        StudyHub
+                    </span>
+
+                </div>
+
+
+                <p>
+                    Todo en un solo lugar.
+                </p>
+
+            </div>
+
+        </footer>
+
+    </main>
+
+
+    <script>
+
+        const words = [
+            {
+                text: "crear",
+                background: "#eff6ff",
+                color: "#2563eb",
+                dot: "#3b82f6",
+                ring: "#60a5fa"
+            },
+            {
+                text: "imaginar",
+                background: "#f5f3ff",
+                color: "#7c3aed",
+                dot: "#8b5cf6",
+                ring: "#a78bfa"
+            },
+            {
+                text: "estudiar",
+                background: "#ecfdf5",
+                color: "#059669",
+                dot: "#10b981",
+                ring: "#34d399"
+            },
+            {
+                text: "aprender",
+                background: "#fffbeb",
+                color: "#d97706",
+                dot: "#f59e0b",
+                ring: "#fbbf24"
+            },
+            {
+                text: "organizar",
+                background: "#fff1f2",
+                color: "#e11d48",
+                dot: "#f43f5e",
+                ring: "#fb7185"
+            }
+        ];
+
+
+        let index = 0;
+
+        const dynamicWord = document.getElementById("dynamicWord");
+        const wordText = document.getElementById("wordText");
+        const pulseDot = document.getElementById("pulseDot");
+        const pulseRing = document.getElementById("pulseRing");
+
+
+        function changeWord() {
+
+            dynamicWord.classList.remove("word-enter");
+            dynamicWord.classList.add("word-leave");
+
+            setTimeout(() => {
+
+                index = (index + 1) % words.length;
+
+                const word = words[index];
+
+                dynamicWord.style.backgroundColor = word.background;
+                dynamicWord.style.color = word.color;
+
+                pulseDot.style.backgroundColor = word.dot;
+                pulseRing.style.backgroundColor = word.ring;
+
+                wordText.textContent = word.text;
+
+                dynamicWord.classList.remove("word-leave");
+
+                void dynamicWord.offsetWidth;
+
+                dynamicWord.classList.add("word-enter");
+
+            }, 260);
+
+        }
+
+        setInterval(changeWord, 2400);
+
+    </script>
+
 </body>
+
 </html>
