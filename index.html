@@ -72,7 +72,7 @@
 
             <!-- INGRESAR -->
             <button type="button" class="login-button">
-                <span>Ingresar</span>
+                <span>Comenzar</span>
                 <i class="fa-solid fa-arrow-right"></i>
             </button>
 
@@ -619,27 +619,34 @@
 
         function changeWord() {
 
-            index = (index + 1) % words.length;
-
-            const word = words[index];
-
-            dynamicWord.style.backgroundColor = word.background;
-            dynamicWord.style.color = word.color;
-
-            pulseDot.style.backgroundColor = word.dot;
-            pulseRing.style.backgroundColor = word.ring;
-
-            wordText.textContent = word.text;
-
             dynamicWord.classList.remove("word-enter");
+            dynamicWord.classList.add("word-leave");
 
-            void dynamicWord.offsetWidth;
+            setTimeout(() => {
 
-            dynamicWord.classList.add("word-enter");
+                index = (index + 1) % words.length;
+
+                const word = words[index];
+
+                dynamicWord.style.backgroundColor = word.background;
+                dynamicWord.style.color = word.color;
+
+                pulseDot.style.backgroundColor = word.dot;
+                pulseRing.style.backgroundColor = word.ring;
+
+                wordText.textContent = word.text;
+
+                dynamicWord.classList.remove("word-leave");
+
+                void dynamicWord.offsetWidth;
+
+                dynamicWord.classList.add("word-enter");
+
+            }, 260);
 
         }
 
-        setInterval(changeWord, 2200);
+        setInterval(changeWord, 2400);
 
     </script>
 
