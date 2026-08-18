@@ -33,7 +33,17 @@ button {
 ========================= */
 
 .navbar-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
     width: 100%;
+
+    background: rgba(252, 252, 252, 0.92);
+    border-bottom: 1px solid rgba(229, 229, 229, 0.8);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
 }
 
 .navbar-container {
@@ -117,6 +127,9 @@ button {
 /* INGRESAR */
 
 .login-button {
+    border: none;
+    cursor: pointer;
+
     display: flex;
     align-items: center;
     gap: 10px;
@@ -162,14 +175,14 @@ button {
 
 .hero {
     width: 100%;
-    max-width: 1200px;
-    min-height: 500px;
+    max-width: 1400px;
+    min-height: calc(100svh - 80px);
 
     margin: 0 auto;
-    padding: 80px 24px 64px;
+    padding: 24px;
 
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
 }
 
@@ -185,7 +198,7 @@ button {
 
     color: #191919;
 
-    font-size: 62px;
+    font-size: 76px;
     font-weight: 600;
     line-height: 1.08;
 
@@ -193,7 +206,7 @@ button {
 }
 
 .dynamic-word-container {
-    min-height: 100px;
+    min-height: 125px;
     margin-top: 12px;
 
     display: flex;
@@ -873,7 +886,7 @@ button {
     }
 
     .hero-title {
-        font-size: 50px;
+        font-size: 58px;
     }
 
     .features-grid {
@@ -899,15 +912,16 @@ button {
     }
 
     .hero {
-        padding-top: 60px;
+        min-height: calc(100svh - 80px);
+        padding: 24px 18px;
     }
 
     .hero-title {
-        font-size: 38px;
+        font-size: 42px;
     }
 
     .dynamic-word-container {
-        min-height: 85px;
+        min-height: 95px;
     }
 
     .features-grid {

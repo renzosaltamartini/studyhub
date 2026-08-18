@@ -8,7 +8,7 @@
 
     margin: 0 auto;
 
-    padding: 115px 24px 140px;
+    padding: 90px 24px 100px;
 }
 
 .about-hero-content {
@@ -73,6 +73,10 @@
 }
 
 .timeline-link {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+
     display: inline-flex;
     align-items: center;
     gap: 11px;
@@ -130,7 +134,7 @@
 
     margin: 0 auto;
 
-    padding: 110px 24px;
+    padding: 78px 24px;
 
     display: grid;
     grid-template-columns: 0.8fr 1.2fr;
@@ -196,7 +200,7 @@
 
     margin: 0 auto;
 
-    padding: 110px 24px;
+    padding: 72px 24px;
 }
 
 .creator-wrapper {
@@ -320,7 +324,7 @@
 
     margin: 0 auto;
 
-    padding: 90px 24px 150px;
+    padding: 72px 24px 95px;
 }
 
 .timeline-heading {
@@ -396,14 +400,14 @@
 .timeline-item {
     position: relative;
 
-    min-height: 220px;
+    min-height: 170px;
 
     display: grid;
     grid-template-columns: 90px 60px 1fr;
 
     gap: 0;
 
-    padding-bottom: 60px;
+    padding-bottom: 36px;
 }
 
 .timeline-date {
@@ -555,7 +559,7 @@
 
     margin: 0 auto;
 
-    padding: 0 24px 140px;
+    padding: 0 24px 100px;
 }
 
 .future-header {
@@ -779,4 +783,41 @@
         font-size: 34px;
     }
 
+}
+
+/* Scroll interno sin modificar la URL */
+#historia {
+    scroll-margin-top: 96px;
+}
+
+/* Redes todavía sin URL configurada */
+.social-links .social-placeholder {
+    width: 36px;
+    height: 36px;
+
+    padding: 0;
+    border: none;
+    border-radius: 11px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+    color: #737373;
+
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.social-links .social-placeholder:hover {
+    background: #f5f5f5;
+    color: #171717;
+    transform: translateY(-2px);
 }
