@@ -122,16 +122,6 @@
 
                 </h1>
 
-                <button
-                    type="button"
-                    class="scroll-indicator"
-                    id="scrollToContent"
-                    aria-label="Ver más contenido"
-                >
-                    <span>Descubrir</span>
-                    <i class="fa-solid fa-arrow-down"></i>
-                </button>
-
             </div>
 
         </section>
@@ -657,48 +647,6 @@
         }
 
         setInterval(changeWord, 2400);
-
-
-        const scrollToContent = document.getElementById("scrollToContent");
-        const firstContentSection = document.querySelector(".hub-section");
-
-        function revealContent() {
-            document.body.classList.add("content-revealed");
-        }
-
-        function updateContentReveal() {
-            if (window.scrollY > 24) {
-                revealContent();
-            }
-        }
-
-        if (scrollToContent && firstContentSection) {
-            scrollToContent.addEventListener("click", () => {
-                revealContent();
-
-                firstContentSection.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
-            });
-        }
-
-        window.addEventListener("scroll", updateContentReveal, {
-            passive: true
-        });
-
-        window.addEventListener("wheel", revealContent, {
-            passive: true,
-            once: true
-        });
-
-        window.addEventListener("touchmove", revealContent, {
-            passive: true,
-            once: true
-        });
-
-        requestAnimationFrame(updateContentReveal);
-
 
     </script>
 
