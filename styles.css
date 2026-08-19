@@ -159,12 +159,12 @@ button {
 }
 
 .login-button:hover {
-    background: #eeeeee;
-    color: #171717;
+    background: #4995f8;
+    color: #e7e7e7;
 }
 
 .login-button:hover i {
-    color: #171717;
+    color: #e7e7e7;
     transform: translateX(3px);
 }
 
