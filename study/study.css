@@ -80,7 +80,13 @@ button { font: inherit; }
     transition: background .2s ease, color .2s ease, transform .2s ease;
 }
 .back-button i { font-size: 10px; transition: transform .2s ease; }
-.back-button:hover { background: var(--surface); color: var(--blue); transform: translateY(-1px); }
+.back-button:hover {
+    background: #fff;
+    color: var(--black);
+    border-color: #b8b8b8;
+    box-shadow: 0 3px 10px rgba(0,0,0,.08);
+    transform: translateY(-1px);
+}
 .back-button:hover i { transform: translateX(-3px); }
 
 /* LOADING */
