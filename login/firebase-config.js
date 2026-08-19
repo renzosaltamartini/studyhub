@@ -1,6 +1,4 @@
-// Configuración de Firebase para StudyHub.
-// Estos datos identifican tu proyecto, pero no reemplazan las reglas de seguridad.
-
+// Reemplaza estos valores por los de Firebase Console > Configuración del proyecto > Tus apps.
 export const firebaseConfig = {
     apiKey: "TU_API_KEY",
     authDomain: "TU_PROYECTO.firebaseapp.com",
