@@ -5,7 +5,7 @@ import {
     updateProfile, sendPasswordResetEmail, onAuthStateChanged, signOut
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
-import { firebaseConfig } from "/login/firebase-config.js";
+import { firebaseConfig } from "/accesos/firebase-config.js";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
