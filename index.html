@@ -66,11 +66,6 @@ Te ayudamos a
 Organiza tus materias, apuntes, fechas importantes y archivos desde un espacio simple, rápido y pensado para estudiar mejor.
 </p>
 
-<button type="button" id="continueScrolling" class="scroll-cue" aria-label="Continuar hacia el contenido de StudyHub">
-<span>Continuá bajando</span>
-<i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
-</button>
-
 </div>
 
 </section>
@@ -225,12 +220,6 @@ if (!reduceMotion) {
 setInterval(changeWord, 2600);
 }
 
-document.getElementById("continueScrolling")?.addEventListener("click", () => {
-document.getElementById("nosotros")?.scrollIntoView({
-behavior: reduceMotion ? "auto" : "smooth",
-block: "start"
-});
-});
 </script>
 
 <!-- Firebase Auth: Google, persistencia y autodetección de sesión -->
