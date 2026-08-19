@@ -66,16 +66,10 @@ Te ayudamos a
 Organiza tus materias, apuntes, fechas importantes y archivos desde un espacio simple, rápido y pensado para estudiar mejor.
 </p>
 
-<div class="hero-actions">
-<button type="button" id="discoverStudyHub" class="hero-primary">Descubrir StudyHub <i class="fa-solid fa-arrow-down"></i></button>
-<a href="mailto:renzosaltamartini2008@gmail.com" class="hero-secondary"><i class="fa-regular fa-envelope"></i> Hablemos</a>
-</div>
-
-<div class="hero-highlights" aria-label="Características principales">
-<span><i class="fa-solid fa-check"></i> Todo organizado</span>
-<span><i class="fa-solid fa-check"></i> Acceso rápido</span>
-<span><i class="fa-solid fa-check"></i> Tu información, siempre disponible</span>
-</div>
+<button type="button" id="continueScrolling" class="scroll-cue" aria-label="Continuar hacia el contenido de StudyHub">
+<span>Continuá bajando</span>
+<i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+</button>
 
 </div>
 
@@ -231,7 +225,7 @@ if (!reduceMotion) {
 setInterval(changeWord, 2600);
 }
 
-document.getElementById("discoverStudyHub")?.addEventListener("click", () => {
+document.getElementById("continueScrolling")?.addEventListener("click", () => {
 document.getElementById("nosotros")?.scrollIntoView({
 behavior: reduceMotion ? "auto" : "smooth",
 block: "start"
