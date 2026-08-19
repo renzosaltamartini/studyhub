@@ -151,16 +151,6 @@ button { font: inherit; }
     justify-content: flex-start;
     transition: background-color .3s ease, color .3s ease, border-color .3s ease, padding .3s ease;
 }
-.space-eyebrow .status-dot {
-    margin-right: 7px;
-    background: conic-gradient(
-        #ea4335 0 20%,
-        #f97316 20% 40%,
-        #fbbc05 40% 60%,
-        #34a853 60% 80%,
-        #4285f4 80% 100%
-    );
-}
 .space-word {
     display: inline-block;
     width: 44px;
