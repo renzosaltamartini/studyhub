@@ -14,7 +14,6 @@ const auth = getAuth(app);
 const $ = (id) => document.getElementById(id);
 const loadingView = $("loadingView");
 const panelView = $("panelView");
-const hubView = $("hubView");
 
 // Se capturan ANTES de tocar el historial, porque history.replaceState cambia
 // la URL base del documento y rompería la resolución de rutas relativas más adelante.
@@ -26,11 +25,7 @@ const siteRootURL = new URL("..", studyBaseURL); // .../
 $("brandLink").href = siteRootURL.href;
 $("backButton").href = siteRootURL.href;
 
-// Si el hosting estático redirigió acá una URL como /study/renzo/hub/ (ver /404.html),
-// el path original quedó guardado en sessionStorage. Lo recuperamos y limpiamos.
-const storedPath = sessionStorage.getItem("sh-redirect-path");
-if (storedPath) sessionStorage.removeItem("sh-redirect-path");
-const rawPath = storedPath || window.location.pathname;
+const rawPath = window.location.pathname;
 
 const allParts = rawPath
     .split(/[?#]/)[0]
@@ -39,17 +34,11 @@ const allParts = rawPath
     .filter(Boolean);
 
 // Busca el segmento "study" para no depender de si el sitio vive en la raíz
-// o en un subpath (ej: ["studyhub","study","renzo","hub"] o ["study","renzo"]).
+// o en un subpath (ej: ["studyhub","study","renzo"] o ["study","renzo"]).
 const studyIndex = allParts.lastIndexOf("study");
 const segments = studyIndex !== -1 ? allParts.slice(studyIndex) : allParts;
 
 const urlSlug = segments[1] || "";
-const isHubRoute = segments[2] === "hub";
-
-function showOnly(view) {
-    [loadingView, panelView, hubView].forEach((el) => el?.classList.add("hidden"));
-    view?.classList.remove("hidden");
-}
 
 function fillAvatar(container, user, displayName) {
     container.innerHTML = "";
@@ -68,12 +57,6 @@ function renderPanel(user, slug, displayName) {
     fillAvatar($("avatar"), user, displayName);
     $("userName").textContent = displayName;
     $("userEmail").textContent = user.email || "Cuenta de Google";
-    $("hubLink").href = new URL(`${slug}/hub/`, studyBaseURL).href;
-}
-
-function renderHub(slug, displayName) {
-    $("hubUserName").textContent = displayName;
-    $("backToPanel").href = new URL(`${slug}/`, studyBaseURL).href;
 }
 
 async function logout() {
@@ -82,10 +65,9 @@ async function logout() {
 }
 
 $("logoutButton")?.addEventListener("click", logout);
-$("hubLogoutButton")?.addEventListener("click", logout);
 
 onAuthStateChanged(auth, (user) => {
-    // Ruta protegida: sin sesión no hay panel ni Hub. Se vuelve al inicio para loguearse con Google.
+    // Ruta protegida: sin sesión no hay panel. Se vuelve al inicio para iniciar con Google.
     if (!user) {
         window.location.replace(siteRootURL.href);
         return;
@@ -93,21 +75,14 @@ onAuthStateChanged(auth, (user) => {
 
     const displayName = user.displayName || user.email?.split("@")[0] || "Usuario";
     const slug = slugify(displayName);
-    const correctURL = isHubRoute
-        ? new URL(`${slug}/hub/`, studyBaseURL)
-        : new URL(`${slug}/`, studyBaseURL);
+    const correctURL = new URL(`${slug}/`, studyBaseURL);
 
-    // Corrige la URL visible del navegador (por ejemplo tras el redirect de /404.html,
-    // o si el slug en la dirección no coincide con el usuario logeado).
-    if (urlSlug !== slug || storedPath) {
+    // Corrige la URL visible si el nombre de la dirección no coincide con el usuario logueado.
+    if (urlSlug !== slug || segments.length > 2) {
         history.replaceState(null, "", correctURL.pathname + correctURL.search);
     }
 
-    if (isHubRoute) {
-        renderHub(slug, displayName);
-        showOnly(hubView);
-    } else {
-        renderPanel(user, slug, displayName);
-        showOnly(panelView);
-    }
+    renderPanel(user, slug, displayName);
+    loadingView.classList.add("hidden");
+    panelView.classList.remove("hidden");
 });

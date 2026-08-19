@@ -42,8 +42,10 @@ function renderLoggedIn(user) {
     const displayName = user.displayName || user.email?.split("@")[0] || "Usuario";
     const slug = slugify(displayName);
 
-    btnComenzar.href = `study/${slug}/`;
-    btnComenzar.setAttribute("aria-label", `Ir al Hub de ${displayName}`);
+    // Abrimos primero el archivo real y study.js deja visible la URL /study/nombre/.
+    // Así el ingreso siempre parte de un archivo real del sitio.
+    btnComenzar.href = "study/index.html";
+    btnComenzar.setAttribute("aria-label", `Ir al espacio de ${displayName}`);
     btnComenzar.classList.add("logged-in");
     btnComenzar.innerHTML = "";
 

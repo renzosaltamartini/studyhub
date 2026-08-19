@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Tu Hub personal de StudyHub.">
-    <title>Tu Hub | StudyHub</title>
+    <meta name="description" content="Tu espacio personal de StudyHub.">
+    <title>StudyHub</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
                 <a class="brand" id="brandLink" href="#" aria-label="StudyHub - Inicio">
                     <span class="brand-mark">SH</span><span class="brand-line"></span><span class="brand-name">StudyHub</span>
                 </a>
-                <a class="back-button" id="backButton" href="#"><i class="fa-solid fa-arrow-left"></i><span>Volver</span></a>
+                <a class="back-button" id="backButton" href="#"><i class="fa-solid fa-arrow-left"></i><span>Inicio</span></a>
             </div>
         </div>
     </header>
@@ -27,7 +27,7 @@
         <!-- CARGANDO SESIÓN -->
         <div class="loading-shell" id="loadingView">
             <span class="spinner" aria-hidden="true"></span>
-            <span>Cargando tu Hub...</span>
+            <span>Cargando tu espacio...</span>
         </div>
 
         <!-- PANEL: intro + bienvenida -->
@@ -49,24 +49,11 @@
                     <span class="eyebrow success"><span class="status-dot"></span>Sesión iniciada</span>
                     <h2>¡Hola, <span id="userName">estudiante</span>!</h2>
                     <p id="userEmail"></p>
-                    <a class="submit-button" id="hubLink" href="#"><span>Entrar a mi Hub</span><i class="fa-solid fa-arrow-right"></i></a>
                     <button class="logout-button" id="logoutButton" type="button">Cerrar sesión</button>
                 </div>
             </div>
         </section>
 
-        <!-- HUB: placeholder, todavía sin configurar -->
-        <section class="hub-shell hidden" id="hubView">
-            <div class="hub-card">
-                <div class="hub-icon"><i class="fa-solid fa-layer-group"></i></div>
-                <h2>El Hub de <span id="hubUserName">estudiante</span> está en camino</h2>
-                <p>Todavía estamos preparando esta sección. Muy pronto vas a poder organizar tus materias, apuntes, archivos y fechas importantes desde acá.</p>
-                <a class="back-to-panel" id="backToPanel" href="#"><i class="fa-solid fa-arrow-left"></i><span>Volver a mi panel</span></a>
-                <div>
-                    <button class="logout-button" id="hubLogoutButton" type="button" style="margin-top: 14px; max-width: 260px; margin-inline: auto;">Cerrar sesión</button>
-                </div>
-            </div>
-        </section>
     </main>
 
     <script type="module" src="study.js"></script>
