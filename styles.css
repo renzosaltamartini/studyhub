@@ -942,3 +942,191 @@ button {
     }
 
 }
+
+/* =========================
+   DARK THEME + NAVBAR 2026
+========================= */
+
+:root {
+    color-scheme: dark;
+    --bg: #080b12;
+    --surface: #0e1420;
+    --surface-soft: #121a28;
+    --border: rgba(148, 163, 184, 0.16);
+    --text: #f8fafc;
+    --muted: #94a3b8;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+}
+
+.navbar-header {
+    background: rgba(8, 11, 18, 0.72);
+    border-bottom-color: var(--border);
+}
+
+.navbar-container {
+    height: 88px;
+    padding-inline: 48px;
+}
+
+.logo-short,
+.nav-link-item.active,
+.hero-title,
+.section-heading h2,
+.content-info h2,
+.feature-card h3,
+.footer-logo .logo-short,
+.files-header strong,
+.folder-heading strong,
+.file-info strong {
+    color: var(--text);
+}
+
+.logo-name,
+.nav-link-item,
+.section-heading p,
+.content-info p,
+.feature-card p,
+.footer,
+.footer p,
+.files-header span,
+.folder-heading span,
+.file-info span {
+    color: var(--muted);
+}
+
+.logo-divider,
+.footer {
+    border-color: var(--border);
+}
+
+.logo-divider {
+    background: var(--border);
+}
+
+.nav-link-item {
+    padding: 10px 18px;
+    font-size: 14px;
+}
+
+.nav-link-item:hover,
+.login-button,
+.login-button:hover {
+    background: var(--surface-soft);
+    color: var(--text);
+}
+
+.login-button {
+    padding: 10px 18px;
+    border: 1px solid var(--border);
+    font-size: 14px;
+}
+
+.login-button i,
+.login-button:hover i {
+    color: #60a5fa;
+}
+
+.hero {
+    min-height: calc(100svh - 88px);
+    padding-bottom: clamp(90px, 15vh, 170px);
+}
+
+.feature-card,
+.preview-card,
+.files-preview,
+.folder-card,
+.upload-button {
+    background: var(--surface);
+    border-color: var(--border);
+}
+
+.feature-card:hover {
+    border-color: rgba(96, 165, 250, 0.4);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.3);
+}
+
+.calendar-inner,
+.files-inner,
+.file-row,
+.preview-wrapper {
+    background: var(--surface-soft);
+}
+
+.preview-header {
+    border-color: var(--border);
+}
+
+.preview-title strong,
+.page-parent,
+.subpage {
+    color: #cbd5e1;
+}
+
+.page-parent:hover,
+.subpage:hover,
+.upload-button:hover {
+    background: #182234;
+}
+
+.icon-button {
+    color: var(--muted);
+}
+
+@media (max-width: 900px) {
+    .navbar-container {
+        height: 80px;
+        padding-inline: 24px;
+    }
+
+    .navbar-links {
+        position: static;
+        display: flex;
+        margin-left: auto;
+        margin-right: 12px;
+        transform: none;
+    }
+
+    .hero {
+        min-height: calc(100svh - 80px);
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar-container {
+        padding-inline: 16px;
+    }
+
+    .navbar-logo {
+        flex-shrink: 0;
+    }
+
+    .navbar-links {
+        gap: 0;
+        margin-right: 6px;
+    }
+
+    .nav-link-item {
+        padding: 8px 9px;
+        font-size: 12px;
+    }
+
+    .login-button {
+        padding: 9px 10px;
+    }
+
+    .login-button span {
+        display: none;
+    }
+
+    .hero {
+        padding: 20px 18px 105px;
+    }
+
+    .hero-title {
+        font-size: clamp(36px, 11vw, 46px);
+    }
+}

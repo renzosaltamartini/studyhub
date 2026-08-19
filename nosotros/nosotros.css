@@ -785,6 +785,123 @@
 
 }
 
+/* Mantener los botones sociales oscuros frente a las reglas heredadas. */
+.social-links .social-placeholder,
+.social-links .social-placeholder:hover {
+    color: #94a3b8;
+}
+
+.social-links .social-placeholder:hover {
+    background: #182234;
+    color: #f8fafc;
+}
+
+/* =================================
+   DARK THEME
+================================= */
+
+.about-label,
+.timeline-link,
+.timeline-tag {
+    background: #121a28;
+    color: #94a3b8;
+}
+
+.about-hero h1,
+.introduction-title h2,
+.introduction-text .introduction-main,
+.creator-info h2,
+.timeline-heading h2,
+.timeline-content h3,
+.future-header h2,
+.future-card h3 {
+    color: #f8fafc;
+}
+
+.about-hero h1 span {
+    color: #64748b;
+}
+
+.about-hero p,
+.introduction-text p,
+.creator-info p,
+.timeline-heading p,
+.timeline-content p,
+.future-card p,
+.timeline-date,
+.timeline-small-title,
+.future-header span,
+.introduction-title span,
+.creator-label {
+    color: #94a3b8;
+}
+
+.about-introduction {
+    background: #0b1019;
+    border-color: rgba(148, 163, 184, 0.16);
+}
+
+.creator-card,
+.future-card {
+    background: #0e1420;
+    border-color: rgba(148, 163, 184, 0.16);
+}
+
+.creator-avatar,
+.timeline-example {
+    background: #121a28;
+    color: #cbd5e1;
+    border-color: rgba(148, 163, 184, 0.16);
+}
+
+.social-links a,
+.social-placeholder {
+    color: #94a3b8;
+}
+
+.social-links a:hover,
+.social-placeholder:hover {
+    background: #182234 !important;
+    color: #f8fafc !important;
+}
+
+.timeline::before {
+    background: rgba(148, 163, 184, 0.22);
+}
+
+.timeline-marker span {
+    border-color: #080b12;
+    background: #475569;
+    box-shadow: 0 0 0 1px #475569;
+}
+
+.timeline-example div {
+    color: #cbd5e1;
+}
+
+.future-card:hover {
+    border-color: rgba(96, 165, 250, 0.4);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 600px) {
+    .about-hero {
+        padding: 62px 18px 80px;
+    }
+
+    .about-hero h1 {
+        font-size: clamp(36px, 11vw, 44px);
+    }
+
+    .introduction-grid,
+    .creator-section,
+    .timeline-section,
+    .future-section {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+}
+
 /* Scroll interno sin modificar la URL */
 #historia {
     scroll-margin-top: 96px;
