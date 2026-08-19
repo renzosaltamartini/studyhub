@@ -107,14 +107,14 @@ button { font: inherit; }
 /* PANEL */
 .auth-shell {
     position: relative;
-    width: min(1240px, calc(100% - 72px));
+    width: min(1160px, calc(100% - 56px));
     min-height: 100svh;
     margin: auto;
     padding: 112px 0 44px;
     display: grid;
-    grid-template-columns: minmax(0, 1.25fr) minmax(390px, 470px);
+    grid-template-columns: minmax(0, 1fr) minmax(390px, 480px);
     align-items: center;
-    gap: clamp(64px, 7vw, 104px);
+    gap: clamp(54px, 8vw, 112px);
 }
 .auth-shell::before,
 .auth-shell::after {
@@ -151,6 +151,16 @@ button { font: inherit; }
     justify-content: flex-start;
     transition: background-color .3s ease, color .3s ease, border-color .3s ease, padding .3s ease;
 }
+.space-eyebrow .status-dot {
+    margin-right: 7px;
+    background: conic-gradient(
+        #ea4335 0 20%,
+        #f97316 20% 40%,
+        #fbbc05 40% 60%,
+        #34a853 60% 80%,
+        #4285f4 80% 100%
+    );
+}
 .space-word {
     display: inline-block;
     width: 44px;
@@ -180,7 +190,7 @@ button { font: inherit; }
     opacity: .18;
 }
 .intro h1 {
-    max-width: 740px;
+    max-width: 650px;
     margin: 26px 0 20px;
     color: var(--black);
     font-size: clamp(46px, 5.1vw, 68px);
