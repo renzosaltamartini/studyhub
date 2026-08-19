@@ -15,6 +15,40 @@ const $ = (id) => document.getElementById(id);
 const loadingView = $("loadingView");
 const panelView = $("panelView");
 
+const spaceWords = [
+    { text: "estudio", background: "#eff6ff", color: "#2563eb", border: "#dbeafe" },
+    { text: "aprendizaje", background: "#ecfdf5", color: "#059669", border: "#d1fae5" },
+    { text: "comodidad", background: "#f5f3ff", color: "#7c3aed", border: "#ede9fe" },
+    { text: "organización", background: "#fff7ed", color: "#ea580c", border: "#fed7aa" },
+    { text: "facilidad", background: "#fff1f2", color: "#e11d48", border: "#fecdd3" }
+];
+
+const spaceWord = $("spaceWord");
+const spaceEyebrow = spaceWord?.closest(".space-eyebrow");
+let spaceWordIndex = 0;
+
+function rotateSpaceWord() {
+    if (!spaceWord || !spaceEyebrow) return;
+    spaceWord.classList.remove("is-entering");
+    spaceWord.classList.add("is-leaving");
+
+    window.setTimeout(() => {
+        spaceWordIndex = (spaceWordIndex + 1) % spaceWords.length;
+        const nextWord = spaceWords[spaceWordIndex];
+        spaceWord.textContent = nextWord.text;
+        spaceEyebrow.style.backgroundColor = nextWord.background;
+        spaceEyebrow.style.color = nextWord.color;
+        spaceEyebrow.style.borderColor = nextWord.border;
+        spaceWord.classList.remove("is-leaving");
+        void spaceWord.offsetWidth;
+        spaceWord.classList.add("is-entering");
+    }, 200);
+}
+
+if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    window.setInterval(rotateSpaceWord, 2500);
+}
+
 // Se capturan ANTES de tocar el historial, porque history.replaceState cambia
 // la URL base del documento y rompería la resolución de rutas relativas más adelante.
 // Así el sitio funciona igual esté publicado en la raíz del dominio o en un subpath

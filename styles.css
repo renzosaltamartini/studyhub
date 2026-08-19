@@ -235,7 +235,6 @@ button { font: inherit; }
 .feature-large { grid-column: span 2; }
 .feature-index { display: block; margin-bottom: 22px; color: #9aa0a6; font-size: 10px; font-weight: 700; letter-spacing: .08em; }
 .feature-icon { width: 44px; height: 44px; margin-bottom: 20px; display: grid; place-items: center; border-radius: 50%; }
-.feature-icon.neutral { background: var(--surface); color: var(--black); border: 1px solid var(--line); }
 .feature-icon.violet { background: #f5f3ff; color: var(--violet); }
 .feature-icon.blue { background: #eff6ff; color: #2563eb; }
 .feature-icon.green { background: #ecfdf5; color: var(--green); }
