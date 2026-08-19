@@ -19,7 +19,8 @@ const panelView = $("panelView");
 // la URL base del documento y rompería la resolución de rutas relativas más adelante.
 // Así el sitio funciona igual esté publicado en la raíz del dominio o en un subpath
 // (por ejemplo GitHub Pages de proyecto: usuario.github.io/studyhub/).
-const studyBaseURL = new URL(".", document.baseURI); // .../study/
+const panelBaseURL = new URL(".", document.baseURI); // .../study/panel/
+const studyBaseURL = new URL("..", panelBaseURL); // .../study/
 const siteRootURL = new URL("..", studyBaseURL); // .../
 
 $("brandLink").href = siteRootURL.href;
@@ -34,11 +35,11 @@ const allParts = rawPath
     .filter(Boolean);
 
 // Busca el segmento "study" para no depender de si el sitio vive en la raíz
-// o en un subpath (ej: ["studyhub","study","renzo"] o ["study","renzo"]).
+// o en un subpath (ej: ["studyhub","study","panel","renzo"]).
 const studyIndex = allParts.lastIndexOf("study");
 const segments = studyIndex !== -1 ? allParts.slice(studyIndex) : allParts;
 
-const urlSlug = segments[1] || "";
+const urlSlug = segments[1] === "panel" ? (segments[2] || "") : "";
 
 function fillAvatar(container, user, displayName) {
     container.innerHTML = "";
@@ -76,10 +77,10 @@ onAuthStateChanged(auth, (user) => {
 
     const displayName = user.displayName || user.email?.split("@")[0] || "Usuario";
     const slug = slugify(displayName);
-    const correctURL = new URL(`${slug}/`, studyBaseURL);
+    const correctURL = new URL(`${slug}/`, panelBaseURL);
 
     // Corrige la URL visible si el nombre de la dirección no coincide con el usuario logueado.
-    if (urlSlug !== slug || segments.length > 2) {
+    if (urlSlug !== slug || segments.length > 3) {
         history.replaceState(null, "", correctURL.pathname + correctURL.search);
     }
 
