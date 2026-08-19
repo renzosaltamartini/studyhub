@@ -127,45 +127,100 @@ button {
 /* INGRESAR */
 
 .login-button {
-    border: none;
-    cursor: pointer;
+    position: relative;
+    overflow: hidden;
 
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    gap: 12px;
 
-    padding: 8px 16px;
-
+    padding: 11px 18px;
+    border: 1px solid rgba(125, 211, 252, 0.35);
     border-radius: 12px;
 
-    background: #f5f5f5;
-    color: #171717;
+    background: linear-gradient(135deg, #38bdf8, #2563eb);
+    color: #ffffff;
 
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+
+    cursor: pointer;
+    box-shadow:
+        0 5px 18px rgba(37, 99, 235, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
 
     transition:
-        background 0.2s ease,
-        color 0.2s ease;
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.login-button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        110deg,
+        transparent 25%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 75%
+    );
+
+    transform: translateX(-120%);
+    transition: transform 0.55s ease;
+}
+
+.login-button span,
+.login-button i {
+    position: relative;
+    z-index: 1;
 }
 
 .login-button i {
-    color: #737373;
+    display: grid;
+    place-items: center;
+
+    width: 22px;
+    height: 22px;
+    border-radius: 7px;
+
+    background: rgba(255, 255, 255, 0.16);
+    color: #ffffff;
     font-size: 10px;
 
     transition:
         transform 0.25s ease,
-        color 0.25s ease;
+        background 0.25s ease;
 }
 
 .login-button:hover {
-    background: #4995f8;
-    color: #e7e7e7;
+    transform: translateY(-2px);
+    border-color: rgba(186, 230, 253, 0.7);
+
+    box-shadow:
+        0 8px 25px rgba(37, 99, 235, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.login-button:hover::before {
+    transform: translateX(120%);
 }
 
 .login-button:hover i {
-    color: #e7e7e7;
     transform: translateX(3px);
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.login-button:active {
+    transform: translateY(0) scale(0.97);
+}
+
+.login-button:focus-visible {
+    outline: 3px solid rgba(56, 189, 248, 0.35);
+    outline-offset: 3px;
 }
 
 
