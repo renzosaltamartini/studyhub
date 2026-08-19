@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>StudyHub</title>
+<script>
+    // StudyHub usa rutas dinámicas como /study/<nombre>/ y /study/<nombre>/hub/
+    // que no existen como archivos reales en el hosting estático.
+    // Guardamos la ruta pedida y redirigimos al archivo real que sabe interpretarla,
+    // detectando el prefijo del sitio (funciona tanto en la raíz del dominio como
+    // en un subpath, por ejemplo usuario.github.io/studyhub/).
+    (function () {
+        var path = window.location.pathname;
+        var full = path + window.location.search + window.location.hash;
+
+        try {
+            sessionStorage.setItem("sh-redirect-path", full);
+        } catch (e) {
+            // sessionStorage no disponible: seguimos igual, solo perdemos el path exacto.
+        }
+
+        var marker = "/study";
+        var idx = path.indexOf(marker + "/");
+        if (idx === -1 && path.replace(/\/+$/, "").slice(-marker.length) === marker) {
+            idx = path.lastIndexOf(marker);
+        }
+
+        if (idx !== -1) {
+            var prefix = path.slice(0, idx);
+            window.location.replace(prefix + "/study/index.html");
+        } else {
+            window.location.replace("/");
+        }
+    })();
+</script>
+</head>
+<body></body>
+</html>

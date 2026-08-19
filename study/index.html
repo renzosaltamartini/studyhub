@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tu Hub personal de StudyHub.">
+    <title>Tu Hub | StudyHub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="study.css">
+</head>
+<body>
+    <header class="auth-header">
+        <div class="header-content">
+            <div class="header-left">
+                <a class="brand" id="brandLink" href="#" aria-label="StudyHub - Inicio">
+                    <span class="brand-mark">SH</span><span class="brand-line"></span><span class="brand-name">StudyHub</span>
+                </a>
+                <a class="back-button" id="backButton" href="#"><i class="fa-solid fa-arrow-left"></i><span>Volver</span></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- CARGANDO SESIÓN -->
+        <div class="loading-shell" id="loadingView">
+            <span class="spinner" aria-hidden="true"></span>
+            <span>Cargando tu Hub...</span>
+        </div>
+
+        <!-- PANEL: intro + bienvenida -->
+        <section class="auth-shell hidden" id="panelView">
+            <div class="intro" aria-labelledby="intro-title">
+                <span class="eyebrow"><span class="status-dot"></span>Tu espacio de estudio</span>
+                <h1 id="intro-title">Todo lo que necesitas, en un solo lugar.</h1>
+                <p>Organiza materias, apuntes, archivos y fechas importantes desde tu Hub personal.</p>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> Tus datos sincronizados</li>
+                    <li><i class="fa-solid fa-check"></i> Acceso desde cualquier dispositivo</li>
+                    <li><i class="fa-solid fa-check"></i> Una cuenta, todo tu contenido</li>
+                </ul>
+            </div>
+
+            <div class="auth-card">
+                <div class="account-view">
+                    <div class="avatar" id="avatar">SH</div>
+                    <span class="eyebrow success"><span class="status-dot"></span>Sesión iniciada</span>
+                    <h2>¡Hola, <span id="userName">estudiante</span>!</h2>
+                    <p id="userEmail"></p>
+                    <a class="submit-button" id="hubLink" href="#"><span>Entrar a mi Hub</span><i class="fa-solid fa-arrow-right"></i></a>
+                    <button class="logout-button" id="logoutButton" type="button">Cerrar sesión</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- HUB: placeholder, todavía sin configurar -->
+        <section class="hub-shell hidden" id="hubView">
+            <div class="hub-card">
+                <div class="hub-icon"><i class="fa-solid fa-layer-group"></i></div>
+                <h2>El Hub de <span id="hubUserName">estudiante</span> está en camino</h2>
+                <p>Todavía estamos preparando esta sección. Muy pronto vas a poder organizar tus materias, apuntes, archivos y fechas importantes desde acá.</p>
+                <a class="back-to-panel" id="backToPanel" href="#"><i class="fa-solid fa-arrow-left"></i><span>Volver a mi panel</span></a>
+                <div>
+                    <button class="logout-button" id="hubLogoutButton" type="button" style="margin-top: 14px; max-width: 260px; margin-inline: auto;">Cerrar sesión</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="study.js"></script>
+</body>
+</html>
