@@ -199,11 +199,11 @@ referrerpolicy="no-referrer"
 <!-- JS de la animación de texto -->
 <script>
 const words = [
-{ text: "crear", background: "#f1f3f4", color: "#202124" },
-{ text: "imaginar", background: "#f1f3f4", color: "#202124" },
-{ text: "estudiar", background: "#f1f3f4", color: "#202124" },
-{ text: "aprender", background: "#f1f3f4", color: "#202124" },
-{ text: "organizar", background: "#f1f3f4", color: "#202124" }
+{ text: "crear", background: "#eff6ff", color: "#2563eb" },
+{ text: "imaginar", background: "#f5f3ff", color: "#7c3aed" },
+{ text: "estudiar", background: "#ecfdf5", color: "#059669" },
+{ text: "aprender", background: "#fffbeb", color: "#d97706" },
+{ text: "organizar", background: "#fff1f2", color: "#e11d48" }
 ];
 
 let index = 0;
@@ -234,7 +234,121 @@ setInterval(changeWord, 2600);
 }
 </script>
 
-<!-- JS para autodetección de sesión -->
-<script type="module" src="home.js"></script>
+<!-- Firebase Auth: Google, persistencia y autodetección de sesión -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+import {
+getAuth,
+GoogleAuthProvider,
+setPersistence,
+browserLocalPersistence,
+signInWithPopup,
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyAXGKWZA8kWaN2NWCK2A9jTlGSq-B2bqWA",
+authDomain: "laranchada-6abd3.firebaseapp.com",
+databaseURL: "https://laranchada-6abd3-default-rtdb.firebaseio.com",
+projectId: "laranchada-6abd3",
+storageBucket: "laranchada-6abd3.firebasestorage.app",
+messagingSenderId: "326750839699",
+appId: "1:326750839699:web:7d5f46d67b20ad2599fe66",
+measurementId: "G-0QP3VVQZ0Z"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+provider.setCustomParameters({ prompt: "select_account" });
+
+const btnComenzar = document.getElementById("btnComenzar");
+let currentUser = null;
+
+const googleButtonContent = btnComenzar.innerHTML;
+
+function slugify(value) {
+return (
+(value || "usuario")
+.normalize("NFD")
+.replace(/[\u0300-\u036f]/g, "")
+.toLowerCase()
+.trim()
+.replace(/[^a-z0-9]+/g, "-")
+.replace(/^-+|-+$/g, "") || "usuario"
+);
+}
+
+function renderLoggedOut() {
+btnComenzar.href = "#";
+btnComenzar.removeAttribute("data-user-slug");
+btnComenzar.setAttribute("aria-label", "Comenzar en StudyHub con Google");
+btnComenzar.classList.remove("logged-in", "loading");
+btnComenzar.innerHTML = googleButtonContent;
+}
+
+function renderLoggedIn(user) {
+const displayName = user.displayName || user.email?.split("@")[0] || "Usuario";
+const slug = slugify(displayName);
+
+localStorage.setItem("studyhubUserSlug", slug);
+btnComenzar.href = "study/panel/index.html";
+btnComenzar.dataset.userSlug = slug;
+btnComenzar.setAttribute("aria-label", `Ir al espacio de ${displayName}`);
+btnComenzar.classList.add("logged-in");
+btnComenzar.innerHTML = "";
+
+if (user.photoURL) {
+const image = document.createElement("img");
+image.src = user.photoURL;
+image.alt = "";
+image.className = "nav-avatar-img";
+image.referrerPolicy = "no-referrer";
+btnComenzar.appendChild(image);
+} else {
+const initials = document.createElement("span");
+initials.className = "nav-avatar-text";
+initials.textContent = displayName.slice(0, 2).toUpperCase();
+btnComenzar.appendChild(initials);
+}
+
+const name = document.createElement("span");
+name.className = "nav-user-name";
+name.textContent = displayName;
+btnComenzar.appendChild(name);
+}
+
+async function signInWithGoogle() {
+if (btnComenzar.classList.contains("loading")) return;
+
+btnComenzar.classList.add("loading");
+btnComenzar.setAttribute("aria-busy", "true");
+
+try {
+await setPersistence(auth, browserLocalPersistence);
+await signInWithPopup(auth, provider);
+} catch (error) {
+if (error.code !== "auth/popup-closed-by-user") {
+console.error("No se pudo iniciar sesión con Google:", error);
+window.alert("No pudimos iniciar sesión con Google. Inténtalo nuevamente.");
+}
+} finally {
+btnComenzar.classList.remove("loading");
+btnComenzar.removeAttribute("aria-busy");
+}
+}
+
+btnComenzar.addEventListener("click", (event) => {
+if (currentUser) return;
+event.preventDefault();
+signInWithGoogle();
+});
+
+onAuthStateChanged(auth, (user) => {
+currentUser = user;
+if (user) renderLoggedIn(user);
+else renderLoggedOut();
+});
+</script>
 </body>
 </html>
