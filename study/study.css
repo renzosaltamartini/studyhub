@@ -146,14 +146,18 @@ button { font: inherit; }
 }
 .eyebrow.success { border-color: #d1fae5; background: #ecfdf5; color: var(--green); }
 .space-eyebrow {
-    min-width: 220px;
-    justify-content: center;
-    transition: background-color .3s ease, color .3s ease, border-color .3s ease;
+    gap: 4px;
+    width: auto;
+    justify-content: flex-start;
+    transition: background-color .3s ease, color .3s ease, border-color .3s ease, padding .3s ease;
 }
 .space-word {
     display: inline-block;
-    min-width: 78px;
+    width: 44px;
+    overflow: hidden;
+    white-space: nowrap;
     text-align: left;
+    transition: width .38s cubic-bezier(.2,.8,.2,1);
 }
 .space-word.is-leaving { animation: spaceWordOut .2s ease forwards; }
 .space-word.is-entering { animation: spaceWordIn .36s cubic-bezier(.2,.8,.2,1) forwards; }
@@ -163,7 +167,8 @@ button { font: inherit; }
     height: 8px;
     flex-shrink: 0;
     border-radius: 50%;
-    background: #3b82f6;
+    background: currentColor;
+    transition: background-color .3s ease, color .3s ease, transform .3s ease;
 }
 .eyebrow.success .status-dot { background: #10b981; }
 .status-dot::before {

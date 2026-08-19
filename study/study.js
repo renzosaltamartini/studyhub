@@ -25,7 +25,34 @@ const spaceWords = [
 
 const spaceWord = $("spaceWord");
 const spaceEyebrow = spaceWord?.closest(".space-eyebrow");
+const spaceDot = spaceEyebrow?.querySelector(".status-dot");
 let spaceWordIndex = 0;
+
+function measureWordWidth(text) {
+    if (!spaceWord) return 0;
+    const probe = document.createElement("span");
+    const styles = window.getComputedStyle(spaceWord);
+    probe.textContent = text;
+    probe.style.position = "absolute";
+    probe.style.visibility = "hidden";
+    probe.style.whiteSpace = "nowrap";
+    probe.style.font = styles.font;
+    probe.style.letterSpacing = styles.letterSpacing;
+    document.body.appendChild(probe);
+    const width = Math.ceil(probe.getBoundingClientRect().width) + 2;
+    probe.remove();
+    return width;
+}
+
+function resizeSpaceWord(text, animate = true) {
+    if (!spaceWord) return;
+    if (!animate) spaceWord.style.transition = "none";
+    spaceWord.style.width = `${measureWordWidth(text)}px`;
+    if (!animate) {
+        void spaceWord.offsetWidth;
+        spaceWord.style.removeProperty("transition");
+    }
+}
 
 function rotateSpaceWord() {
     if (!spaceWord || !spaceEyebrow) return;
@@ -39,11 +66,16 @@ function rotateSpaceWord() {
         spaceEyebrow.style.backgroundColor = nextWord.background;
         spaceEyebrow.style.color = nextWord.color;
         spaceEyebrow.style.borderColor = nextWord.border;
+        if (spaceDot) spaceDot.style.color = nextWord.color;
+        resizeSpaceWord(nextWord.text);
         spaceWord.classList.remove("is-leaving");
         void spaceWord.offsetWidth;
         spaceWord.classList.add("is-entering");
     }, 200);
 }
+
+resizeSpaceWord(spaceWords[0].text, false);
+if (spaceDot) spaceDot.style.color = spaceWords[0].color;
 
 if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     window.setInterval(rotateSpaceWord, 2500);
