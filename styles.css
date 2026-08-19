@@ -168,6 +168,40 @@ button {
     transform: translateX(3px);
 }
 
+.login-button.logged-in {
+    padding: 5px 14px 5px 6px;
+    gap: 10px;
+    max-width: 210px;
+}
+
+.nav-avatar-img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.nav-avatar-text {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #eff6ff;
+    color: #2563eb;
+    font-size: 11px;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+
+.nav-user-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 13px;
+    font-weight: 600;
+}
 
 /* =========================
    HERO
