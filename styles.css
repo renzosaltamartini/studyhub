@@ -159,6 +159,11 @@ button { font: inherit; }
     transition: transform .28s cubic-bezier(0.2, 0.8, 0.2, 1), opacity .28s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+.hero-ending strong {
+    font-weight: 700;
+    font-style: italic;
+}
+
 /* ANIMACIONES LINDAS Y FLUIDAS (Fade + Vertical Shift + Scale) */
 .word-enter {
     opacity: 1;
@@ -194,7 +199,7 @@ button { font: inherit; }
     font-weight: 600;
     transition: all .2s ease;
 }
-.hero-primary { background: var(--green); color: #fff; box-shadow: 0 4px 14px rgba(5,150,105,.24); }
+.hero-primary { border: 0; background: var(--green); color: #fff; box-shadow: 0 4px 14px rgba(5,150,105,.24); cursor: pointer; }
 .hero-primary:hover { background: var(--green-hover); color: #fff; transform: translateY(-2px); box-shadow: 0 7px 18px rgba(5,150,105,.28); }
 .hero-secondary { border: 1px solid var(--line); color: var(--text); background: #fff; }
 .hero-secondary:hover { background: var(--surface); border-color: #c6c6c6; transform: translateY(-2px); }
@@ -215,7 +220,7 @@ button { font: inherit; }
 .hero-highlights i { font-size: 11px; }
 
 /* HUB */
-.hub-section { width: 100%; max-width: 1180px; margin: 0 auto; padding: 60px 28px 120px; scroll-margin-top: 96px; }
+.hub-section { width: 100%; max-width: 1180px; margin: 0 auto; padding: 60px 28px 180px; scroll-margin-top: 96px; }
 .section-heading { max-width: 680px; margin-bottom: 48px; }
 .section-heading h2, .creator-content h2 { margin: 0; font-size: 38px; line-height: 1.15; letter-spacing: -.03em; font-weight: 600; color: var(--black); }
 .section-heading p, .creator-intro { margin: 16px 0 0; color: var(--muted); font-size: 15px; line-height: 1.7; }
@@ -301,12 +306,15 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--black); outline
     .login-button.logged-in { padding-left: 5px; max-width: 148px; }
     .nav-user-name { max-width: 85px; }
     .hero { padding: 60px 16px 90px; }
-    .hero-title { font-size: 34px; }
+    .hero-title {
+        font-size: clamp(40px, 11vw, 48px);
+        line-height: 1.18;
+    }
     .dynamic-word { padding: 1px 16px; margin: 2px 0; }
     .hero-description { font-size: 15px; }
     .hero-actions { flex-direction: column; width: 100%; }
     .hero-primary, .hero-secondary { width: 100%; }
-    .hub-section { padding: 48px 16px 80px; }
+    .hub-section { padding: 48px 16px 120px; }
     .section-heading h2, .creator-content h2 { font-size: 28px; }
     .features-grid { grid-template-columns: 1fr; }
     .feature-large { grid-column: auto; }

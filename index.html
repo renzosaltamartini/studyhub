@@ -54,14 +54,12 @@
 
 <div class="hero-content">
 
-<span class="hero-eyebrow"><i class="fa-solid fa-wand-magic-sparkles"></i> Tu espacio de estudio personal</span>
-
 <h1 class="hero-title">
 Te ayudamos a
 <span id="dynamicWord" class="dynamic-word word-enter" aria-live="polite" aria-atomic="true">
 <span id="wordText">crear</span>
 </span>
-en un solo lugar.
+<span class="hero-ending">en un <strong>solo lugar.</strong></span>
 </h1>
 
 <p class="hero-description">
@@ -69,7 +67,7 @@ Organiza tus materias, apuntes, fechas importantes y archivos desde un espacio s
 </p>
 
 <div class="hero-actions">
-<a href="#nosotros" class="hero-primary">Descubrir StudyHub <i class="fa-solid fa-arrow-down"></i></a>
+<button type="button" id="discoverStudyHub" class="hero-primary">Descubrir StudyHub <i class="fa-solid fa-arrow-down"></i></button>
 <a href="mailto:renzosaltamartini2008@gmail.com" class="hero-secondary"><i class="fa-regular fa-envelope"></i> Hablemos</a>
 </div>
 
@@ -232,6 +230,13 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
 if (!reduceMotion) {
 setInterval(changeWord, 2600);
 }
+
+document.getElementById("discoverStudyHub")?.addEventListener("click", () => {
+document.getElementById("nosotros")?.scrollIntoView({
+behavior: reduceMotion ? "auto" : "smooth",
+block: "start"
+});
+});
 </script>
 
 <!-- Firebase Auth: Google, persistencia y autodetección de sesión -->
