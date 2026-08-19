@@ -107,14 +107,14 @@ button { font: inherit; }
 /* PANEL */
 .auth-shell {
     position: relative;
-    width: min(1160px, calc(100% - 56px));
+    width: min(1240px, calc(100% - 72px));
     min-height: 100svh;
     margin: auto;
     padding: 112px 0 44px;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(390px, 480px);
+    grid-template-columns: minmax(0, 1.25fr) minmax(390px, 470px);
     align-items: center;
-    gap: clamp(54px, 8vw, 112px);
+    gap: clamp(64px, 7vw, 104px);
 }
 .auth-shell::before,
 .auth-shell::after {
@@ -180,7 +180,7 @@ button { font: inherit; }
     opacity: .18;
 }
 .intro h1 {
-    max-width: 650px;
+    max-width: 740px;
     margin: 26px 0 20px;
     color: var(--black);
     font-size: clamp(46px, 5.1vw, 68px);
