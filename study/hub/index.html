@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hub | StudyHub</title>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tu Hub personal de StudyHub."><title>Hub | StudyHub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="hub.css">
 </head>
 <body>
+    <header class="hub-header"><nav class="navbar"><a class="brand" id="brandLink" href="#"><span class="brand-mark">SH</span><span class="brand-line"></span><span class="brand-name">StudyHub</span></a><a class="panel-button" id="panelLink" href="#"><i class="fa-solid fa-arrow-left"></i><span>Volver al panel</span></a></nav></header>
+    <main class="hub-main">
+        <section class="hub-intro"><span class="eyebrow"><span class="status-dot"></span>Tu espacio personal</span><h1>Tu Hub</h1><p>Organiza todo lo relacionado con tus estudios desde un solo lugar.</p></section>
+        <section class="hub-grid" aria-label="Herramientas del Hub">
+            <article class="hub-card violet"><div class="card-icon"><i class="fa-regular fa-bell"></i></div><div><h2>Recordatorios</h2><p>Agenda tus próximos recordatorios y mantén siempre visible aquello que tienes pendiente.</p></div><i class="fa-solid fa-arrow-right card-arrow"></i></article>
+            <article class="hub-card blue"><div class="card-icon"><i class="fa-regular fa-calendar"></i></div><div><h2>Calendario</h2><p>Visualiza tus días y agrega actividades, tareas, entregas o cualquier cosa que debas realizar.</p></div><i class="fa-solid fa-arrow-right card-arrow"></i></article>
+            <article class="hub-card green"><div class="card-icon"><i class="fa-regular fa-file-lines"></i></div><div><h2>Páginas</h2><p>Crea páginas y subpáginas para organizar materias, clases, apuntes y todo tu contenido.</p></div><i class="fa-solid fa-arrow-right card-arrow"></i></article>
+            <article class="hub-card yellow"><div class="card-icon"><i class="fa-regular fa-folder-open"></i></div><div><h2>Archivos</h2><p>Guarda PDFs y otros archivos dentro de tus materias, con acceso rápido y vista previa.</p></div><i class="fa-solid fa-arrow-right card-arrow"></i></article>
+            <article class="hub-card danger reset-card"><div class="card-icon"><i class="fa-solid fa-arrow-rotate-left"></i></div><div><h2>Resetear Hub</h2><p>¿Quieres comenzar desde cero? Puedes reiniciar tu Hub y eliminar todo el contenido que hayas creado.</p></div><i class="fa-solid fa-arrow-right card-arrow"></i></article>
+        </section>
+    </main>
     <script>
-        const params = new URLSearchParams(window.location.search);
-        const name = params.get("name");
-
-        if (name) {
-            const hubBaseURL = new URL(".", document.baseURI);
-            const destination = new URL(`${encodeURIComponent(name)}/`, hubBaseURL);
-            history.replaceState(null, "", destination.pathname);
-        }
+        const params=new URLSearchParams(window.location.search);const requestedName=params.get("name");const hubBaseURL=new URL(".",document.baseURI);const studyBaseURL=new URL("..",hubBaseURL);const siteRootURL=new URL("..",studyBaseURL);const pathParts=window.location.pathname.split("/").filter(Boolean);const hubIndex=pathParts.lastIndexOf("hub");const name=requestedName||(hubIndex>=0?pathParts[hubIndex+1]:"")||"usuario";if(requestedName){const destination=new URL(`${encodeURIComponent(name)}/`,hubBaseURL);history.replaceState(null,"",destination.pathname)}document.getElementById("brandLink").href=siteRootURL.href;document.getElementById("panelLink").href=new URL(`panel/index.html?name=${encodeURIComponent(name)}`,studyBaseURL).href;
     </script>
 </body>
 </html>
