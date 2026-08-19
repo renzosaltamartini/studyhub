@@ -4,17 +4,21 @@ import {
     signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword,
     updateProfile, sendPasswordResetEmail, onAuthStateChanged, signOut
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 import { firebaseConfig } from "/login/firebase-config.js";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
 
 const $ = (id) => document.getElementById(id);
 const authForms = $("authForms"), accountView = $("accountView"), authForm = $("authForm");
-const loginTab = $("loginTab"), registerTab = $("registerTab"), nameField = $("nameField");
-const displayName = $("displayName"), email = $("email"), password = $("password");
+const loginTab = $("loginTab"), registerTab = $("registerTab");
+const registerFields = $("registerFields"), registerExtraFields = $("registerExtraFields");
+const firstName = $("firstName"), lastName = $("lastName"), email = $("email"), password = $("password");
+const confirmPassword = $("confirmPassword"), organization = $("organization"), occupation = $("occupation");
 const submitButton = $("submitButton"), googleButton = $("googleButton"), message = $("message");
 let mode = "login";
 
@@ -37,19 +41,27 @@ function readableError(error) {
 }
 
 function setMode(nextMode) {
+    if (mode === nextMode) return;
     mode = nextMode;
     const registering = mode === "register";
     loginTab.classList.toggle("active", !registering);
     registerTab.classList.toggle("active", registering);
     loginTab.setAttribute("aria-selected", String(!registering));
     registerTab.setAttribute("aria-selected", String(registering));
-    nameField.classList.toggle("hidden", !registering);
-    displayName.required = registering;
+    registerFields.classList.toggle("hidden", !registering);
+    registerExtraFields.classList.toggle("hidden", !registering);
+    firstName.required = registering;
+    lastName.required = registering;
+    confirmPassword.required = registering;
+    occupation.required = registering;
     password.autocomplete = registering ? "new-password" : "current-password";
     $("forgotPassword").classList.toggle("hidden", registering);
     $("form-title").textContent = registering ? "Crea tu cuenta" : "Bienvenido de nuevo";
     $("form-subtitle").textContent = registering ? "Empieza a organizar tu estudio." : "Ingresa para continuar a tu Hub.";
     submitButton.querySelector("span").textContent = registering ? "Crear cuenta" : "Ingresar";
+    $("authForms").classList.remove("form-transition");
+    void $("authForms").offsetWidth;
+    $("authForms").classList.add("form-transition");
     showMessage();
 }
 
@@ -69,8 +81,22 @@ authForm.addEventListener("submit", (event) => {
     if (!authForm.checkValidity()) return authForm.reportValidity();
     runAuth(async () => {
         if (mode === "register") {
+            if (password.value !== confirmPassword.value) {
+                showMessage("Las contraseñas no coinciden.");
+                confirmPassword.focus();
+                return;
+            }
             const credential = await createUserWithEmailAndPassword(auth, email.value.trim(), password.value);
-            await updateProfile(credential.user, { displayName: displayName.value.trim() });
+            const fullName = `${firstName.value.trim()} ${lastName.value.trim()}`;
+            await updateProfile(credential.user, { displayName: fullName });
+            await setDoc(doc(db, "users", credential.user.uid), {
+                firstName: firstName.value.trim(),
+                lastName: lastName.value.trim(),
+                email: email.value.trim(),
+                organization: organization.value.trim(),
+                occupation: occupation.value,
+                createdAt: serverTimestamp()
+            });
         } else {
             await signInWithEmailAndPassword(auth, email.value.trim(), password.value);
         }
@@ -89,6 +115,13 @@ $("passwordToggle").addEventListener("click", () => {
     password.type = visible ? "password" : "text";
     $("passwordToggle").innerHTML = `<i class="fa-regular fa-eye${visible ? "" : "-slash"}"></i>`;
     $("passwordToggle").setAttribute("aria-label", visible ? "Mostrar contraseña" : "Ocultar contraseña");
+});
+
+$("confirmPasswordToggle").addEventListener("click", () => {
+    const visible = confirmPassword.type === "text";
+    confirmPassword.type = visible ? "password" : "text";
+    $("confirmPasswordToggle").innerHTML = `<i class="fa-regular fa-eye${visible ? "" : "-slash"}"></i>`;
+    $("confirmPasswordToggle").setAttribute("aria-label", visible ? "Mostrar confirmación" : "Ocultar confirmación");
 });
 
 $("logoutButton").addEventListener("click", () => signOut(auth));
