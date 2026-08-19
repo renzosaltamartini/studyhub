@@ -203,6 +203,12 @@ button {
     font-weight: 600;
 }
 
+.login-button.loading {
+    cursor: wait;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
 /* =========================
    HERO
 ========================= */
