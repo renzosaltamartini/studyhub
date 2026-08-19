@@ -25,6 +25,12 @@
                 <span class="logo-name">StudyHub</span>
             </a>
 
+            <div class="navbar-actions">
+            <a href="mailto:renzosaltamartini2008@gmail.com" class="contact-button" aria-label="Enviar un correo a StudyHub">
+                <i class="fa-regular fa-envelope"></i>
+                <span>Contacto</span>
+            </a>
+
             <!-- BOTÓN COMENZAR / PERFIL -->
             <a href="#" id="btnComenzar" class="login-button" aria-label="Comenzar en StudyHub con Google">
                 <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -35,6 +41,7 @@
                 </svg>
                 <span>Comenzar</span>
             </a>
+            </div>
         </nav>
     </header>
 
@@ -42,6 +49,7 @@
         <!-- HERO -->
         <section id="inicio" class="hero">
             <div class="hero-content">
+                <span class="hero-eyebrow"><i class="fa-solid fa-wand-magic-sparkles"></i> Tu espacio de estudio personal</span>
                 <h1 class="hero-title">
                     Con nosotros podrás
                     <span class="dynamic-word-container">
@@ -55,6 +63,18 @@
                     </span>
                     en un solo lugar.
                 </h1>
+                <p class="hero-description">
+                    Organiza tus materias, apuntes, fechas importantes y archivos desde un espacio simple, rápido y pensado para estudiar mejor.
+                </p>
+                <div class="hero-actions">
+                    <a href="#nosotros" class="hero-primary">Descubrir StudyHub <i class="fa-solid fa-arrow-down"></i></a>
+                    <a href="mailto:renzosaltamartini2008@gmail.com" class="hero-secondary"><i class="fa-regular fa-envelope"></i> Hablemos</a>
+                </div>
+                <div class="hero-highlights" aria-label="Características principales">
+                    <span><i class="fa-solid fa-check"></i> Todo organizado</span>
+                    <span><i class="fa-solid fa-check"></i> Acceso rápido</span>
+                    <span><i class="fa-solid fa-check"></i> Tu información, siempre disponible</span>
+                </div>
             </div>
         </section>
 
@@ -132,6 +152,8 @@
         function changeWord() {
             dynamicWord.classList.remove("word-enter");
             dynamicWord.classList.add("word-leave");
+            wordText.classList.remove("text-enter");
+            wordText.classList.add("text-leave");
             setTimeout(() => {
                 index = (index + 1) % words.length;
                 const word = words[index];
@@ -141,8 +163,10 @@
                 pulseRing.style.backgroundColor = word.ring;
                 wordText.textContent = word.text;
                 dynamicWord.classList.remove("word-leave");
+                wordText.classList.remove("text-leave");
                 void dynamicWord.offsetWidth;
                 dynamicWord.classList.add("word-enter");
+                wordText.classList.add("text-enter");
             }, 260);
         }
         setInterval(changeWord, 2400);
