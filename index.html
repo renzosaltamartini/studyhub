@@ -36,7 +36,7 @@
 
 <!-- BOTÓN COMENZAR / PERFIL -->
 <a href="#" id="btnComenzar" class="login-button" aria-label="Comenzar en StudyHub con Google">
-<svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
 <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.13C3.26 21.3 7.31 24 12 24z"/>
 <path fill="#FBBC05" d="M5.28 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.63H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.37l3.99-3.13z"/>
@@ -61,7 +61,7 @@
 <h1 class="hero-title">
 Te ayudamos a
 <span class="dynamic-word-container">
-<span id="dynamicWord" class="dynamic-word word-enter">
+<span id="dynamicWord" class="dynamic-word word-enter" aria-live="polite" aria-atomic="true">
 <span class="pulse-container">
 <span id="pulseRing" class="pulse-ring"></span>
 <span id="pulseDot" class="pulse-dot"></span>
@@ -160,6 +160,53 @@ con tu estudio.
 </div>
 </section>
 
+<!-- CREADOR -->
+<section class="creator-section" aria-labelledby="creator-title">
+<div class="creator-card">
+<div class="creator-portrait-wrap">
+<span class="creator-tape" aria-hidden="true"></span>
+<img
+class="creator-portrait"
+src="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s96-c"
+alt="Foto de Renzo Saltamartini"
+width="192"
+height="192"
+loading="lazy"
+referrerpolicy="no-referrer"
+>
+</div>
+
+<div class="creator-content">
+<span class="section-badge creator-badge"><i class="fa-solid fa-code"></i> Detrás de StudyHub</span>
+<h2 id="creator-title">Hola, soy Renzo.</h2>
+<p class="creator-intro">Estudiante de Ingeniería Informática y creador de StudyHub, un espacio pensado para hacer más simple la organización académica.</p>
+
+<dl class="creator-details">
+<div class="creator-detail">
+<dt><i class="fa-regular fa-user"></i> Nombre y apellido</dt>
+<dd>Renzo Saltamartini</dd>
+</div>
+<div class="creator-detail">
+<dt><i class="fa-solid fa-earth-americas"></i> Nacionalidad</dt>
+<dd><span class="argentina-flag" role="img" aria-label="Bandera de Argentina">🇦🇷</span> Argentina</dd>
+</div>
+<div class="creator-detail">
+<dt><i class="fa-regular fa-calendar"></i> Edad</dt>
+<dd>18 años</dd>
+</div>
+<div class="creator-detail">
+<dt><i class="fa-regular fa-envelope"></i> Email</dt>
+<dd><a href="mailto:renzosaltamartini2008@gmail.com">renzosaltamartini2008@gmail.com</a></dd>
+</div>
+<div class="creator-detail creator-detail-wide">
+<dt><i class="fa-solid fa-graduation-cap"></i> Ocupación</dt>
+<dd>Estudiante · Ingeniería Informática — UADE</dd>
+</div>
+</dl>
+</div>
+</div>
+</section>
+
 <!-- FOOTER -->
 <footer class="footer">
 <div class="footer-content">
@@ -212,7 +259,11 @@ wordText.classList.add("text-enter");
 }, 220);
 }
 
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+if (!reduceMotion) {
 setInterval(changeWord, 2400);
+}
 </script>
 
 <!-- JS para autodetección de sesión -->
