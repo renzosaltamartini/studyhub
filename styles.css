@@ -10,6 +10,7 @@
     --blue-hover: #1557b0;
     --violet: #7c3aed;
     --green: #059669;
+    --green-hover: #047857;
     --yellow: #d97706;
     --pink: #e11d48;
     --red: #d93025;
@@ -193,8 +194,8 @@ button { font: inherit; }
     font-weight: 600;
     transition: all .2s ease;
 }
-.hero-primary { background: var(--blue); color: #fff; box-shadow: 0 4px 14px rgba(26,115,232,.24); }
-.hero-primary:hover { background: var(--blue-hover); color: #fff; transform: translateY(-2px); }
+.hero-primary { background: var(--green); color: #fff; box-shadow: 0 4px 14px rgba(5,150,105,.24); }
+.hero-primary:hover { background: var(--green-hover); color: #fff; transform: translateY(-2px); box-shadow: 0 7px 18px rgba(5,150,105,.28); }
 .hero-secondary { border: 1px solid var(--line); color: var(--text); background: #fff; }
 .hero-secondary:hover { background: var(--surface); border-color: #c6c6c6; transform: translateY(-2px); }
 
@@ -214,7 +215,7 @@ button { font: inherit; }
 .hero-highlights i { font-size: 11px; }
 
 /* HUB */
-.hub-section { width: 100%; max-width: 1180px; margin: 0 auto; padding: 60px 28px 120px; }
+.hub-section { width: 100%; max-width: 1180px; margin: 0 auto; padding: 60px 28px 120px; scroll-margin-top: 96px; }
 .section-heading { max-width: 680px; margin-bottom: 48px; }
 .section-heading h2, .creator-content h2 { margin: 0; font-size: 38px; line-height: 1.15; letter-spacing: -.03em; font-weight: 600; color: var(--black); }
 .section-heading p, .creator-intro { margin: 16px 0 0; color: var(--muted); font-size: 15px; line-height: 1.7; }
