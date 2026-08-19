@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>StudyHub</title>
 
-<!-- Bootstrap (grid/utilities si se necesitan en otras vistas) -->
+<!-- Bootstrap (grid/utilities) -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
@@ -21,9 +21,9 @@
 <header class="navbar-header">
 <nav class="navbar-container">
 
-<!-- LOGO -->
-<a href="./" class="navbar-logo">
-<img src="studyhub.png" alt="StudyHub" class="navbar-brand-image" width="164" height="46">
+<!-- TEXTO BRAND SIN LOGO -->
+<a href="./" class="navbar-brand-text">
+<span>StudyHub</span>
 </a>
 
 <div class="navbar-actions">
@@ -58,10 +58,8 @@
 
 <h1 class="hero-title">
 Te ayudamos a
-<span class="dynamic-word-container">
 <span id="dynamicWord" class="dynamic-word word-enter" aria-live="polite" aria-atomic="true">
 <span id="wordText">crear</span>
-</span>
 </span>
 en un solo lugar.
 </h1>
@@ -81,20 +79,6 @@ Organiza tus materias, apuntes, fechas importantes y archivos desde un espacio s
 <span><i class="fa-solid fa-check"></i> Tu información, siempre disponible</span>
 </div>
 
-</div>
-
-<div class="hero-mock" aria-hidden="true">
-<div class="mock-tape"></div>
-<div class="mock-card">
-<div class="mock-card-label">
-<strong>Tu Hub</strong>
-<span>HOY</span>
-</div>
-<div class="mock-row"><span class="mock-dot" style="background:#8b5cf6"></span><span>Recordatorios</span><small>3</small></div>
-<div class="mock-row"><span class="mock-dot" style="background:#3b82f6"></span><span>Calendario</span><small>Oct</small></div>
-<div class="mock-row"><span class="mock-dot" style="background:#10b981"></span><span>Páginas</span><small>12</small></div>
-<div class="mock-row"><span class="mock-dot" style="background:#f59e0b"></span><span>Archivos</span><small>PDF</small></div>
-</div>
 </div>
 
 </section>
@@ -118,28 +102,28 @@ con tu estudio.
 
 <article class="feature-card">
 <span class="feature-index">IDX—01</span>
-<div class="feature-icon violet"><i class="fa-regular fa-bell"></i></div>
+<div class="feature-icon neutral"><i class="fa-regular fa-bell"></i></div>
 <h3>Recordatorios</h3>
 <p>Agenda tus próximos recordatorios y mantén siempre visible aquello que tienes pendiente.</p>
 </article>
 
 <article class="feature-card">
 <span class="feature-index">IDX—02</span>
-<div class="feature-icon blue"><i class="fa-regular fa-calendar"></i></div>
+<div class="feature-icon neutral"><i class="fa-regular fa-calendar"></i></div>
 <h3>Calendario</h3>
 <p>Visualiza tus días y agrega actividades, tareas, entregas o cualquier cosa que debas realizar.</p>
 </article>
 
 <article class="feature-card">
 <span class="feature-index">IDX—03</span>
-<div class="feature-icon green"><i class="fa-regular fa-file-lines"></i></div>
+<div class="feature-icon neutral"><i class="fa-regular fa-file-lines"></i></div>
 <h3>Páginas</h3>
 <p>Crea páginas y subpáginas para organizar materias, clases, apuntes y todo tu contenido.</p>
 </article>
 
 <article class="feature-card">
 <span class="feature-index">IDX—04</span>
-<div class="feature-icon yellow"><i class="fa-regular fa-folder-open"></i></div>
+<div class="feature-icon neutral"><i class="fa-regular fa-folder-open"></i></div>
 <h3>Archivos</h3>
 <p>Guarda PDFs y otros archivos dentro de tus materias, con acceso rápido y vista previa.</p>
 </article>
@@ -158,7 +142,6 @@ con tu estudio.
 <section class="creator-section" aria-labelledby="creator-title">
 <div class="creator-card">
 <div class="creator-portrait-wrap">
-<span class="creator-tape" aria-hidden="true"></span>
 <img
 class="creator-portrait"
 src="https://lh3.googleusercontent.com/a/ACg8ocLYSjY5aO_gPGWIOhpKUVtSWB0PoQD1M5ix3HmoGjbXozB2Ob0=s96-c"
@@ -205,7 +188,6 @@ referrerpolicy="no-referrer"
 <footer class="footer">
 <div class="footer-content">
 <div class="footer-logo">
-<img src="sh.png" alt="StudyHub" class="footer-brand-image" width="38" height="38">
 <span>StudyHub</span>
 </div>
 <p>TODO EN UN SOLO LUGAR.</p>
@@ -217,11 +199,11 @@ referrerpolicy="no-referrer"
 <!-- JS de la animación de texto -->
 <script>
 const words = [
-{ text: "crear", background: "#e8f0fe", color: "#1967d2" },
-{ text: "imaginar", background: "#f3e8fd", color: "#8430ce" },
-{ text: "estudiar", background: "#e6f4ea", color: "#137333" },
-{ text: "aprender", background: "#fef7e0", color: "#b06000" },
-{ text: "organizar", background: "#fce8e6", color: "#c5221f" }
+{ text: "crear", background: "#f1f3f4", color: "#202124" },
+{ text: "imaginar", background: "#f1f3f4", color: "#202124" },
+{ text: "estudiar", background: "#f1f3f4", color: "#202124" },
+{ text: "aprender", background: "#f1f3f4", color: "#202124" },
+{ text: "organizar", background: "#f1f3f4", color: "#202124" }
 ];
 
 let index = 0;
@@ -230,8 +212,7 @@ const wordText = document.getElementById("wordText");
 
 function changeWord() {
 dynamicWord.classList.remove("word-enter");
-wordText.classList.remove("text-enter");
-wordText.classList.add("text-leave");
+dynamicWord.classList.add("word-leave");
 
 setTimeout(() => {
 index = (index + 1) % words.length;
@@ -241,17 +222,15 @@ dynamicWord.style.backgroundColor = word.background;
 dynamicWord.style.color = word.color;
 wordText.textContent = word.text;
 
-wordText.classList.remove("text-leave");
-void dynamicWord.offsetWidth;
+dynamicWord.classList.remove("word-leave");
 dynamicWord.classList.add("word-enter");
-wordText.classList.add("text-enter");
-}, 220);
+}, 280);
 }
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 if (!reduceMotion) {
-setInterval(changeWord, 2400);
+setInterval(changeWord, 2600);
 }
 </script>
 
