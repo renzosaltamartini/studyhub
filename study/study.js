@@ -57,6 +57,7 @@ function renderPanel(user, slug, displayName) {
     fillAvatar($("avatar"), user, displayName);
     $("userName").textContent = displayName;
     $("userEmail").textContent = user.email || "Cuenta de Google";
+    $("hubLink").href = new URL(`hub/index.html?name=${encodeURIComponent(slug)}`, studyBaseURL).href;
 }
 
 async function logout() {

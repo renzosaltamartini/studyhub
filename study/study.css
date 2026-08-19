@@ -156,11 +156,14 @@ button { font: inherit; }
 .avatar img { width: 100%; height: 100%; object-fit: cover; }
 .account-view h2 { margin: 0 0 7px; font-size: 26px; font-weight: 600; letter-spacing: -.035em; }
 .account-view > p { margin: 0; color: var(--muted); font-size: 12px; }
-.logout-button {
+.hub-button, .logout-button {
     width: 100%; min-height: 47px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 10px;
     cursor: pointer; font-size: 12px; font-weight: 600; transition: transform .2s ease, background .2s ease, box-shadow .2s ease, border-color .2s ease;
 }
-.logout-button { margin-top: 28px; border: 1px solid #fecaca; background: #fef2f2; color: #dc2626; box-shadow: 0 0 22px rgba(220,38,38,.06); }
+.hub-button { margin-top: 28px; border: 1px solid #dbeafe; background: var(--blue-soft); color: var(--blue); box-shadow: 0 0 24px rgba(59,130,246,.08); }
+.hub-button:hover { background: #dbeafe; transform: translateY(-1px); box-shadow: 0 0 30px rgba(59,130,246,.14); }
+.hub-button:active { transform: scale(.99); }
+.logout-button { margin-top: 10px; border: 1px solid #fecaca; background: #fef2f2; color: #dc2626; box-shadow: 0 0 22px rgba(220,38,38,.06); }
 .logout-button:hover { background: #fee2e2; border-color: #fca5a5; color: #b91c1c; transform: translateY(-1px); box-shadow: 0 0 26px rgba(220,38,38,.12); }
 .logout-button:active { transform: scale(.99); }
 
