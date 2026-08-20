@@ -57,6 +57,13 @@ button { font: inherit; }
     color: var(--black);
     display: inline-flex;
     align-items: center;
+    gap: 9px;
+}
+.navbar-brand-logo {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    flex-shrink: 0;
 }
 
 .navbar-actions { display: flex; align-items: center; gap: 10px; }

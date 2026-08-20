@@ -40,12 +40,16 @@
         align-items: center;
     }
     .notfound-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
         font-size: 18px;
         font-weight: 700;
         letter-spacing: -.03em;
         color: var(--black);
         margin-bottom: 24px;
     }
+    .notfound-brand img { width: 27px; height: 27px; object-fit: contain; }
     .cat-scene {
         position: relative;
         width: 118px;
@@ -198,7 +202,7 @@
 <body>
 
 <div class="notfound">
-    <span class="notfound-brand">StudyHub</span>
+    <span class="notfound-brand"><img src="/sh.png" alt="">StudyHub</span>
     <div class="cat-scene" aria-hidden="true">
         <div class="cat-shadow"></div>
         <div class="cat-tail"></div>

@@ -63,7 +63,8 @@ button { font: inherit; }
     font-weight: 700;
     letter-spacing: -.04em;
 }
-.brand-mark img { width: 23px; height: 23px; object-fit: contain; filter: invert(1); }
+.brand-mark img { width: 29px; height: 29px; object-fit: contain; filter: none; }
+.brand .brand-mark { background: transparent; color: var(--black); border-radius: 0; }
 .brand-line { display: none; }
 .brand-name { color: var(--black); font-size: 20px; font-weight: 700; letter-spacing: -.03em; }
 .back-button {

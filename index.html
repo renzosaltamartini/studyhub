@@ -25,6 +25,7 @@
 
 <!-- TEXTO BRAND SIN LOGO -->
 <a href="./" class="navbar-brand-text">
+<img class="navbar-brand-logo" src="/sh.png" alt="">
 <span>StudyHub</span>
 </a>
 
@@ -282,7 +283,7 @@ const displayName = user.displayName || user.email?.split("@")[0] || "Usuario";
 const slug = slugify(displayName);
 
 localStorage.setItem("studyhubUserSlug", slug);
-btnComenzar.href = "study/panel/index.html";
+btnComenzar.href = "/study/panel";
 btnComenzar.dataset.userSlug = slug;
 btnComenzar.setAttribute("aria-label", `Ir al espacio de ${displayName}`);
 btnComenzar.classList.add("logged-in");

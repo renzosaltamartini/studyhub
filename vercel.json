@@ -1,5 +1,12 @@
 {
-  "redirects": [],
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/study/panel/index.html", "destination": "/study/panel", "permanent": true },
+    { "source": "/study/panel/.html", "destination": "/study/panel", "permanent": true },
+    { "source": "/study/panel/ingreso/index.html", "destination": "/study/panel/ingreso", "permanent": true },
+    { "source": "/study/hub/index.html", "destination": "/study/hub", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/study/panel/ingreso", "destination": "/study/panel/ingreso/index.html" },
     { "source": "/study/panel/ingreso/", "destination": "/study/panel/ingreso/index.html" },
