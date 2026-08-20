@@ -1,7 +1,5 @@
 {
-  "redirects": [
-    { "source": "/study/hub/:slug", "destination": "/study/hub", "permanent": false }
-  ],
+  "redirects": [],
   "rewrites": [
     { "source": "/study/panel/ingreso", "destination": "/study/panel/ingreso/index.html" },
     { "source": "/study/panel/ingreso/", "destination": "/study/panel/ingreso/index.html" },
