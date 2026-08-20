@@ -359,3 +359,12 @@ body.dark-theme { --background:#242529; --surface:#2e3034; --border:#414349; --t
 .dark-theme .intake-card { border-color:#44464c; background:#2e3034; box-shadow:0 12px 34px rgba(0,0,0,.18); }
 .dark-theme .form-field input,.dark-theme .form-field select { border-color:#4a4c52; background:#27282c; color:#f0f1f3; }
 .dark-theme .form-field input:disabled { background:#34363b; color:#a9acb2; }
+.dark-theme .eyebrow,.dark-theme .space-eyebrow { border-color:#4b4e55 !important; background:#35373c !important; color:#cbd5e1 !important; }
+.dark-theme .eyebrow.success { border-color:#31594d !important; background:#293d38 !important; color:#6ee7b7 !important; }
+.dark-theme .eyebrow.success .status-dot { background:#6ee7b7; }
+.dark-theme .eyebrow.session-error { border-color:#684044 !important; background:#402d30 !important; color:#ff9b95 !important; }
+.dark-theme .form-error { background:#402d30; color:#ff9b95; }
+.dark-theme .auth-shell::before { background:#263d5e; }
+.dark-theme .auth-shell::after { background:#433568; }
+.dark-theme .field-note { color:#a1a5ac; }
+body,.auth-header,.back-button,.panel-theme-button,.auth-card,.intake-card,.profile-detail,.eyebrow,.form-field input,.form-field select,.logout-button { transition:background-color .3s,color .3s,border-color .3s,box-shadow .3s; }
