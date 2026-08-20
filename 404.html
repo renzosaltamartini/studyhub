@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Página no encontrada · StudyHub</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --bg: #ffffff;
+        --text: #202124;
+        --muted: #5f6368;
+        --black: #111111;
+        --line: #e0e0e0;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+        height: 100%;
+        margin: 0;
+    }
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100dvh;
+        padding: 24px;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        text-align: center;
+    }
+    .notfound {
+        width: 100%;
+        max-width: 420px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .notfound-brand {
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: -.03em;
+        color: var(--black);
+        margin-bottom: 40px;
+    }
+    .notfound-code {
+        margin: 0;
+        font-size: clamp(64px, 18vw, 96px);
+        line-height: 1;
+        font-weight: 700;
+        letter-spacing: -.04em;
+        color: var(--black);
+    }
+    .notfound-title {
+        margin: 18px 0 0;
+        font-size: clamp(19px, 4vw, 22px);
+        font-weight: 600;
+        color: var(--black);
+    }
+    .notfound-text {
+        margin: 10px 0 0;
+        max-width: 340px;
+        color: var(--muted);
+        font-size: 14.5px;
+        line-height: 1.6;
+    }
+    .notfound-button {
+        margin-top: 32px;
+        min-height: 44px;
+        padding: 0 24px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border-radius: 999px;
+        background: var(--black);
+        color: #fff;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        transition: transform .2s ease, background .2s ease;
+    }
+    .notfound-button:hover {
+        background: #2d2d2d;
+        transform: translateY(-1px);
+    }
+    .notfound-button:focus-visible {
+        outline: 2px solid var(--black);
+        outline-offset: 3px;
+    }
+    @media (max-width: 420px) {
+        .notfound-brand { margin-bottom: 28px; }
+        .notfound-button { width: 100%; }
+    }
+</style>
+</head>
+<body>
+
+<div class="notfound">
+    <span class="notfound-brand">StudyHub</span>
+    <p class="notfound-code">404</p>
+    <h1 class="notfound-title">Esta página no existe</h1>
+    <p class="notfound-text">El enlace que seguiste puede estar roto o la página se movió de lugar.</p>
+    <a class="notfound-button" href="https://stdyhub.vercel.app">
+        <span>Volver al inicio</span>
+    </a>
+</div>
+
+</body>
+</html>

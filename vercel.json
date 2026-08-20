@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/study/panel", "destination": "/study/panel/index.html" },
+    { "source": "/study/panel/:slug*", "destination": "/study/panel/index.html" },
+    { "source": "/:path*", "destination": "/404.html" }
+  ]
+}

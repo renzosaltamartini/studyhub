@@ -296,6 +296,22 @@ button { font: inherit; }
 
 a:focus-visible, button:focus-visible { outline: 2px solid var(--black); outline-offset: 3px; }
 
+/* REVELADO PROGRESIVO AL HACER SCROLL */
+.reveal {
+    opacity: 0;
+    transform: translateY(36px);
+    filter: blur(6px);
+    will-change: opacity, transform, filter;
+    transition: opacity .7s cubic-bezier(.22,.8,.32,1),
+                transform .7s cubic-bezier(.22,.8,.32,1),
+                filter .7s cubic-bezier(.22,.8,.32,1);
+}
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+
 /* RESPONSIVE */
 @media (max-width: 900px) {
     .hero { padding: 80px 20px 75px; }
@@ -335,4 +351,5 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--black); outline
 
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    .reveal { transition-duration: .01ms !important; }
 }
