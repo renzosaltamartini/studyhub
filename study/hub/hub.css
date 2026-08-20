@@ -32,8 +32,15 @@
 .nav-item:hover{background:#f5f5f6;color:#111}
 .sidebar.fully-hidden{transform:translateX(-105%);width:270px}
 .hub-main.sidebar-hidden{margin-left:0}
-.sidebar-opener{position:fixed;z-index:18;top:18px;left:18px;min-height:42px;padding:0 17px;border:1px solid #e0e1e4;border-radius:999px;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.94);color:#202124;box-shadow:0 5px 18px rgba(15,23,42,.08);backdrop-filter:blur(12px);opacity:0;visibility:hidden;transform:translateY(-7px);cursor:pointer;font-size:13px;font-weight:700;transition:opacity .2s,transform .2s,box-shadow .2s}
+.sidebar-opener{position:fixed;z-index:18;top:18px;left:18px;display:flex;align-items:center;gap:10px;opacity:0;visibility:hidden;transform:translateY(-7px);transition:opacity .2s,transform .2s}
 .sidebar-opener.visible{opacity:1;visibility:visible;transform:translateY(0)}
-.sidebar-opener:hover{box-shadow:0 8px 22px rgba(15,23,42,.12);transform:translateY(-1px)}
-.sidebar-opener i{font-size:13px}
+.sidebar-open-button{width:42px;height:42px;padding:0;border:1px solid #e0e1e4;border-radius:13px;display:grid;place-items:center;background:rgba(255,255,255,.95);color:#202124;box-shadow:0 5px 18px rgba(15,23,42,.07);backdrop-filter:blur(12px);cursor:pointer;transition:transform .2s,box-shadow .2s}
+.sidebar-open-button:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(15,23,42,.11)}
+.sidebar-open-button i{font-size:14px}
+.user-pill{height:42px;max-width:min(480px,calc(100vw - 92px));padding:0 17px;border:1px solid #e0e1e4;border-radius:999px;display:flex;align-items:center;gap:5px;overflow:hidden;background:rgba(255,255,255,.95);color:#202124;box-shadow:0 5px 18px rgba(15,23,42,.07);backdrop-filter:blur(12px);font-size:12px;white-space:nowrap}
+.pill-prefix{flex:0 0 auto;color:#73767c;font-weight:500}
+.pill-value{min-width:0;overflow:hidden;color:#151618;font-weight:700;text-overflow:ellipsis;transition:opacity .18s,transform .18s}
+.pill-value.leaving{opacity:0;transform:translateY(-6px)}
+.pill-value.entering{animation:pillValueIn .35s ease}
+@keyframes pillValueIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:760px){.sidebar-opener{display:none}.sidebar.fully-hidden{transform:translateX(-100%)}.nav-item{min-height:40px}}
