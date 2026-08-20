@@ -213,6 +213,14 @@ button { font: inherit; }
 }
 .account-view { text-align: center; }
 .account-view .eyebrow { margin-bottom: 22px; }
+.account-view .eyebrow.session-error {
+    border-color: #fecaca;
+    background: #fef2f2;
+    color: var(--red);
+}
+.account-view .eyebrow.session-error .status-dot {
+    background: var(--red);
+}
 .avatar {
     width: 82px;
     height: 82px;

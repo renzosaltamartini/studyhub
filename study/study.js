@@ -110,6 +110,7 @@ function renderLoggedIn(user, displayName) {
     $("userName").textContent = displayName;
     $("userEmail").textContent = user.email || "Cuenta de Google";
     $("sessionStatus").innerHTML = '<span class="status-dot"></span>Sesión iniciada';
+    $("sessionStatus").classList.remove("session-error");
     if ($("hubLink")) $("hubLink").href = new URL("hub/", studyBaseURL).href;
     $("loginButton")?.classList.add("hidden");
     $("loggedActions")?.classList.remove("hidden");
@@ -119,6 +120,7 @@ function renderLoggedOut() {
     const avatar = $("avatar");
     avatar.innerHTML = '<i class="fa-brands fa-google" aria-hidden="true"></i>';
     $("sessionStatus").innerHTML = '<span class="status-dot"></span>Sesión no iniciada';
+    $("sessionStatus").classList.add("session-error");
     $("greeting").textContent = "Debes iniciar sesión";
     $("userEmail").textContent = "Inicia sesión con Google para acceder a tu espacio.";
     $("loggedActions")?.classList.add("hidden");

@@ -4,30 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hub | StudyHub</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link rel="stylesheet" href="/study/study.css">
 </head>
 <body>
-    <header class="auth-header"><div class="header-content"><div class="header-left">
-        <a class="brand" id="brandLink" href="#"><span class="brand-mark">SH</span><span class="brand-line"></span><span class="brand-name">StudyHub</span></a>
-        <a class="back-button" id="backButton" href="#"><i class="fa-solid fa-arrow-left"></i><span>Inicio</span></a>
-    </div></div></header>
-    <main>
-        <div class="loading-shell" id="loadingView"><span class="spinner"></span><span>Cargando tu Hub...</span></div>
-        <section class="auth-shell hidden" id="panelView">
-            <div class="intro"><span class="eyebrow space-eyebrow"><span>Tu espacio de</span><span id="spaceWord" class="space-word">estudio</span></span><h1>Tu Hub, en un solo lugar.</h1></div>
-            <div class="auth-card"><div class="account-view">
-                <div class="avatar" id="avatar">SH</div>
-                <span class="eyebrow success" id="sessionStatus"><span class="status-dot"></span>Comprobando sesión</span>
-                <h2 id="greeting">¡Hola, <span id="userName">estudiante</span>!</h2>
-                <p id="userEmail"></p>
-                <div id="loggedActions"><a class="hub-button" href="/study/panel"><i class="fa-solid fa-arrow-left"></i><span>Volver al panel</span></a><button class="logout-button" id="logoutButton" type="button">Cerrar sesión</button></div>
-                <button class="hub-button hidden" id="loginButton" type="button"><i class="fa-brands fa-google"></i><span>Iniciar sesión con Google</span></button>
-            </div></div>
-        </section>
-    </main>
-    <script type="module" src="/study/study.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+        import { firebaseConfig } from "/firebase-config.js";
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        onAuthStateChanged(auth, (user) => {
+            if (!user) window.location.replace("/study/panel");
+        });
+    </script>
 </body>
 </html>
