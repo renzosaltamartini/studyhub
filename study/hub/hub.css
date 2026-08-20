@@ -79,3 +79,10 @@ body.dark-theme{background:#242529;color:#eceef1}
 .dark-theme .sidebar-user{border-top-color:#414248}.dark-theme .user-data strong{color:#f0f1f3}.dark-theme .user-data span{color:#979aa1}
 .dark-theme .user-pill{background:rgba(48,49,54,.96);color:#f1f2f4;border-color:#494b51;box-shadow:0 5px 18px rgba(0,0,0,.2)}.dark-theme .pill-value{color:#f1f2f4}
 .dark-theme .hub-placeholder p{color:#a9acb2}.dark-theme .placeholder-icon{background:#33353a;color:#e4e6ea;border-color:#45474d}.dark-theme .mobile-header{background:#2c2d31;border-color:#3d3f44}.dark-theme .mobile-header button{background:#37383d;color:#fff;border-color:#494b51}
+.brand-mark img{width:23px;height:23px;object-fit:contain;filter:invert(1)}
+.dark-theme .brand-mark img{filter:none}
+.space-head{margin-top:22px}.empty-nav{max-height:0;margin-top:0}
+.sidebar{transition:transform .46s cubic-bezier(.22,.8,.25,1),opacity .3s ease,background-color .3s,border-color .3s,box-shadow .3s}
+.sidebar.fully-hidden{opacity:0;transform:translateX(-110%)}
+.hub-main{transition:margin-left .46s cubic-bezier(.22,.8,.25,1),background-color .3s,color .3s}
+.sidebar-opener{transition:opacity .28s ease .12s,transform .32s cubic-bezier(.2,.8,.2,1) .12s}
