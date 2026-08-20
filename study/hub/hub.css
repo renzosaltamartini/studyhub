@@ -37,10 +37,17 @@
 .sidebar-open-button{width:42px;height:42px;padding:0;border:1px solid #e0e1e4;border-radius:13px;display:grid;place-items:center;background:rgba(255,255,255,.95);color:#202124;box-shadow:0 5px 18px rgba(15,23,42,.07);backdrop-filter:blur(12px);cursor:pointer;transition:transform .2s,box-shadow .2s}
 .sidebar-open-button:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(15,23,42,.11)}
 .sidebar-open-button i{font-size:14px}
-.user-pill{height:42px;max-width:min(480px,calc(100vw - 92px));padding:0 17px;border:1px solid #e0e1e4;border-radius:999px;display:flex;align-items:center;gap:5px;overflow:hidden;background:rgba(255,255,255,.95);color:#202124;box-shadow:0 5px 18px rgba(15,23,42,.07);backdrop-filter:blur(12px);font-size:12px;white-space:nowrap}
+.user-pill{height:42px;max-width:min(480px,calc(100vw - 92px));padding:0 18px;border:1px solid #e0e1e4;border-radius:999px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:rgba(255,255,255,.95);color:#202124;box-shadow:0 5px 18px rgba(15,23,42,.07);backdrop-filter:blur(12px);font-size:12px;white-space:nowrap}
 .pill-prefix{flex:0 0 auto;color:#73767c;font-weight:500}
 .pill-value{min-width:0;overflow:hidden;color:#151618;font-weight:700;text-overflow:ellipsis;transition:opacity .18s,transform .18s}
 .pill-value.leaving{opacity:0;transform:translateY(-6px)}
 .pill-value.entering{animation:pillValueIn .35s ease}
 @keyframes pillValueIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:760px){.sidebar-opener{display:none}.sidebar.fully-hidden{transform:translateX(-100%)}.nav-item{min-height:40px}}
+.sidebar-menu-head{margin:25px 5px 0;padding:0 7px;display:flex;align-items:center;justify-content:space-between;color:#96999f;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.sidebar-menu-head button{width:25px;height:25px;padding:0;border:0;border-radius:8px;display:grid;place-items:center;background:transparent;color:#85888f;cursor:pointer;transition:background .2s,color .2s}
+.sidebar-menu-head button:hover{background:#f1f2f4;color:#17181b}
+.sidebar-menu-head button i{font-size:10px;transition:transform .25s}
+.sidebar-menu-head button.closed i{transform:rotate(180deg)}
+.sidebar-nav{margin-top:8px;max-height:190px;overflow:hidden;opacity:1;transition:max-height .28s ease,opacity .2s ease,margin .28s ease}
+.sidebar-nav.options-hidden{max-height:0;margin-top:0;opacity:0;pointer-events:none}
