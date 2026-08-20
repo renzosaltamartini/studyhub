@@ -58,7 +58,7 @@
 .nav-row.item-hidden{justify-content:flex-end}
 .nav-row.item-hidden .nav-item{display:none}
 .nav-row.item-hidden .item-toggle i{transform:rotate(180deg)}
-.help-head{margin-top:22px}.help-nav{max-height:none}.help-nav .nav-item i{color:#70737a}
+.help-head{margin-top:22px}.help-nav{max-height:48px}.help-nav .nav-item i{color:#70737a}
 .help-nav.options-hidden{max-height:0}
 .section-toggle.closed i{transform:rotate(180deg)}
 .item-toggle{position:relative}
@@ -75,7 +75,7 @@ body.dark-theme{background:#242529;color:#eceef1}
 .dark-theme .collapse-button:hover,.dark-theme .user-action:hover,.dark-theme .sidebar-open-button:hover,.dark-theme .floating-theme-button:hover{background:#43454b;color:#fff}
 .dark-theme .sidebar-menu-head{color:#92959c}.dark-theme .sidebar-menu-head button:hover{background:#3a3b40;color:#fff}
 .dark-theme .nav-item{color:#b5b8be}.dark-theme .nav-item i,.dark-theme .nav-item:nth-child(1) i,.dark-theme .nav-item:nth-child(2) i,.dark-theme .nav-item:nth-child(3) i,.dark-theme .nav-item:nth-child(4) i{color:#aeb1b7}
-.dark-theme .nav-item:hover{background:#383a3f;color:#fff}.dark-theme .nav-item.active,.dark-theme .nav-item.active:nth-child(1),.dark-theme .nav-item.active:nth-child(2),.dark-theme .nav-item.active:nth-child(3),.dark-theme .nav-item.active:nth-child(4){background:#e8e9eb;color:#202124;box-shadow:none}.dark-theme .nav-item.active i{color:#202124}
+.dark-theme .nav-item:hover{background:#383a3f;color:#fff}.dark-theme .nav-item.active,.dark-theme .nav-item.active:nth-child(1),.dark-theme .nav-item.active:nth-child(2),.dark-theme .nav-item.active:nth-child(3),.dark-theme .nav-item.active:nth-child(4){background:#383a3f;color:#fff;box-shadow:none}.dark-theme .nav-item.active i{color:#fff}
 .dark-theme .sidebar-user{border-top-color:#414248}.dark-theme .user-data strong{color:#f0f1f3}.dark-theme .user-data span{color:#979aa1}
 .dark-theme .user-pill{background:rgba(48,49,54,.96);color:#f1f2f4;border-color:#494b51;box-shadow:0 5px 18px rgba(0,0,0,.2)}.dark-theme .pill-value{color:#f1f2f4}
 .dark-theme .hub-placeholder p{color:#a9acb2}.dark-theme .placeholder-icon{background:#33353a;color:#e4e6ea;border-color:#45474d}.dark-theme .mobile-header{background:#2c2d31;border-color:#3d3f44}.dark-theme .mobile-header button{background:#37383d;color:#fff;border-color:#494b51}
