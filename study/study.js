@@ -116,9 +116,6 @@ function occupationLabel(profile) {
 function renderLoggedIn(user, displayName, profile) {
     fillAvatar($("avatar"), user, displayName);
     $("userName").textContent = displayName;
-    const email = profile.email || user.email || "Cuenta de Google";
-    $("userEmail").dataset.email = email;
-    $("userEmail").textContent = "•".repeat(Math.min(Math.max(email.length, 10), 22));
     $("userOccupation").textContent = occupationLabel(profile);
     $("userCountry").textContent = profile.country;
     $("profileDetails").classList.remove("hidden");
@@ -167,16 +164,6 @@ async function logout() {
 
 $("logoutButton")?.addEventListener("click", logout);
 $("loginButton")?.addEventListener("click", login);
-
-$("toggleEmail")?.addEventListener("click", () => {
-    const email = $("userEmail");
-    const button = $("toggleEmail");
-    const isVisible = button.getAttribute("aria-pressed") === "true";
-    email.textContent = isVisible ? "•".repeat(Math.min(Math.max(email.dataset.email.length, 10), 22)) : email.dataset.email;
-    button.setAttribute("aria-pressed", String(!isVisible));
-    button.setAttribute("aria-label", isVisible ? "Mostrar email" : "Ocultar email");
-    button.querySelector("i").className = isVisible ? "fa-solid fa-eye" : "fa-solid fa-eye-slash";
-});
 
 onAuthStateChanged(auth, async (user) => {
     if (user) {

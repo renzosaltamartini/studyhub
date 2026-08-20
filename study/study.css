@@ -254,10 +254,6 @@ button { font: inherit; }
 .profile-detail { min-height: 40px; padding: 9px 12px; border: 1px solid #eceff1; border-radius: 12px; background: #fafafa; display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: 12.5px; }
 .profile-detail > i { width: 16px; color: var(--blue); text-align: center; }
 .profile-detail span { min-width: 0; overflow-wrap: anywhere; }
-.email-detail span { flex: 1; }
-.reveal-email { width: 30px; height: 30px; border: 0; border-radius: 50%; background: transparent; color: var(--muted); cursor: pointer; }
-.reveal-email:hover { background: #e8f0fe; color: var(--blue); }
-
 /* INGRESO OBLIGATORIO */
 .intake-shell { width: min(760px, calc(100% - 40px)); margin: auto; padding: 108px 0 42px; }
 .intake-card { padding: clamp(24px, 5vw, 44px); border: 1px solid var(--border); border-radius: 28px; background: #fff; box-shadow: var(--shadow); }
