@@ -8,6 +8,7 @@
     { "source": "/study/hub/index.html", "destination": "/study/hub", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/panel", "destination": "/study/panel/index.html" },
     { "source": "/study/panel/ingreso", "destination": "/study/panel/ingreso/index.html" },
     { "source": "/study/panel/ingreso/", "destination": "/study/panel/ingreso/index.html" },
     { "source": "/study/panel", "destination": "/study/panel/index.html" },
