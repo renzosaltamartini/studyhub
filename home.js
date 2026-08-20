@@ -33,7 +33,7 @@ let currentUser = null;
 
 function renderLoggedOut() {
     btnComenzar.href = "#";
-    btnComenzar.setAttribute("aria-label", "Comenzar en EyeHub con Google");
+    btnComenzar.setAttribute("aria-label", "Comenzar en StudyHub con Google");
     btnComenzar.classList.remove("logged-in");
     btnComenzar.innerHTML = COMENZAR_ICON;
 }
