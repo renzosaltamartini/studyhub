@@ -250,6 +250,32 @@ button { font: inherit; }
     letter-spacing: -.035em;
 }
 .account-view > p { margin: 0; color: var(--muted); font-size: 12.5px; }
+.profile-details { margin-top: 16px; display: grid; gap: 9px; text-align: left; }
+.profile-detail { min-height: 40px; padding: 9px 12px; border: 1px solid #eceff1; border-radius: 12px; background: #fafafa; display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: 12.5px; }
+.profile-detail > i { width: 16px; color: var(--blue); text-align: center; }
+.profile-detail span { min-width: 0; overflow-wrap: anywhere; }
+.email-detail span { flex: 1; }
+.reveal-email { width: 30px; height: 30px; border: 0; border-radius: 50%; background: transparent; color: var(--muted); cursor: pointer; }
+.reveal-email:hover { background: #e8f0fe; color: var(--blue); }
+
+/* INGRESO OBLIGATORIO */
+.intake-shell { width: min(760px, calc(100% - 40px)); margin: auto; padding: 108px 0 42px; }
+.intake-card { padding: clamp(24px, 5vw, 44px); border: 1px solid var(--border); border-radius: 28px; background: #fff; box-shadow: var(--shadow); }
+.intake-head { margin-bottom: 30px; }
+.intake-head h1 { margin: 16px 0 9px; font-size: clamp(30px, 5vw, 43px); letter-spacing: -.045em; }
+.intake-head p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.form-field { display: grid; gap: 7px; }
+.form-field.full { grid-column: 1 / -1; }
+.form-field label { color: var(--text); font-size: 12px; font-weight: 700; }
+.form-field input, .form-field select { width: 100%; min-height: 48px; padding: 0 14px; border: 1px solid #d7dce1; border-radius: 13px; background: #fff; color: var(--text); font: inherit; font-size: 14px; outline: none; transition: border-color .2s, box-shadow .2s; }
+.form-field input:focus, .form-field select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(26,115,232,.12); }
+.form-field input:disabled { background: #f3f4f6; color: #6b7280; cursor: not-allowed; }
+.field-note { color: var(--subtle); font-size: 11px; }
+.form-error { margin: 16px 0 0; padding: 11px 13px; border-radius: 12px; background: #fef2f2; color: var(--red); font-size: 12px; }
+.submit-button { width: 100%; min-height: 50px; margin-top: 24px; border: 1px solid var(--blue); border-radius: 999px; background: var(--blue); color: #fff; cursor: pointer; font-weight: 700; }
+.submit-button:disabled { opacity: .65; cursor: wait; }
+@media (max-width: 620px) { .form-grid { grid-template-columns: 1fr; } .form-field.full { grid-column: auto; } .intake-shell { width: min(100% - 28px, 520px); padding-top: 88px; } .intake-card { border-radius: 22px; } }
 
 .hub-button,
 .logout-button {

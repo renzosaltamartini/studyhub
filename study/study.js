@@ -8,10 +8,12 @@ import {
     onAuthStateChanged,
     signOut
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
 
 import { firebaseConfig } from "../firebase-config.js";
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const database = getDatabase(app);
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
 
@@ -105,10 +107,22 @@ function fillAvatar(container, user, displayName) {
     }
 }
 
-function renderLoggedIn(user, displayName) {
+function occupationLabel(profile) {
+    const labels = { profesional: "Profesional", estudiante: "Estudiante", desempleado: "Desempleado" };
+    const base = labels[profile.occupation] || profile.occupation || "Sin ocupación";
+    return profile.occupationDetail ? `${base} · ${profile.occupationDetail}` : base;
+}
+
+function renderLoggedIn(user, displayName, profile) {
     fillAvatar($("avatar"), user, displayName);
     $("userName").textContent = displayName;
-    $("userEmail").textContent = user.email || "Cuenta de Google";
+    const email = profile.email || user.email || "Cuenta de Google";
+    $("userEmail").dataset.email = email;
+    $("userEmail").textContent = "•".repeat(Math.min(Math.max(email.length, 10), 22));
+    $("userOccupation").textContent = occupationLabel(profile);
+    $("userCountry").textContent = profile.country;
+    $("profileDetails").classList.remove("hidden");
+    $("loggedOutMessage").classList.add("hidden");
     $("sessionStatus").innerHTML = '<span class="status-dot"></span>Sesión iniciada';
     $("sessionStatus").classList.remove("session-error");
     if ($("hubLink")) $("hubLink").href = new URL("hub/", studyBaseURL).href;
@@ -122,7 +136,9 @@ function renderLoggedOut() {
     $("sessionStatus").innerHTML = '<span class="status-dot"></span>Sesión no iniciada';
     $("sessionStatus").classList.add("session-error");
     $("greeting").textContent = "Debes iniciar sesión";
-    $("userEmail").textContent = "Inicia sesión con Google para acceder a tu espacio.";
+    $("profileDetails").classList.add("hidden");
+    $("loggedOutMessage").textContent = "Inicia sesión con Google para acceder a tu espacio.";
+    $("loggedOutMessage").classList.remove("hidden");
     $("loggedActions")?.classList.add("hidden");
     $("loginButton")?.classList.remove("hidden");
 }
@@ -152,10 +168,32 @@ async function logout() {
 $("logoutButton")?.addEventListener("click", logout);
 $("loginButton")?.addEventListener("click", login);
 
-onAuthStateChanged(auth, (user) => {
+$("toggleEmail")?.addEventListener("click", () => {
+    const email = $("userEmail");
+    const button = $("toggleEmail");
+    const isVisible = button.getAttribute("aria-pressed") === "true";
+    email.textContent = isVisible ? "•".repeat(Math.min(Math.max(email.dataset.email.length, 10), 22)) : email.dataset.email;
+    button.setAttribute("aria-pressed", String(!isVisible));
+    button.setAttribute("aria-label", isVisible ? "Mostrar email" : "Ocultar email");
+    button.querySelector("i").className = isVisible ? "fa-solid fa-eye" : "fa-solid fa-eye-slash";
+});
+
+onAuthStateChanged(auth, async (user) => {
     if (user) {
-        const displayName = user.displayName || user.email?.split("@")[0] || "Usuario";
-        renderLoggedIn(user, displayName);
+        try {
+            const snapshot = await get(ref(database, `users/${user.uid}/profile`));
+            const profile = snapshot.val();
+            if (!profile?.completed) {
+                window.location.replace("/study/panel/ingreso");
+                return;
+            }
+            const displayName = profile.fullName || user.displayName || user.email?.split("@")[0] || "Usuario";
+            renderLoggedIn(user, displayName, profile);
+        } catch (error) {
+            console.error("No se pudo comprobar el perfil:", error);
+            window.location.replace("/study/panel/ingreso");
+            return;
+        }
     } else {
         renderLoggedOut();
     }
