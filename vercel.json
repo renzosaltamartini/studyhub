@@ -1,7 +1,8 @@
 {
+  "cleanUrls": true,
+  "trailingSlash": false,
   "rewrites": [
-    { "source": "/study/panel", "destination": "/study/panel/index.html" },
-    { "source": "/study/panel/:slug*", "destination": "/study/panel/index.html" },
-    { "source": "/:path*", "destination": "/404.html" }
+    { "source": "/study/panel/:nombre", "destination": "/study/panel/index.html" },
+    { "source": "/study/hub/:nombre", "destination": "/study/hub/index.html" }
   ]
 }
