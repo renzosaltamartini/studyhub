@@ -68,6 +68,12 @@ Organiza tus materias, apuntes, fechas importantes y archivos desde un espacio s
 
 </div>
 
+<div class="scroll-dots" id="scrollDots" aria-hidden="true">
+<span></span>
+<span></span>
+<span></span>
+</div>
+
 </section>
 
 <!-- HUB CENTRAL -->
@@ -219,6 +225,15 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
 if (!reduceMotion) {
 setInterval(changeWord, 2600);
 }
+
+const scrollDots = document.getElementById("scrollDots");
+
+function updateScrollDots() {
+scrollDots?.classList.toggle("is-hidden", window.scrollY > 24);
+}
+
+updateScrollDots();
+window.addEventListener("scroll", updateScrollDots, { passive: true });
 
 </script>
 
