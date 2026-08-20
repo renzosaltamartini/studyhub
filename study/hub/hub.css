@@ -37,7 +37,7 @@
 .sidebar-open-button{width:42px;height:42px;padding:0;border:1px solid #e0e1e4;border-radius:13px;display:grid;place-items:center;background:rgba(255,255,255,.95);color:#202124;box-shadow:0 5px 18px rgba(15,23,42,.07);backdrop-filter:blur(12px);cursor:pointer;transition:transform .2s,box-shadow .2s}
 .sidebar-open-button:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(15,23,42,.11)}
 .sidebar-open-button i{font-size:14px}
-.user-pill{height:42px;max-width:min(480px,calc(100vw - 92px));padding:0 18px;border:1px solid #e0e1e4;border-radius:999px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:rgba(255,255,255,.95);color:#202124;box-shadow:0 5px 18px rgba(15,23,42,.07);backdrop-filter:blur(12px);font-size:12px;white-space:nowrap}
+.user-pill{width:90px;height:42px;max-width:min(480px,calc(100vw - 92px));padding:0 18px;border:1px solid #e0e1e4;border-radius:999px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:rgba(255,255,255,.95);color:#202124;box-shadow:0 5px 18px rgba(15,23,42,.07);backdrop-filter:blur(12px);font-size:12px;white-space:nowrap;transition:width .42s cubic-bezier(.2,.8,.2,1)}
 .pill-prefix{flex:0 0 auto;color:#73767c;font-weight:500}
 .pill-value{min-width:0;overflow:hidden;color:#151618;font-weight:700;text-overflow:ellipsis;transition:opacity .18s,transform .18s}
 .pill-value.leaving{opacity:0;transform:translateY(-6px)}
@@ -51,3 +51,11 @@
 .sidebar-menu-head button.closed i{transform:rotate(180deg)}
 .sidebar-nav{margin-top:8px;max-height:190px;overflow:hidden;opacity:1;transition:max-height .28s ease,opacity .2s ease,margin .28s ease}
 .sidebar-nav.options-hidden{max-height:0;margin-top:0;opacity:0;pointer-events:none}
+.nav-row{display:flex;align-items:center;gap:4px;transition:width .28s ease}
+.nav-row .nav-item{min-width:0;flex:1;transition:flex-basis .28s ease,width .28s ease,padding .28s ease,background .2s,color .2s}
+.item-toggle{width:27px;height:27px;flex:0 0 27px;padding:0;border:0;border-radius:8px;display:grid;place-items:center;background:transparent;color:#9a9da3;cursor:pointer;transition:background .2s,color .2s}
+.item-toggle:hover{background:#f1f2f4;color:#151618}.item-toggle i{font-size:9px;transition:transform .25s}
+.nav-row.item-hidden .nav-item{flex:0 0 40px;width:40px;padding:0;justify-content:center}
+.nav-row.item-hidden .nav-item span{width:0;opacity:0;overflow:hidden}
+.nav-row.item-hidden .item-toggle i{transform:rotate(180deg)}
+.help-head{margin-top:22px}.help-nav{max-height:none}.help-nav .nav-item i{color:#70737a}
