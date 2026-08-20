@@ -82,8 +82,6 @@ button { font: inherit; }
 }
 .contact-button { border: 1px solid var(--line); color: var(--text); background: #fff; }
 .contact-button:hover { background: var(--surface); border-color: #c6c6c6; }
-.home-theme-button { width: 40px; height: 40px; padding: 0; border: 1px solid var(--line); border-radius: 50%; display: grid; place-items: center; background: #fff; color: var(--text); cursor: pointer; transition: all .2s ease; }
-.home-theme-button:hover { background: var(--surface); border-color: #c6c6c6; transform: translateY(-1px); }
 .login-button {
     border: 2px solid transparent;
     background: linear-gradient(#fff, #fff) padding-box,
@@ -362,31 +360,3 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--black); outline
     *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
     .reveal { transition-duration: .01ms !important; }
 }
-
-/* TEMA GLOBAL */
-body.dark-theme { --bg:#242529; --surface:#303236; --text:#eceef1; --muted:#a9acb2; --line:#414349; --black:#f2f2f3; --black-hover:#fff; background:#242529; color:#eceef1; }
-.dark-theme .navbar-header { background:rgba(44,45,49,.92); border-color:#414349; }
-.dark-theme .contact-button,.dark-theme .home-theme-button { border-color:#494b51; background:#37383d; color:#d7d9dd; }
-.dark-theme .contact-button:hover,.dark-theme .home-theme-button:hover { border-color:#5d6067; background:#43454b; color:#fff; }
-.dark-theme .login-button { background:linear-gradient(#303236,#303236) padding-box,linear-gradient(110deg,#ea4335,#f97316,#fbbc05,#34a853,#4285f4) border-box; color:#eceef1; }
-.dark-theme .login-button:hover { background:linear-gradient(#3a3c41,#3a3c41) padding-box,linear-gradient(110deg,#ea4335,#f97316,#fbbc05,#34a853,#4285f4) border-box; color:#fff; }
-.dark-theme .feature-card,.dark-theme .creator-card,.dark-theme .creator-detail,.dark-theme .footer { border-color:#414349; background:#2e3034; }
-.dark-theme .feature-card.danger { background:#352c2e; }
-.dark-theme .creator-detail dt,.dark-theme .footer p { color:#a1a5ac; }
-.dark-theme .hero-eyebrow,.dark-theme .section-badge,.dark-theme .creator-badge { border-color:#4b4e55; background:#35373c; color:#cbd5e1; }
-.dark-theme .hero-eyebrow i,.dark-theme .section-badge i { color:#cbd5e1; }
-.dark-theme .dynamic-word { background:#353a45; color:#a9c5ff; }
-.dark-theme .section-kicker { color:#a9acb2; }
-.dark-theme .feature-icon.violet { background:#3b3448; color:#c4b5fd; }
-.dark-theme .feature-icon.blue { background:#303b4c; color:#93c5fd; }
-.dark-theme .feature-icon.green { background:#2d403b; color:#6ee7b7; }
-.dark-theme .feature-icon.yellow { background:#453d2c; color:#fcd34d; }
-.dark-theme .feature-icon.red { background:#493234; color:#fca5a5; }
-.dark-theme .feature-card:hover { background:#34363b; box-shadow:0 10px 26px rgba(0,0,0,.2); }
-.dark-theme .feature-card.danger:hover { background:#3d3033; }
-.dark-theme .creator-portrait { background:#2e3034; }
-.dark-theme .nav-avatar-img { background:linear-gradient(#303236,#303236) padding-box,linear-gradient(135deg,#ea4335,#f97316,#fbbc05,#34a853,#4285f4) border-box; }
-.dark-theme .nav-avatar-text { background:linear-gradient(#343b49,#343b49) padding-box,linear-gradient(135deg,#ea4335,#f97316,#fbbc05,#34a853,#4285f4) border-box; color:#a9c5ff; }
-.dark-theme .hero::before { background:#263d5e; }
-.dark-theme .hero::after { background:#433568; }
-body,.navbar-header,.contact-button,.home-theme-button,.login-button,.dynamic-word,.feature-card,.creator-card,.creator-detail,.footer,.hero-eyebrow,.section-badge,.feature-icon { transition:background-color .3s,color .3s,border-color .3s,box-shadow .3s; }

@@ -21,20 +21,6 @@ const $ = (id) => document.getElementById(id);
 const loadingView = $("loadingView");
 const panelView = $("panelView");
 
-function setTheme(dark) {
-    document.body.classList.toggle("dark-theme", dark);
-    localStorage.setItem("studyhub-theme", dark ? "dark" : "light");
-    document.querySelectorAll(".theme-toggle").forEach((button) => {
-        button.setAttribute("aria-label", dark ? "Activar tema claro" : "Activar tema oscuro");
-        button.querySelector("i").className = dark ? "fa-regular fa-sun" : "fa-regular fa-moon";
-    });
-}
-
-setTheme(localStorage.getItem("studyhub-theme") === "dark");
-document.querySelectorAll(".theme-toggle").forEach((button) => {
-    button.addEventListener("click", () => setTheme(!document.body.classList.contains("dark-theme")));
-});
-
 const spaceWords = [
     { text: "estudio", background: "#eff6ff", color: "#2563eb", border: "#dbeafe" },
     { text: "aprendizaje", background: "#ecfdf5", color: "#059669", border: "#d1fae5" },

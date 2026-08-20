@@ -19,18 +19,6 @@ provider.setCustomParameters({ prompt: "select_account" });
 
 const btnComenzar = document.getElementById("btnComenzar");
 
-function setTheme(dark) {
-    document.body.classList.toggle("dark-theme", dark);
-    localStorage.setItem("studyhub-theme", dark ? "dark" : "light");
-    document.querySelectorAll(".theme-toggle").forEach((button) => {
-        button.setAttribute("aria-label", dark ? "Activar tema claro" : "Activar tema oscuro");
-        button.querySelector("i").className = dark ? "fa-regular fa-sun" : "fa-regular fa-moon";
-    });
-}
-
-setTheme(localStorage.getItem("studyhub-theme") === "dark");
-document.querySelectorAll(".theme-toggle").forEach((button) => button.addEventListener("click", () => setTheme(!document.body.classList.contains("dark-theme"))));
-
 const COMENZAR_ICON = `
     <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
