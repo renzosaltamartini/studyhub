@@ -15,72 +15,6 @@ const $ = (id) => document.getElementById(id);
 const loadingView = $("loadingView");
 const panelView = $("panelView");
 
-const spaceWords = [
-    { text: "estudio", background: "#eff6ff", color: "#2563eb", border: "#dbeafe" },
-    { text: "aprendizaje", background: "#ecfdf5", color: "#059669", border: "#d1fae5" },
-    { text: "comodidad", background: "#f5f3ff", color: "#7c3aed", border: "#ede9fe" },
-    { text: "organización", background: "#fff7ed", color: "#ea580c", border: "#fed7aa" },
-    { text: "facilidad", background: "#fff1f2", color: "#e11d48", border: "#fecdd3" }
-];
-
-const spaceWord = $("spaceWord");
-const spaceEyebrow = spaceWord?.closest(".space-eyebrow");
-const spaceDot = spaceEyebrow?.querySelector(".status-dot");
-let spaceWordIndex = 0;
-
-function measureWordWidth(text) {
-    if (!spaceWord) return 0;
-    const probe = document.createElement("span");
-    const styles = window.getComputedStyle(spaceWord);
-    probe.textContent = text;
-    probe.style.position = "absolute";
-    probe.style.visibility = "hidden";
-    probe.style.whiteSpace = "nowrap";
-    probe.style.font = styles.font;
-    probe.style.letterSpacing = styles.letterSpacing;
-    document.body.appendChild(probe);
-    const width = Math.ceil(probe.getBoundingClientRect().width) + 2;
-    probe.remove();
-    return width;
-}
-
-function resizeSpaceWord(text, animate = true) {
-    if (!spaceWord) return;
-    if (!animate) spaceWord.style.transition = "none";
-    spaceWord.style.width = `${measureWordWidth(text)}px`;
-    if (!animate) {
-        void spaceWord.offsetWidth;
-        spaceWord.style.removeProperty("transition");
-    }
-}
-
-function rotateSpaceWord() {
-    if (!spaceWord || !spaceEyebrow) return;
-    spaceWord.classList.remove("is-entering");
-    spaceWord.classList.add("is-leaving");
-
-    window.setTimeout(() => {
-        spaceWordIndex = (spaceWordIndex + 1) % spaceWords.length;
-        const nextWord = spaceWords[spaceWordIndex];
-        spaceWord.textContent = nextWord.text;
-        spaceEyebrow.style.backgroundColor = nextWord.background;
-        spaceEyebrow.style.color = nextWord.color;
-        spaceEyebrow.style.borderColor = nextWord.border;
-        if (spaceDot) spaceDot.style.color = nextWord.color;
-        resizeSpaceWord(nextWord.text);
-        spaceWord.classList.remove("is-leaving");
-        void spaceWord.offsetWidth;
-        spaceWord.classList.add("is-entering");
-    }, 200);
-}
-
-resizeSpaceWord(spaceWords[0].text, false);
-if (spaceDot) spaceDot.style.color = spaceWords[0].color;
-
-if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    window.setInterval(rotateSpaceWord, 2500);
-}
-
 // Se capturan ANTES de tocar el historial, porque history.replaceState cambia
 // la URL base del documento y rompería la resolución de rutas relativas más adelante.
 // Así el sitio funciona igual esté publicado en la raíz del dominio o en un subpath
@@ -124,10 +58,7 @@ function renderPanel(user, slug, displayName) {
     fillAvatar($("avatar"), user, displayName);
     $("userName").textContent = displayName;
     $("userEmail").textContent = user.email || "Cuenta de Google";
-    const hubEntryURL = new URL("hub/index.html", siteRootURL);
-    hubEntryURL.searchParams.set("slug", slug);
-    hubEntryURL.searchParams.set("name", displayName);
-    $("hubLink").href = hubEntryURL.href;
+    $("hubLink").href = new URL(`hub/index.html?name=${encodeURIComponent(slug)}`, studyBaseURL).href;
 }
 
 async function logout() {

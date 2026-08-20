@@ -220,15 +220,6 @@ if (!reduceMotion) {
 setInterval(changeWord, 2600);
 }
 
-const scrollDots = document.getElementById("scrollDots");
-
-function updateScrollDots() {
-scrollDots?.classList.toggle("is-hidden", window.scrollY > 24);
-}
-
-updateScrollDots();
-window.addEventListener("scroll", updateScrollDots, { passive: true });
-
 </script>
 
 <!-- Firebase Auth: Google, persistencia y autodetección de sesión -->

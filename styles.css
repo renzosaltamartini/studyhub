@@ -115,13 +115,11 @@ button { font: inherit; }
 .hero {
     width: 100%;
     max-width: 900px;
-    min-height: 100svh;
     margin: 0 auto;
-    padding: 120px 28px 80px;
+    padding: 110px 28px 95px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     text-align: center;
     position: relative;
 }
@@ -144,7 +142,6 @@ button { font: inherit; }
     display: flex;
     flex-direction: column;
     align-items: center;
-    transform: translateY(-7vh);
 }
 .hero-eyebrow,
 .section-badge {
@@ -211,9 +208,8 @@ button { font: inherit; }
     font-size: 17px;
     line-height: 1.65;
 }
-
 /* HUB */
-.hub-section { width: 100%; max-width: 1180px; margin: 0 auto; padding: 140px 28px 180px; scroll-margin-top: 96px; }
+.hub-section { width: 100%; max-width: 1180px; margin: 0 auto; padding: 105px 28px 180px; scroll-margin-top: 96px; }
 .section-heading { max-width: 680px; margin-bottom: 48px; }
 .section-heading h2, .creator-content h2 { margin: 0; font-size: 38px; line-height: 1.15; letter-spacing: -.03em; font-weight: 600; color: var(--black); }
 .section-heading p, .creator-intro { margin: 16px 0 0; color: var(--muted); font-size: 15px; line-height: 1.7; }
@@ -302,8 +298,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--black); outline
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
-    .hero { padding: 100px 20px 70px; }
-    .hero-content { transform: translateY(-5vh); }
+    .hero { padding: 80px 20px 75px; }
     .features-grid { grid-template-columns: repeat(2, 1fr); }
     .feature-large { grid-column: span 2; }
     .creator-card { grid-template-columns: 170px 1fr; gap: 32px; padding: 34px; }
@@ -318,15 +313,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--black); outline
     .login-button svg { display: none; }
     .login-button.logged-in { padding-left: 5px; max-width: 148px; }
     .nav-user-name { max-width: 85px; }
-    .hero { min-height: 100svh; padding: 90px 16px 64px; }
-    .hero-content { transform: translateY(-4vh); }
+    .hero { padding: 60px 16px 65px; }
     .hero-title {
         font-size: clamp(44px, 12vw, 54px);
         line-height: 1.18;
     }
     .dynamic-word { padding: 1px 16px; margin: 2px 0; }
     .hero-description { font-size: 15px; }
-    .hub-section { padding: 100px 16px 120px; }
+    .hub-section { padding: 78px 16px 120px; }
     .section-heading h2, .creator-content h2 { font-size: 28px; }
     .features-grid { grid-template-columns: 1fr; }
     .feature-large { grid-column: auto; }

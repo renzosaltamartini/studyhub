@@ -3,32 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#ffffff">
     <title>Hub | StudyHub</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./hub.css">
 </head>
 <body>
-    <main class="hub-loader" aria-labelledby="welcomeText">
-        <div class="ambient ambient-one" aria-hidden="true"></div>
-        <div class="ambient ambient-two" aria-hidden="true"></div>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const name = params.get("name");
 
-        <section class="loader-content">
-            <div class="brand-mark" aria-label="StudyHub">SH</div>
-
-            <p class="loader-label"><span class="signal-dot"></span>ACCESO AUTORIZADO</p>
-            <h1 id="welcomeText" class="decrypt-text" aria-live="polite">INICIANDO...</h1>
-
-            <div id="loadingStatus" class="loading-status hidden" aria-live="polite">
-                <p>CARGANDO HUB<span class="loading-dots" aria-hidden="true"></span></p>
-                <div class="progress-track" aria-hidden="true"><span class="progress-bar"></span></div>
-            </div>
-        </section>
-    </main>
-
-    <noscript>Necesitas activar JavaScript para entrar a tu Hub.</noscript>
-    <script type="module" src="./hub.js"></script>
+        if (name) {
+            const hubBaseURL = new URL(".", document.baseURI);
+            const destination = new URL(`${encodeURIComponent(name)}/`, hubBaseURL);
+            history.replaceState(null, "", destination.pathname);
+        }
+    </script>
 </body>
 </html>
