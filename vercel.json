@@ -1,7 +1,13 @@
 {
+  "redirects": [
+    { "source": "/study/panel/:slug", "destination": "/study/panel", "permanent": false },
+    { "source": "/study/hub/:slug", "destination": "/study/hub", "permanent": false }
+  ],
   "rewrites": [
     { "source": "/study/panel", "destination": "/study/panel/index.html" },
-    { "source": "/study/panel/:slug*", "destination": "/study/panel/index.html" },
+    { "source": "/study/panel/", "destination": "/study/panel/index.html" },
+    { "source": "/study/hub", "destination": "/study/hub/index.html" },
+    { "source": "/study/hub/", "destination": "/study/hub/index.html" },
     { "source": "/:path*", "destination": "/404.html" }
   ]
 }

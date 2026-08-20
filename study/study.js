@@ -1,15 +1,19 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 import {
     getAuth,
+    GoogleAuthProvider,
+    setPersistence,
+    browserLocalPersistence,
+    signInWithPopup,
     onAuthStateChanged,
     signOut
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
 import { firebaseConfig } from "../firebase-config.js";
-import { slugify } from "../slug.js";
-
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+provider.setCustomParameters({ prompt: "select_account" });
 
 const $ = (id) => document.getElementById(id);
 const loadingView = $("loadingView");
@@ -81,31 +85,12 @@ if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     window.setInterval(rotateSpaceWord, 2500);
 }
 
-// Se capturan ANTES de tocar el historial, porque history.replaceState cambia
-// la URL base del documento y rompería la resolución de rutas relativas más adelante.
-// Así el sitio funciona igual esté publicado en la raíz del dominio o en un subpath
-// (por ejemplo GitHub Pages de proyecto: usuario.github.io/studyhub/).
-const panelBaseURL = new URL(".", document.baseURI); // .../study/panel/
-const studyBaseURL = new URL("..", panelBaseURL); // .../study/
-const siteRootURL = new URL("..", studyBaseURL); // .../
+// Rutas públicas fijas: el nombre del usuario nunca forma parte de la URL.
+const siteRootURL = new URL("/", window.location.origin);
+const studyBaseURL = new URL("study/", siteRootURL);
 
 $("brandLink").href = siteRootURL.href;
 $("backButton").href = siteRootURL.href;
-
-const rawPath = window.location.pathname;
-
-const allParts = rawPath
-    .split(/[?#]/)[0]
-    .replace(/^\/+|\/+$/g, "")
-    .split("/")
-    .filter(Boolean);
-
-// Busca el segmento "study" para no depender de si el sitio vive en la raíz
-// o en un subpath (ej: ["studyhub","study","panel","renzo"]).
-const studyIndex = allParts.lastIndexOf("study");
-const segments = studyIndex !== -1 ? allParts.slice(studyIndex) : allParts;
-
-const urlSlug = segments[1] === "panel" ? (segments[2] || "") : "";
 
 function fillAvatar(container, user, displayName) {
     container.innerHTML = "";
@@ -120,11 +105,40 @@ function fillAvatar(container, user, displayName) {
     }
 }
 
-function renderPanel(user, slug, displayName) {
+function renderLoggedIn(user, displayName) {
     fillAvatar($("avatar"), user, displayName);
     $("userName").textContent = displayName;
     $("userEmail").textContent = user.email || "Cuenta de Google";
-    $("hubLink").href = new URL(`hub/index.html?name=${encodeURIComponent(slug)}`, studyBaseURL).href;
+    $("sessionStatus").innerHTML = '<span class="status-dot"></span>Sesión iniciada';
+    if ($("hubLink")) $("hubLink").href = new URL("hub/", studyBaseURL).href;
+    $("loginButton")?.classList.add("hidden");
+    $("loggedActions")?.classList.remove("hidden");
+}
+
+function renderLoggedOut() {
+    const avatar = $("avatar");
+    avatar.innerHTML = '<i class="fa-brands fa-google" aria-hidden="true"></i>';
+    $("sessionStatus").innerHTML = '<span class="status-dot"></span>Sesión no iniciada';
+    $("greeting").textContent = "Debes iniciar sesión";
+    $("userEmail").textContent = "Inicia sesión con Google para acceder a tu espacio.";
+    $("loggedActions")?.classList.add("hidden");
+    $("loginButton")?.classList.remove("hidden");
+}
+
+async function login() {
+    const button = $("loginButton");
+    if (button?.classList.contains("loading")) return;
+    button?.classList.add("loading");
+    try {
+        await setPersistence(auth, browserLocalPersistence);
+        await signInWithPopup(auth, provider);
+    } catch (error) {
+        if (error.code !== "auth/popup-closed-by-user") {
+            console.error("No se pudo iniciar sesión con Google:", error);
+        }
+    } finally {
+        button?.classList.remove("loading");
+    }
 }
 
 async function logout() {
@@ -133,24 +147,15 @@ async function logout() {
 }
 
 $("logoutButton")?.addEventListener("click", logout);
+$("loginButton")?.addEventListener("click", login);
 
 onAuthStateChanged(auth, (user) => {
-    // Ruta protegida: sin sesión no hay panel. Se vuelve al inicio para iniciar con Google.
-    if (!user) {
-        window.location.replace(siteRootURL.href);
-        return;
+    if (user) {
+        const displayName = user.displayName || user.email?.split("@")[0] || "Usuario";
+        renderLoggedIn(user, displayName);
+    } else {
+        renderLoggedOut();
     }
-
-    const displayName = user.displayName || user.email?.split("@")[0] || "Usuario";
-    const slug = slugify(displayName);
-    const correctURL = new URL(`${slug}/`, panelBaseURL);
-
-    // Corrige la URL visible si el nombre de la dirección no coincide con el usuario logueado.
-    if (urlSlug !== slug || segments.length > 3) {
-        history.replaceState(null, "", correctURL.pathname + correctURL.search);
-    }
-
-    renderPanel(user, slug, displayName);
     loadingView.classList.add("hidden");
     panelView.classList.remove("hidden");
 });
