@@ -119,3 +119,5 @@ body.dark-theme{background:#242529;color:#eceef1}
 @media(max-width:760px){.calendar-view{width:min(100% - 28px,620px);padding:34px 0 40px}.calendar-header{align-items:flex-start;flex-direction:column}.calendar-header h1{font-size:30px}.calendar-controls{width:100%;justify-content:space-between}.month-controls strong{min-width:125px}.calendar-shell{overflow-x:auto}.calendar-weekdays,.calendar-grid{min-width:700px}.calendar-day{min-height:92px}}
 
 .calendar-header h1{margin-top:0}.month-controls{border-radius:999px}.month-controls button:first-child{border-radius:999px 9px 9px 999px}.month-controls button:last-child{border-radius:9px 999px 999px 9px}
+
+.help-actions{display:flex;align-items:center;gap:6px}.help-actions .nav-item{min-width:0;flex:1}.help-theme-button{width:40px;height:40px;flex:0 0 40px;padding:0;border:1px solid #e4e5e7;border-radius:10px;display:grid;place-items:center;background:#f1f2f4;color:#62656b;cursor:pointer}.help-theme-button:hover{background:#e7e8ea;color:#111}.dark-theme .help-theme-button{border-color:#494b51;background:#37383d;color:#d7d9dd}.dark-theme .help-theme-button:hover{background:#43454b;color:#fff}

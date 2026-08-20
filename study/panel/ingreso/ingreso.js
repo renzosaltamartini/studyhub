@@ -8,6 +8,7 @@ const auth = getAuth(app);
 const database = getDatabase(app);
 const $ = (id) => document.getElementById(id);
 let currentUser = null;
+document.body.classList.toggle("dark-theme", localStorage.getItem("studyhub-theme") === "dark");
 
 function showError(message) {
     $("formError").textContent = message;
