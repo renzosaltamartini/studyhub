@@ -55,7 +55,12 @@
 .nav-row .nav-item{min-width:0;flex:1;transition:flex-basis .28s ease,width .28s ease,padding .28s ease,background .2s,color .2s}
 .item-toggle{width:27px;height:27px;flex:0 0 27px;padding:0;border:0;border-radius:8px;display:grid;place-items:center;background:transparent;color:#9a9da3;cursor:pointer;transition:background .2s,color .2s}
 .item-toggle:hover{background:#f1f2f4;color:#151618}.item-toggle i{font-size:9px;transition:transform .25s}
-.nav-row.item-hidden .nav-item{flex:0 0 40px;width:40px;padding:0;justify-content:center}
-.nav-row.item-hidden .nav-item span{width:0;opacity:0;overflow:hidden}
+.nav-row.item-hidden{justify-content:flex-end}
+.nav-row.item-hidden .nav-item{display:none}
 .nav-row.item-hidden .item-toggle i{transform:rotate(180deg)}
 .help-head{margin-top:22px}.help-nav{max-height:none}.help-nav .nav-item i{color:#70737a}
+.help-nav.options-hidden{max-height:0}
+.section-toggle.closed i{transform:rotate(180deg)}
+.item-toggle{position:relative}
+.item-toggle::after{content:attr(data-name);position:absolute;z-index:50;right:34px;top:50%;padding:6px 9px;border:1px solid #dedfe2;border-radius:8px;background:#fff;color:#25272b;box-shadow:0 5px 16px rgba(15,23,42,.1);font-size:10px;font-weight:600;white-space:nowrap;opacity:0;visibility:hidden;transform:translate(4px,-50%);transition:opacity .16s,transform .16s}
+.nav-row.item-hidden .item-toggle:hover::after{opacity:1;visibility:visible;transform:translate(0,-50%)}
