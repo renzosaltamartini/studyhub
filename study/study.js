@@ -124,7 +124,10 @@ function renderPanel(user, slug, displayName) {
     fillAvatar($("avatar"), user, displayName);
     $("userName").textContent = displayName;
     $("userEmail").textContent = user.email || "Cuenta de Google";
-    $("hubLink").href = new URL(`hub/index.html?name=${encodeURIComponent(slug)}`, studyBaseURL).href;
+    const hubEntryURL = new URL("hub/index.html", siteRootURL);
+    hubEntryURL.searchParams.set("slug", slug);
+    hubEntryURL.searchParams.set("name", displayName);
+    $("hubLink").href = hubEntryURL.href;
 }
 
 async function logout() {
