@@ -211,35 +211,7 @@ button { font: inherit; }
     font-size: 17px;
     line-height: 1.65;
 }
-.scroll-dots {
-    position: absolute;
-    left: 50%;
-    bottom: 42px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transform: translateX(-50%);
-    opacity: 1;
-    transition: opacity .28s ease, transform .28s ease, visibility .28s ease;
-}
-.scroll-dots span {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #5f6368;
-    animation: scrollDot 1.35s ease-in-out infinite;
-}
-.scroll-dots span:nth-child(2) { animation-delay: .16s; }
-.scroll-dots span:nth-child(3) { animation-delay: .32s; }
-.scroll-dots.is-hidden {
-    visibility: hidden;
-    opacity: 0;
-    transform: translate(-50%, 10px);
-}
-@keyframes scrollDot {
-    0%, 55%, 100% { opacity: .28; transform: translateY(0); }
-    25% { opacity: 1; transform: translateY(-5px); }
-}
+
 /* HUB */
 .hub-section { width: 100%; max-width: 1180px; margin: 0 auto; padding: 140px 28px 180px; scroll-margin-top: 96px; }
 .section-heading { max-width: 680px; margin-bottom: 48px; }
@@ -348,7 +320,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--black); outline
     .nav-user-name { max-width: 85px; }
     .hero { min-height: 100svh; padding: 90px 16px 64px; }
     .hero-content { transform: translateY(-4vh); }
-    .scroll-dots { bottom: 28px; }
     .hero-title {
         font-size: clamp(44px, 12vw, 54px);
         line-height: 1.18;
