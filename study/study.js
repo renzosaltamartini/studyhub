@@ -134,6 +134,7 @@ async function login() {
     try {
         await setPersistence(auth, browserLocalPersistence);
         await signInWithPopup(auth, provider);
+        window.location.reload();
     } catch (error) {
         if (error.code !== "auth/popup-closed-by-user") {
             console.error("No se pudo iniciar sesión con Google:", error);
