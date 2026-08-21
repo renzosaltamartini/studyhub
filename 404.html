@@ -7,6 +7,7 @@
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/design-v2.css">
 <style>
     :root {
         --bg: #ffffff;
@@ -38,6 +39,11 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        padding: 44px 30px;
+        border: 1px solid var(--v2-ink);
+        border-radius: 18px;
+        background: var(--v2-paper);
+        box-shadow: 10px 10px 0 var(--v2-ink);
     }
     .notfound-brand {
         display: inline-flex;
@@ -135,7 +141,8 @@
         line-height: 1;
         font-weight: 700;
         letter-spacing: -.04em;
-        color: var(--black);
+        color: var(--v2-accent);
+        font-family: "Playfair Display", serif;
     }
     .notfound-title {
         margin: 18px 0 0;
@@ -158,8 +165,8 @@
         align-items: center;
         justify-content: center;
         gap: 8px;
-        border-radius: 999px;
-        background: var(--black);
+        border-radius: 10px;
+        background: var(--v2-accent);
         color: #fff;
         text-decoration: none;
         font-size: 14px;
@@ -167,8 +174,9 @@
         transition: transform .2s ease, background .2s ease;
     }
     .notfound-button:hover {
-        background: #2d2d2d;
-        transform: translateY(-1px);
+        background: var(--v2-accent);
+        transform: translate(-2px,-2px);
+        box-shadow: 5px 5px 0 var(--v2-ink);
     }
     .notfound-button:focus-visible {
         outline: 2px solid var(--black);
