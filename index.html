@@ -10,7 +10,10 @@
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <!-- Tipografía limpia -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <!-- CSS -->
+<script src="/theme.js"></script>
 <link rel="stylesheet" href="styles.css">
 <!-- Si JS está deshabilitado, el contenido no debe quedar oculto -->
 <noscript><style>.reveal{opacity:1!important;transform:none!important;filter:none!important;}</style></noscript>
@@ -32,6 +35,10 @@
 <i class="fa-regular fa-envelope"></i>
 <span>Contacto</span>
 </a>
+
+<button class="theme-button theme-toggle" type="button" aria-label="Activar tema oscuro" title="Tema oscuro">
+<i class="fa-regular fa-moon"></i>
+</button>
 
 <!-- BOTÓN COMENZAR / PERFIL -->
 <a href="#" id="btnComenzar" class="login-button" aria-label="Comenzar en StudyHub con Google">
@@ -89,30 +96,35 @@ con tu estudio.
 <div class="features-grid">
 
 <article class="feature-card reveal">
+<span class="feature-index">IDX—01</span>
 <div class="feature-icon violet"><i class="fa-regular fa-bell"></i></div>
 <h3>Recordatorios</h3>
 <p>Agenda tus próximos recordatorios y mantén siempre visible aquello que tienes pendiente.</p>
 </article>
 
 <article class="feature-card reveal">
+<span class="feature-index">IDX—02</span>
 <div class="feature-icon blue"><i class="fa-regular fa-calendar"></i></div>
 <h3>Calendario</h3>
 <p>Visualiza tus días y agrega actividades, tareas, entregas o cualquier cosa que debas realizar.</p>
 </article>
 
 <article class="feature-card reveal">
+<span class="feature-index">IDX—03</span>
 <div class="feature-icon green"><i class="fa-regular fa-file-lines"></i></div>
 <h3>Páginas</h3>
 <p>Crea páginas y subpáginas para organizar materias, clases, apuntes y todo tu contenido.</p>
 </article>
 
 <article class="feature-card reveal">
+<span class="feature-index">IDX—04</span>
 <div class="feature-icon yellow"><i class="fa-regular fa-folder-open"></i></div>
 <h3>Archivos</h3>
 <p>Guarda PDFs y otros archivos dentro de tus materias, con acceso rápido y vista previa.</p>
 </article>
 
 <article class="feature-card feature-large danger reveal">
+<span class="feature-index">IDX—05 / IRREVERSIBLE</span>
 <div class="feature-icon red"><i class="fa-regular fa-trash-can"></i></div>
 <h3>Borrar Hub</h3>
 <p>¿Quieres comenzar desde cero? Puedes reiniciar tu Hub y eliminar todo el contenido que hayas creado.</p>
@@ -182,11 +194,11 @@ referrerpolicy="no-referrer"
 <!-- JS de la animación de texto -->
 <script>
 const words = [
-{ text: "crear", background: "rgba(219, 234, 254, .68)", color: "#2563eb" },
-{ text: "imaginar", background: "rgba(237, 233, 254, .68)", color: "#7c3aed" },
-{ text: "estudiar", background: "rgba(209, 250, 229, .68)", color: "#059669" },
-{ text: "aprender", background: "rgba(254, 243, 199, .68)", color: "#b96d00" },
-{ text: "organizar", background: "rgba(255, 228, 230, .68)", color: "#d43f64" }
+{ text: "crear", background: "#eff6ff", color: "#2563eb" },
+{ text: "imaginar", background: "#f5f3ff", color: "#7c3aed" },
+{ text: "estudiar", background: "#ecfdf5", color: "#059669" },
+{ text: "aprender", background: "#fffbeb", color: "#d97706" },
+{ text: "organizar", background: "#fff1f2", color: "#e11d48" }
 ];
 
 let index = 0;
