@@ -1404,9 +1404,10 @@ body.dark-theme::before {
 
 /* Welcome / Hub home */
 .welcome-view {
-    width: min(1120px, calc(100% - 64px));
+    width: min(1080px, calc(100% - 64px));
+    margin: 0 auto;
     min-height: 100svh;
-    padding: 58px 0 68px;
+    padding: 72px 0 60px;
 }
 .welcome-hero {
     position: relative;
@@ -1714,104 +1715,4 @@ body.dark-theme::before {
     .welcome-orb { opacity: .34; }
     .quick-access-head h2 { font-size: 23px; }
     .quick-card { padding: 17px; }
-}
-
-/* =========================================================
-   SIDEBAR OCULTO — ESTADO COMPACTO
-   Mantiene una pequeña guía lateral para que el contenido no
-   salte a pantalla completa y agrupa los controles en un dock.
-   ========================================================= */
-@media (min-width: 761px) {
-    .hub-main,
-    .hub-main.sidebar-hidden {
-        transition: margin-left .36s cubic-bezier(.2,.8,.2,1);
-    }
-
-    .hub-main.sidebar-hidden {
-        margin-left: 72px;
-    }
-
-    .sidebar-opener {
-        top: 50%;
-        left: 14px;
-        width: 46px;
-        padding: 5px;
-        gap: 3px;
-        flex-direction: column;
-        border: 1px solid rgba(218, 222, 216, .92);
-        border-radius: 16px;
-        background: rgba(255,255,255,.78);
-        box-shadow: 0 12px 34px rgba(29,35,29,.07);
-        backdrop-filter: blur(18px) saturate(1.08);
-        -webkit-backdrop-filter: blur(18px) saturate(1.08);
-        opacity: 0;
-        visibility: hidden;
-        transform: translate(-8px, -50%);
-        transition:
-            opacity .24s ease,
-            visibility .24s ease,
-            transform .32s cubic-bezier(.2,.8,.2,1);
-    }
-
-    .sidebar-opener.visible {
-        opacity: 1;
-        visibility: visible;
-        transform: translate(0, -50%);
-    }
-
-    .sidebar-open-button,
-    .floating-theme-button {
-        width: 36px;
-        height: 36px;
-        border: 0;
-        border-radius: 11px;
-        background: transparent;
-        color: #6f746f;
-        box-shadow: none;
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-        transition: background .18s ease, color .18s ease, transform .18s ease;
-    }
-
-    .sidebar-open-button:hover,
-    .floating-theme-button:hover {
-        transform: none;
-        background: var(--hub-soft);
-        color: var(--hub-black);
-        box-shadow: none;
-    }
-
-    .sidebar-open-button {
-        position: relative;
-    }
-
-    .sidebar-open-button::after {
-        content: "";
-        position: absolute;
-        left: 7px;
-        right: 7px;
-        bottom: -2px;
-        height: 1px;
-        background: var(--hub-line);
-    }
-
-    .dark-theme .sidebar-opener {
-        border-color: var(--hub-line);
-        background: rgba(31,34,31,.8);
-        box-shadow: 0 14px 38px rgba(0,0,0,.18);
-    }
-
-    .dark-theme .sidebar-open-button,
-    .dark-theme .floating-theme-button {
-        color: #aeb3ae;
-        background: transparent;
-        border: 0;
-        box-shadow: none;
-    }
-
-    .dark-theme .sidebar-open-button:hover,
-    .dark-theme .floating-theme-button:hover {
-        background: var(--hub-soft);
-        color: #f1f3f1;
-    }
 }
