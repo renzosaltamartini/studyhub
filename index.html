@@ -5,15 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>StudyHub</title>
 
-<!-- Bootstrap (grid/utilities) -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <!-- Tipografía limpia -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <!-- CSS -->
-<script src="/theme.js"></script>
 <link rel="stylesheet" href="styles.css">
 <!-- Si JS está deshabilitado, el contenido no debe quedar oculto -->
 <noscript><style>.reveal{opacity:1!important;transform:none!important;filter:none!important;}</style></noscript>
@@ -36,10 +33,6 @@
 <span>Contacto</span>
 </a>
 
-<button class="theme-button theme-toggle" type="button" aria-label="Activar tema oscuro" title="Tema oscuro">
-<i class="fa-regular fa-moon"></i>
-</button>
-
 <!-- BOTÓN COMENZAR / PERFIL -->
 <a href="#" id="btnComenzar" class="login-button" aria-label="Comenzar en StudyHub con Google">
 <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -61,19 +54,40 @@
 <section id="inicio" class="hero">
 
 <div class="hero-content">
-
+<span class="hero-kicker">Tu estudio, más simple</span>
 <h1 class="hero-title">
-Te ayudamos a
-<span id="dynamicWord" class="dynamic-word word-enter" aria-live="polite" aria-atomic="true">
-<span id="wordText">crear</span>
-</span>
+<span class="dynamic-line">Te ayudamos a <span id="dynamicWord" class="dynamic-word word-enter" aria-live="polite" aria-atomic="true"><span id="wordText">crear</span></span></span>
 <span class="hero-ending">en un <strong>solo lugar.</strong></span>
 </h1>
-
 <p class="hero-description">
 Organiza tus materias, apuntes, fechas importantes y archivos desde un espacio simple, rápido y pensado para estudiar mejor.
 </p>
+</div>
 
+<div class="workspace-preview" aria-hidden="true">
+    <div class="workspace-window">
+        <div class="workspace-top">
+            <div class="workspace-top-left"><img class="workspace-logo" src="/sh.png" alt=""><span>Mi Hub</span></div>
+            <div class="workspace-dots"><span></span><span></span><span></span></div>
+        </div>
+        <h2 class="preview-title">Buenas tardes.</h2>
+        <p class="preview-subtitle">Esto es lo importante para hoy.</p>
+        <div class="preview-grid">
+            <div class="preview-card">
+                <span class="preview-icon"><i class="fa-regular fa-bell"></i></span>
+                <strong>Recordatorios</strong><small>2 pendientes para esta semana</small>
+            </div>
+            <div class="preview-card">
+                <span class="preview-icon"><i class="fa-regular fa-calendar"></i></span>
+                <strong>Calendario</strong><small>Próxima entrega el viernes</small>
+            </div>
+            <div class="preview-card wide">
+                <span class="preview-icon"><i class="fa-regular fa-file-lines"></i></span>
+                <strong>Álgebra · Clase 4</strong><small>Tus páginas y archivos siempre a mano.</small>
+            </div>
+        </div>
+    </div>
+    <div class="preview-float"><i class="fa-solid fa-circle-check"></i>Todo organizado</div>
 </div>
 
 </section>
