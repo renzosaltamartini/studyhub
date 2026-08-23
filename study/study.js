@@ -34,6 +34,16 @@ const spaceEyebrow = spaceWord?.closest(".space-eyebrow");
 const spaceDot = spaceEyebrow?.querySelector(".status-dot");
 let spaceWordIndex = 0;
 
+function applySpaceWordColors(word) {
+    if (!spaceEyebrow) return;
+    // El badge de "Tu espacio de" usa su propia paleta dinámica también en dark.
+    // Usamos prioridad important para que el tema global no la reemplace.
+    spaceEyebrow.style.setProperty("background-color", word.background, "important");
+    spaceEyebrow.style.setProperty("color", word.color, "important");
+    spaceEyebrow.style.setProperty("border-color", word.border, "important");
+    if (spaceDot) spaceDot.style.setProperty("color", word.color, "important");
+}
+
 function measureWordWidth(text) {
     if (!spaceWord) return 0;
     const probe = document.createElement("span");
@@ -69,10 +79,7 @@ function rotateSpaceWord() {
         spaceWordIndex = (spaceWordIndex + 1) % spaceWords.length;
         const nextWord = spaceWords[spaceWordIndex];
         spaceWord.textContent = nextWord.text;
-        spaceEyebrow.style.backgroundColor = nextWord.background;
-        spaceEyebrow.style.color = nextWord.color;
-        spaceEyebrow.style.borderColor = nextWord.border;
-        if (spaceDot) spaceDot.style.color = nextWord.color;
+        applySpaceWordColors(nextWord);
         resizeSpaceWord(nextWord.text);
         spaceWord.classList.remove("is-leaving");
         void spaceWord.offsetWidth;
@@ -81,7 +88,7 @@ function rotateSpaceWord() {
 }
 
 resizeSpaceWord(spaceWords[0].text, false);
-if (spaceDot) spaceDot.style.color = spaceWords[0].color;
+applySpaceWordColors(spaceWords[0]);
 
 if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     window.setInterval(rotateSpaceWord, 2500);

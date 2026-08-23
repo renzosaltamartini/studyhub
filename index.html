@@ -205,6 +205,15 @@ let index = 0;
 const dynamicWord = document.getElementById("dynamicWord");
 const wordText = document.getElementById("wordText");
 
+function applyDynamicWordColors(word) {
+    // Estos colores son propios de la palabra animada y deben conservarse
+    // tanto en light como en dark, por encima de los estilos globales del tema.
+    dynamicWord.style.setProperty("background-color", word.background, "important");
+    dynamicWord.style.setProperty("color", word.color, "important");
+}
+
+applyDynamicWordColors(words[index]);
+
 function changeWord() {
 dynamicWord.classList.remove("word-enter");
 dynamicWord.classList.add("word-leave");
@@ -213,8 +222,7 @@ setTimeout(() => {
 index = (index + 1) % words.length;
 const word = words[index];
 
-dynamicWord.style.backgroundColor = word.background;
-dynamicWord.style.color = word.color;
+applyDynamicWordColors(word);
 wordText.textContent = word.text;
 
 dynamicWord.classList.remove("word-leave");
