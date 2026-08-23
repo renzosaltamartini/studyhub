@@ -1,0 +1,9 @@
+{
+  "name": "studyhub",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.57.4",
+    "firebase-admin": "^13.5.0"
+  }
+}
