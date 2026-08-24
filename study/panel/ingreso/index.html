@@ -28,7 +28,17 @@
         <section class="intake-shell hidden" id="formView">
             <div class="intake-card">
                 <div class="intake-head">
-                    <span class="eyebrow"><i class="fa-solid fa-user-check"></i> Primer ingreso</span>
+                    <div class="intake-context-row">
+                        <span class="eyebrow"><i class="fa-solid fa-user-check"></i> Primer ingreso</span>
+                        <div class="active-account" aria-live="polite">
+                            <span class="active-account-icon" aria-hidden="true"><i class="fa-solid fa-user"></i></span>
+                            <span class="active-account-copy">
+                                <small>Ingresando como</small>
+                                <strong id="activeAccountEmail">Comprobando cuenta...</strong>
+                            </span>
+                            <button class="change-account-button" id="changeAccountButton" type="button">Cambiar cuenta</button>
+                        </div>
+                    </div>
                     <h1>Completa tu perfil</h1>
                     <p>Necesitamos estos datos antes de abrir tu panel. La información se guardará únicamente cuando completes y envíes todo el formulario.</p>
                 </div>
@@ -90,6 +100,7 @@
                     <button class="submit-button" id="verifyCodeButton" type="submit">Verificar correo</button>
                 </form>
                 <button class="resend-code-button" id="resendCodeButton" type="button">Reenviar código</button>
+                <button class="verification-change-account" id="verificationChangeAccountButton" type="button"><i class="fa-solid fa-arrow-right-arrow-left"></i> Usar otra cuenta</button>
                 <p class="verification-help">El código vence en 10 minutos. Puedes solicitar otro cada 30 segundos.</p>
             </div>
         </section>

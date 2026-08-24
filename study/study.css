@@ -172,7 +172,16 @@ button, input, select { font: inherit; }
     box-shadow: 0 20px 55px rgba(28,34,28,.06);
 }
 .intake-head { margin-bottom: 32px; }
-.intake-head .eyebrow { margin-bottom: 16px; background: var(--accent-soft); border-color: #dfe2ff; color: var(--accent); }
+.intake-context-row { margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.intake-head .eyebrow { flex: 0 0 auto; margin: 0; background: var(--accent-soft); border-color: #dfe2ff; color: var(--accent); }
+.active-account { min-width: 0; max-width: 420px; padding: 7px 8px 7px 10px; display: flex; align-items: center; gap: 9px; border: 1px solid var(--border); border-radius: 12px; background: #f7f8f6; }
+.active-account-icon { width: 28px; height: 28px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 8px; background: #5f6560; color: #fff; font-size: 11px; }
+.active-account-copy { min-width: 0; display: grid; line-height: 1.15; }
+.active-account-copy small { color: #909590; font-size: 9px; font-weight: 600; }
+.active-account-copy strong { overflow: hidden; color: #444944; font-size: 10px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+.change-account-button { flex: 0 0 auto; min-height: 30px; padding: 0 9px; border: 1px solid var(--border); border-radius: 8px; background: #fff; color: #606560; cursor: pointer; font-size: 10px; font-weight: 700; transition: background .2s ease, color .2s ease, border-color .2s ease; }
+.change-account-button:hover:not(:disabled) { border-color: var(--border-strong); background: #eceeeb; color: var(--black); }
+.change-account-button:disabled { cursor: wait; opacity: .6; }
 .intake-head h1 { margin: 0; color: var(--black); font-size: 38px; line-height: 1.08; letter-spacing: -.045em; font-weight: 600; }
 .intake-head p { max-width: 590px; margin: 13px 0 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
 .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px 14px; }
@@ -220,6 +229,10 @@ select:focus-visible { outline: 3px solid rgba(85,103,242,.18); outline-offset: 
     .auth-card { padding: 22px; border-radius: 18px; }
     .intake-shell { width: min(100% - 28px, 720px); padding: 96px 0 32px; }
     .intake-card { padding: 24px 18px; border-radius: 18px; }
+    .intake-context-row { align-items: stretch; flex-direction: column; }
+    .intake-head .eyebrow { align-self: flex-start; }
+    .active-account { width: 100%; max-width: none; }
+    .active-account-copy { flex: 1; }
     .intake-head h1 { font-size: 32px; }
     .form-grid { grid-template-columns: 1fr; }
     .form-field.full { grid-column: auto; }
@@ -246,5 +259,8 @@ select:focus-visible { outline: 3px solid rgba(85,103,242,.18); outline-offset: 
 .resend-code-button{width:100%;min-height:40px;margin-top:9px;border:1px solid var(--border);border-radius:10px;background:transparent;color:#6f746f;cursor:pointer;font-size:12px;font-weight:700}
 .resend-code-button:hover:not(:disabled){background:#f5f6f4;color:var(--black)}
 .resend-code-button:disabled{cursor:not-allowed;opacity:.62}
+.verification-change-account{width:100%;min-height:40px;margin-top:9px;border:0;border-radius:10px;background:transparent;color:#858a85;cursor:pointer;font-size:11px;font-weight:700}
+.verification-change-account:hover:not(:disabled){background:#f5f6f4;color:var(--black)}
+.verification-change-account:disabled{cursor:wait;opacity:.62}
 .verification-help{text-align:center;font-size:10px!important;color:#9da19d!important}
 @media(max-width:620px){.verification-shell{width:min(100% - 28px,520px);padding:96px 0 32px}.verification-card{padding:26px 18px;border-radius:18px}.verification-card h1{font-size:30px}}

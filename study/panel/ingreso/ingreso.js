@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 import { getDatabase, ref, get, set, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
 import { firebaseConfig } from "/firebase-config.js";
 
@@ -10,6 +10,10 @@ const $ = (id) => document.getElementById(id);
 let currentUser = null;
 let cooldownTimer = null;
 let cooldownEndsAt = 0;
+let isSwitchingAccount = false;
+
+const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: "select_account" });
 
 function showError(message, target = "formError") {
     $(target).textContent = message;
@@ -81,6 +85,26 @@ function showVerification(email) {
     window.setTimeout(() => $("verificationCode").focus(), 80);
 }
 
+async function changeGoogleAccount(button) {
+    if (isSwitchingAccount) return;
+    isSwitchingAccount = true;
+    const originalContent = button.innerHTML;
+    button.disabled = true;
+    button.textContent = "Abriendo cuentas...";
+    try {
+        await signInWithPopup(auth, googleProvider);
+        window.location.replace("/study/panel/ingreso");
+    } catch (error) {
+        isSwitchingAccount = false;
+        button.disabled = false;
+        button.innerHTML = originalContent;
+        if (error?.code !== "auth/popup-closed-by-user" && error?.code !== "auth/cancelled-popup-request") {
+            const target = $("formView").classList.contains("hidden") ? "verificationError" : "formError";
+            showError("No pudimos abrir el selector de cuentas. Inténtalo nuevamente.", target);
+        }
+    }
+}
+
 async function requestCode(silent = false) {
     clearMessage("verificationError");
     const button = $("resendCodeButton");
@@ -117,10 +141,14 @@ $("verificationCode").addEventListener("input", (event) => {
     clearMessage("verificationError");
 });
 $("resendCodeButton").addEventListener("click", () => requestCode(false));
+$("changeAccountButton").addEventListener("click", (event) => changeGoogleAccount(event.currentTarget));
+$("verificationChangeAccountButton").addEventListener("click", (event) => changeGoogleAccount(event.currentTarget));
 
 onAuthStateChanged(auth, async (user) => {
+    if (isSwitchingAccount) return;
     if (!user) return window.location.replace("/study/panel");
     currentUser = user;
+    $("activeAccountEmail").textContent = user.email || "Cuenta de Google";
     try {
         const snapshot = await get(ref(database, `users/${user.uid}/profile`));
         const profile = snapshot.val() || {};
