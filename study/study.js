@@ -22,11 +22,11 @@ const loadingView = $("loadingView");
 const panelView = $("panelView");
 
 const spaceWords = [
-    { text: "estudio", background: "#e8f0fe", color: "#1a73e8", border: "#d2e3fc" },
-    { text: "aprendizaje", background: "#e6f4ea", color: "#188038", border: "#ceead6" },
-    { text: "comodidad", background: "#fce8e6", color: "#d93025", border: "#fad2cf" },
-    { text: "organización", background: "#fef7e0", color: "#b06000", border: "#feefc3" },
-    { text: "facilidad", background: "#f3e8ff", color: "#7e22ce", border: "#e9d5ff" }
+    { text: "estudio", background: "#eff6ff", color: "#2563eb", border: "#dbeafe" },
+    { text: "aprendizaje", background: "#ecfdf5", color: "#059669", border: "#d1fae5" },
+    { text: "comodidad", background: "#f5f3ff", color: "#7c3aed", border: "#ede9fe" },
+    { text: "organización", background: "#fff7ed", color: "#ea580c", border: "#fed7aa" },
+    { text: "facilidad", background: "#fff1f2", color: "#e11d48", border: "#fecdd3" }
 ];
 
 const spaceWord = $("spaceWord");
