@@ -2364,3 +2364,107 @@ html.dark-theme,body.dark-theme{--hub-accent:#d7d7d7;--hub-accent-2:#d7d7d7;--hu
 .dark-theme .calendar-day.today .calendar-day-head>span{background:#e5e5e5;color:#202020}
 .dark-theme .files-drop-zone>i,.dark-theme .drive-icon.folder,.dark-theme .drive-icon.pdf,.dark-theme .drive-icon.word{border-color:transparent;background:transparent;color:#aaa}
 .dark-theme .drive-actions button:hover,.dark-theme .file-editor-head-actions button:hover{border-color:transparent;background:#333;color:#fff}
+
+/* =========================================================
+   HUB MONO V2 — rediseño limpio inspirado en Notion
+   ========================================================= */
+html.dark-theme,body.dark-theme{
+    --hub-bg:#202020;
+    --hub-surface:#252525;
+    --hub-surface-solid:#252525;
+    --hub-soft:#2c2c2c;
+    --hub-soft-2:#343434;
+    --hub-text:#e7e7e7;
+    --hub-muted:#929292;
+    --hub-line:#353535;
+    --hub-line-strong:#474747;
+    --hub-black:#f1f1f1;
+}
+.dark-theme .sidebar{width:260px;padding:9px 8px;background:#1b1b1b;border-right:1px solid #2a2a2a}
+.dark-theme .hub-main{margin-left:260px;background:#202020}
+.dark-theme .hub-main.sidebar-hidden{margin-left:0}
+.dark-theme .sidebar.fully-hidden{width:260px}
+.dark-theme .sidebar-brand{height:42px;padding:0 7px}
+.dark-theme .brand-mark{position:relative;width:24px;height:24px;flex-basis:24px;border-radius:5px;background:#333}
+.dark-theme .brand-mark img{display:none}
+.dark-theme .brand-mark::after{content:"S";position:absolute;inset:0;display:grid;place-items:center;color:#d9d9d9;font-size:11px;font-weight:600}
+.dark-theme .brand-text{font-size:13px;font-weight:600;color:#f2f2f2}
+.dark-theme .collapse-button{width:25px;height:25px;flex-basis:25px;font-size:11px}
+.dark-theme .sidebar-menu-head{margin:17px 9px 5px;padding:0;color:#7b7b7b;font-size:11px;line-height:1.2}
+.dark-theme .sidebar-menu-head .section-toggle{display:none}
+.dark-theme .space-head,.dark-theme .empty-nav{display:none}
+.dark-theme .sidebar-nav{margin-top:2px;gap:1px}
+.dark-theme .nav-item{min-height:38px;padding:0 9px;gap:10px;border-radius:6px;color:#b8b8b8;font-size:13px;font-weight:400;transform:none}
+.dark-theme .nav-item i,.dark-theme .nav-item:nth-child(1) i,.dark-theme .nav-item:nth-child(2) i,.dark-theme .nav-item:nth-child(3) i,.dark-theme .nav-item:nth-child(4) i{width:18px;flex-basis:18px;color:#9c9c9c!important;font-size:15px}
+.dark-theme .nav-item:hover{background:#272727;color:#e5e5e5;transform:none}
+.dark-theme .nav-item.active,.dark-theme .nav-item.active:nth-child(1),.dark-theme .nav-item.active:nth-child(2),.dark-theme .nav-item.active:nth-child(3),.dark-theme .nav-item.active:nth-child(4){background:#303030;color:#fff}
+.dark-theme .nav-item.active i{color:#ddd!important}
+.dark-theme .sidebar-user{padding:9px 7px 3px;border-top-color:#292929}
+.dark-theme .user-avatar{width:27px;height:27px;flex-basis:27px;border-radius:6px;background:#333}
+.dark-theme .user-data strong{font-size:11px}.dark-theme .user-data span{display:none}
+.dark-theme .user-action{width:27px;height:27px;border-radius:6px}
+
+.dark-theme .welcome-view{width:min(920px,calc(100% - 80px));padding:74px 0 70px}
+.dark-theme .welcome-hero{min-height:0;padding:0 0 38px;border:0;border-bottom:1px solid #333;border-radius:0;background:transparent}
+.dark-theme .welcome-copy{position:relative;z-index:1}
+.dark-theme .welcome-kicker{display:none}
+.dark-theme .welcome-date{margin-bottom:12px;color:#818181;font-size:12px}
+.dark-theme .welcome-hero h1{margin:0;font-size:34px;font-weight:600;letter-spacing:-.035em;color:#f1f1f1}
+.dark-theme .welcome-subtitle{max-width:520px;margin-top:10px;color:#979797;font-size:14px;line-height:1.55}
+.dark-theme .welcome-orb{display:none}
+.dark-theme .quick-access-head{margin:36px 0 14px;align-items:end}
+.dark-theme .quick-access-head>div>span{display:none}
+.dark-theme .quick-access-head h2{font-size:17px;font-weight:600;letter-spacing:-.015em;color:#e8e8e8}
+.dark-theme .quick-access-head p{color:#777;font-size:11px}
+.dark-theme .quick-access-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.dark-theme .quick-card,.dark-theme .quick-card:nth-child(1),.dark-theme .quick-card:nth-child(2),.dark-theme .quick-card:nth-child(3){
+    min-height:138px;
+    padding:17px;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:11px;
+    border:1px solid #343434;
+    border-radius:9px;
+    background:#242424;
+    text-align:left;
+    box-shadow:none;
+}
+.dark-theme .quick-card:hover{border-color:#4a4a4a;background:#292929;transform:translateY(-2px)}
+.dark-theme .quick-icon,.dark-theme .quick-card:nth-child(1) .quick-icon,.dark-theme .quick-card:nth-child(2) .quick-icon,.dark-theme .quick-card:nth-child(3) .quick-icon{width:26px;height:26px;display:grid;place-items:center;background:transparent;color:#aaa;font-size:17px}
+.dark-theme .quick-content{display:grid;gap:4px}
+.dark-theme .quick-content strong{font-size:13px;font-weight:500;color:#e8e8e8}
+.dark-theme .quick-content small{color:#858585;font-size:10px;line-height:1.4}
+.dark-theme .quick-meta{position:absolute;right:15px;top:15px;display:flex;align-items:baseline;gap:4px;color:#777}
+.dark-theme .quick-meta b{font-size:12px;font-weight:500;color:#aaa}
+.dark-theme .quick-meta small{font-size:9px}
+.dark-theme .quick-arrow{right:15px;bottom:15px;color:#666;font-size:10px}
+.dark-theme .quick-card:hover .quick-arrow{color:#ddd;transform:translateX(2px)}
+
+.dark-theme .reminders-view,.dark-theme .calendar-view,.dark-theme .files-view{width:min(1040px,calc(100% - 80px));padding:62px 0 64px}
+.dark-theme .content-header,.dark-theme .calendar-header,.dark-theme .files-header{padding-bottom:20px;border-bottom:1px solid #333}
+.dark-theme .content-header h1,.dark-theme .calendar-header h1,.dark-theme .files-header h1{font-size:27px;font-weight:600;letter-spacing:-.025em;color:#eee}
+.dark-theme .content-description,.dark-theme .calendar-header p,.dark-theme .files-header p{color:#858585;font-size:12px}
+.dark-theme .new-reminder-button,.dark-theme .new-calendar-event,.dark-theme .files-primary-button,.dark-theme .files-secondary-button{height:36px;padding:0 13px;border:1px solid #414141;border-radius:7px;background:#303030;color:#e9e9e9;font-size:11px;font-weight:500}
+.dark-theme .new-reminder-button:hover,.dark-theme .new-calendar-event:hover,.dark-theme .files-primary-button:hover,.dark-theme .files-secondary-button:hover{border-color:#555;background:#383838;color:#fff;transform:none}
+.dark-theme .cleanup-note,.dark-theme .calendar-help{margin:16px 0;border:0;border-radius:0;background:transparent;color:#777;font-size:10px}
+.dark-theme .reminder-form,.dark-theme .calendar-shell,.dark-theme .calendar-event-form,.dark-theme .files-toolbar,.dark-theme .files-drop-zone{border-color:#343434;border-radius:8px;background:#242424}
+.dark-theme .reminder-card,.dark-theme .drive-card{border:0;border-bottom:1px solid #313131;border-radius:0;background:transparent}
+.dark-theme .reminder-card:hover,.dark-theme .drive-card:hover{border-color:#3b3b3b;background:#252525;transform:none}
+.dark-theme .files-grid{gap:0;border-top:1px solid #313131}
+.dark-theme .drive-card::before{display:none}
+.dark-theme .files-drop-zone{min-height:84px}
+.dark-theme .calendar-day{background:#242424;border-color:#343434}
+.dark-theme .calendar-day:hover{background:#292929}
+
+@media(max-width:900px){
+    .dark-theme .quick-access-grid{grid-template-columns:1fr}
+    .dark-theme .quick-card,.dark-theme .quick-card:nth-child(1),.dark-theme .quick-card:nth-child(2),.dark-theme .quick-card:nth-child(3){min-height:82px;display:grid;grid-template-columns:30px 1fr auto;align-items:center}
+    .dark-theme .quick-meta{position:static}.dark-theme .quick-arrow{display:none}
+}
+@media(max-width:760px){
+    .dark-theme .sidebar{width:260px}.dark-theme .hub-main{margin-left:0}
+    .dark-theme .welcome-view,.dark-theme .reminders-view,.dark-theme .calendar-view,.dark-theme .files-view{width:min(100% - 30px,640px);padding:34px 0 45px}
+    .dark-theme .welcome-hero{padding-bottom:27px}.dark-theme .welcome-hero h1{font-size:28px}
+    .dark-theme .quick-access-head p{display:none}
+}
