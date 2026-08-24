@@ -177,7 +177,7 @@ onAuthStateChanged(auth, async (user) => {
         try {
             const snapshot = await get(ref(database, `users/${user.uid}/profile`));
             const profile = snapshot.val();
-            if (!profile?.completed) {
+            if (!profile?.completed || profile.emailVerified !== true || profile.emailVerifiedAddress !== (user.email || "").toLowerCase()) {
                 window.location.replace("/study/panel/ingreso");
                 return;
             }

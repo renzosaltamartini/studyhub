@@ -227,3 +227,24 @@ select:focus-visible { outline: 3px solid rgba(85,103,242,.18); outline-offset: 
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+
+/* VERIFICACIÓN DE CORREO DEL PRIMER INGRESO */
+.verification-shell{width:min(520px,calc(100% - 40px));margin:0 auto;padding:126px 0 72px}
+.verification-card{padding:38px;border:1px solid var(--border);border-radius:24px;background:#fff;box-shadow:0 20px 55px rgba(28,34,28,.06);text-align:left}
+.verification-icon{width:52px;height:52px;margin-bottom:22px;border-radius:14px;display:grid;place-items:center;background:#eef2ff;color:var(--accent);font-size:20px}
+.verification-card>.eyebrow{margin-bottom:15px;background:var(--accent-soft);border-color:#dfe2ff;color:var(--accent)}
+.verification-card h1{margin:0;color:var(--black);font-size:34px;line-height:1.1;letter-spacing:-.04em;font-weight:600}
+.verification-card>p{margin:12px 0 0;color:var(--muted);font-size:13px;line-height:1.6}
+.verification-card>p strong{color:var(--black);word-break:break-word}
+.verification-label{display:block;margin:26px 0 8px;color:#494e49;font-size:11px;font-weight:700}
+.verification-code{width:100%;height:58px;padding:0 14px;border:1px solid var(--border);border-radius:12px;background:#fbfcfb;color:var(--black);font-size:25px;font-weight:700;letter-spacing:.34em;text-align:center;outline:0;transition:border-color .2s,box-shadow .2s}
+.verification-code:focus{border-color:#9aa5f7;box-shadow:0 0 0 3px rgba(85,103,242,.09);background:#fff}
+.verification-code::placeholder{color:#c2c5c2}
+.verification-notice{padding:10px 11px;border-radius:9px;background:#f1f5ff;color:#5164a8!important;font-size:11px!important}
+.verification-success{margin:14px 0 0;padding:11px 12px;border:1px solid #cfe7d7;border-radius:9px;background:#f2faf5;color:#378453;font-size:12px}
+.resend-code-button{width:100%;min-height:40px;margin-top:9px;border:1px solid var(--border);border-radius:10px;background:transparent;color:#6f746f;cursor:pointer;font-size:12px;font-weight:700}
+.resend-code-button:hover:not(:disabled){background:#f5f6f4;color:var(--black)}
+.resend-code-button:disabled{cursor:not-allowed;opacity:.62}
+.verification-help{text-align:center;font-size:10px!important;color:#9da19d!important}
+@media(max-width:620px){.verification-shell{width:min(100% - 28px,520px);padding:96px 0 32px}.verification-card{padding:26px 18px;border-radius:18px}.verification-card h1{font-size:30px}}

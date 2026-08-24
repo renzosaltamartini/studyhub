@@ -70,8 +70,27 @@
                         </div>
                     </div>
                     <p class="form-error hidden" id="formError" role="alert"></p>
-                    <button class="submit-button" id="submitButton" type="submit">Guardar y entrar al panel</button>
+                    <button class="submit-button" id="submitButton" type="submit">Guardar y verificar correo</button>
                 </form>
+            </div>
+        </section>
+
+        <section class="verification-shell hidden" id="verificationView">
+            <div class="verification-card">
+                <span class="verification-icon"><i class="fa-regular fa-envelope"></i></span>
+                <span class="eyebrow"><i class="fa-solid fa-shield-halved"></i> Verificación obligatoria</span>
+                <h1>Revisa tu correo</h1>
+                <p>Enviamos un código a <strong id="verificationEmail">tu correo</strong>. Debes verificarlo para entrar al Panel y al Hub.</p>
+                <p class="verification-notice hidden" id="verificationNotice"></p>
+                <form id="verificationForm" novalidate>
+                    <label class="verification-label" for="verificationCode">Código de 6 números</label>
+                    <input id="verificationCode" class="verification-code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" placeholder="000000" required>
+                    <p class="form-error hidden" id="verificationError" role="alert"></p>
+                    <p class="verification-success hidden" id="verificationSuccess"><i class="fa-solid fa-circle-check"></i> Correo verificado correctamente.</p>
+                    <button class="submit-button" id="verifyCodeButton" type="submit">Verificar correo</button>
+                </form>
+                <button class="resend-code-button" id="resendCodeButton" type="button">Reenviar código</button>
+                <p class="verification-help">El código vence en 10 minutos. Puedes solicitar otro cada 30 segundos.</p>
             </div>
         </section>
     </main>

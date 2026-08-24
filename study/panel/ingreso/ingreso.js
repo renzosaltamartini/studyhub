@@ -8,10 +8,23 @@ const auth = getAuth(app);
 const database = getDatabase(app);
 const $ = (id) => document.getElementById(id);
 let currentUser = null;
+let cooldownTimer = null;
+let cooldownEndsAt = 0;
 
-function showError(message) {
-    $("formError").textContent = message;
-    $("formError").classList.remove("hidden");
+function showError(message, target = "formError") {
+    $(target).textContent = message;
+    $(target).classList.remove("hidden");
+}
+
+function clearMessage(target) {
+    $(target).textContent = "";
+    $(target).classList.add("hidden");
+}
+
+function showView(name) {
+    $("loadingView").classList.toggle("hidden", name !== "loading");
+    $("formView").classList.toggle("hidden", name !== "form");
+    $("verificationView").classList.toggle("hidden", name !== "verification");
 }
 
 function updateOccupationField() {
@@ -24,35 +37,115 @@ function updateOccupationField() {
     if (!needsDetail) $("occupationDetail").value = "";
 }
 
+async function verificationAPI(action, payload = {}) {
+    if (!currentUser) throw new Error("Tu sesión no está disponible.");
+    const token = await currentUser.getIdToken();
+    const response = await fetch("/api/email-verification", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ action, ...payload })
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+        const error = new Error(data.error || "No se pudo completar la verificación.");
+        Object.assign(error, data);
+        throw error;
+    }
+    return data;
+}
+
+function renderCooldown() {
+    const button = $("resendCodeButton");
+    const seconds = Math.max(0, Math.ceil((cooldownEndsAt - Date.now()) / 1000));
+    if (seconds > 0) {
+        button.disabled = true;
+        button.textContent = `Reenviar código en ${seconds} s`;
+    } else {
+        button.disabled = false;
+        button.textContent = "Reenviar código";
+        if (cooldownTimer) window.clearInterval(cooldownTimer);
+        cooldownTimer = null;
+    }
+}
+
+function startCooldown(nextSendAt) {
+    cooldownEndsAt = Math.max(Date.now(), Number(nextSendAt || 0));
+    if (cooldownTimer) window.clearInterval(cooldownTimer);
+    renderCooldown();
+    if (cooldownEndsAt > Date.now()) cooldownTimer = window.setInterval(renderCooldown, 250);
+}
+
+function showVerification(email) {
+    $("verificationEmail").textContent = email || "tu correo";
+    showView("verification");
+    window.setTimeout(() => $("verificationCode").focus(), 80);
+}
+
+async function requestCode(silent = false) {
+    clearMessage("verificationError");
+    const button = $("resendCodeButton");
+    button.disabled = true;
+    if (!silent) button.textContent = "Enviando...";
+    try {
+        const data = await verificationAPI("send");
+        if (data.verified) return window.location.replace("/study/panel");
+        startCooldown(data.nextSendAt || Date.now() + 30_000);
+        $("verificationNotice").textContent = `Enviamos un código de 6 números a ${data.email}.`;
+        $("verificationNotice").classList.remove("hidden");
+    } catch (error) {
+        if (error.nextSendAt || error.retryAfter) startCooldown(error.nextSendAt || Date.now() + Number(error.retryAfter) * 1000);
+        showError(error.message, "verificationError");
+        if (!cooldownTimer) button.disabled = false;
+    }
+}
+
+async function restoreVerificationState() {
+    try {
+        const status = await verificationAPI("status");
+        if (status.verified) return window.location.replace("/study/panel");
+        startCooldown(status.nextSendAt);
+        if (!status.hasActiveCode && status.retryAfter === 0) await requestCode(true);
+    } catch (error) {
+        showError(error.message, "verificationError");
+        $("resendCodeButton").disabled = false;
+    }
+}
+
 $("occupation").addEventListener("change", updateOccupationField);
+$("verificationCode").addEventListener("input", (event) => {
+    event.target.value = event.target.value.replace(/\D/g, "").slice(0, 6);
+    clearMessage("verificationError");
+});
+$("resendCodeButton").addEventListener("click", () => requestCode(false));
 
 onAuthStateChanged(auth, async (user) => {
-    if (!user) {
-        window.location.replace("/study/panel");
-        return;
-    }
+    if (!user) return window.location.replace("/study/panel");
     currentUser = user;
     try {
         const snapshot = await get(ref(database, `users/${user.uid}/profile`));
-        if (snapshot.val()?.completed) {
+        const profile = snapshot.val() || {};
+        if (profile.completed && profile.emailVerified === true && profile.emailVerifiedAddress === (user.email || "").toLowerCase()) {
             window.location.replace("/study/panel");
             return;
         }
         $("fullName").value = user.displayName || "Usuario de Google";
         $("email").value = user.email || "Sin email disponible";
-        $("loadingView").classList.add("hidden");
-        $("formView").classList.remove("hidden");
+        if (profile.completed) {
+            showVerification(user.email);
+            await restoreVerificationState();
+        } else {
+            showView("form");
+        }
     } catch (error) {
         console.error(error);
+        showView("form");
         showError("No pudimos comprobar tu perfil. Revisa tu conexión e inténtalo nuevamente.");
-        $("loadingView").classList.add("hidden");
-        $("formView").classList.remove("hidden");
     }
 });
 
 $("intakeForm").addEventListener("submit", async (event) => {
     event.preventDefault();
-    $("formError").classList.add("hidden");
+    clearMessage("formError");
     if (!currentUser) return showError("Tu sesión no está disponible.");
     const age = Number($("age").value);
     const country = $("country").value.trim();
@@ -68,20 +161,39 @@ $("intakeForm").addEventListener("submit", async (event) => {
     try {
         await set(ref(database, `users/${currentUser.uid}/profile`), {
             completed: true,
+            emailVerified: false,
             fullName: currentUser.displayName || "Usuario de Google",
             email: currentUser.email || "",
-            age,
-            country,
-            address,
-            occupation,
-            occupationDetail,
+            age, country, address, occupation, occupationDetail,
             completedAt: serverTimestamp()
         });
-        window.location.replace("/study/panel");
+        showVerification(currentUser.email);
+        await requestCode(true);
     } catch (error) {
         console.error(error);
-        showError("No se pudo guardar el perfil. Verifica las reglas de Realtime Database e inténtalo otra vez.");
+        showError(error.message || "No se pudo guardar el perfil o enviar el código. Inténtalo otra vez.");
         $("submitButton").disabled = false;
-        $("submitButton").textContent = "Guardar y entrar al panel";
+        $("submitButton").textContent = "Guardar y verificar correo";
+    }
+});
+
+$("verificationForm").addEventListener("submit", async (event) => {
+    event.preventDefault();
+    clearMessage("verificationError");
+    const code = $("verificationCode").value.trim();
+    if (!/^\d{6}$/.test(code)) return showError("Ingresa los seis números del código.", "verificationError");
+    const button = $("verifyCodeButton");
+    button.disabled = true;
+    button.textContent = "Verificando...";
+    try {
+        await verificationAPI("verify", { code });
+        $("verificationSuccess").classList.remove("hidden");
+        $("verificationCode").disabled = true;
+        window.setTimeout(() => window.location.replace("/study/panel"), 800);
+    } catch (error) {
+        showError(error.message, "verificationError");
+        button.disabled = false;
+        button.textContent = "Verificar correo";
+        $("verificationCode").select();
     }
 });

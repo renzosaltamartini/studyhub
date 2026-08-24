@@ -2,8 +2,23 @@
   "rules": {
     "users": {
       "$uid": {
-        ".read": "auth != null && auth.uid === $uid",
-        ".write": "auth != null && auth.uid === $uid"
+        "profile": {
+          ".read": "auth != null && auth.uid === $uid",
+          ".write": "auth != null && auth.uid === $uid",
+          "emailVerified": {
+            ".validate": "(!data.exists() && newData.val() === false) || (data.exists() && newData.val() === data.val())"
+          },
+          "emailVerifiedAt": {
+            ".validate": "!newData.exists() || newData.val() === data.val()"
+          },
+          "emailVerifiedAddress": {
+            ".validate": "!newData.exists() || newData.val() === data.val()"
+          }
+        },
+        "$resource": {
+          ".read": "auth != null && auth.uid === $uid && root.child('users').child($uid).child('profile').child('emailVerified').val() === true",
+          ".write": "auth != null && auth.uid === $uid && root.child('users').child($uid).child('profile').child('emailVerified').val() === true"
+        }
       }
     }
   }
