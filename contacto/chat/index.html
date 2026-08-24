@@ -56,6 +56,7 @@
       </div>
       <div class="messages" id="messages" aria-live="polite"></div>
       <form class="message-form" id="messageForm">
+        <div class="typing-indicator hidden" id="typingIndicator"><span class="typing-dots"><i></i><i></i><i></i></span><span id="typingText">Escribiendo...</span></div>
         <div class="pending-attachment hidden" id="pendingAttachment"><span class="pending-attachment-icon" id="pendingAttachmentIcon"><i class="fa-regular fa-file"></i></span><span class="pending-attachment-copy"><strong id="pendingAttachmentName"></strong><small id="pendingAttachmentSize"></small></span><button id="removePendingAttachment" type="button" aria-label="Quitar archivo"><i class="fa-solid fa-xmark"></i></button></div>
         <input class="hidden" id="attachmentInput" type="file" accept="image/jpeg,image/png,image/gif,image/webp,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.zip,.rar">
         <button class="composer-button attach-button" id="attachButton" type="button" aria-label="Adjuntar archivo o imagen"><i class="fa-solid fa-paperclip"></i></button>

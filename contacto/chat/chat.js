@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
-import { getDatabase, ref, get, onValue, push, set, update } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
+import { getDatabase, ref, get, onValue, onDisconnect, push, remove, set, update } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 import { firebaseConfig } from "/firebase-config.js";
 import { supabaseConfig } from "/supabase-config.js";
@@ -20,6 +20,9 @@ let inboxChats = [];
 let activeFilter = "all";
 let pendingFile = null;
 let pendingPreviewURL = null;
+let typingTimer = null;
+let typingRefreshTimer = null;
+let lastMessagesSignature = "";
 const MAX_ATTACHMENT_SIZE = 25 * 1024 * 1024;
 const FILE_TYPES = {
   jpg: "image/jpeg", jpeg: "image/jpeg", png: "image/png", gif: "image/gif", webp: "image/webp",
@@ -124,7 +127,6 @@ async function appendAttachment(message, bubble) {
   bubble.appendChild(loading);
   try {
     const data = await storageAPI("signed-url", { path: message.attachmentPath, chatId, download: message.attachmentKind === "file" ? message.attachmentName : false });
-    loading.remove();
     if (message.attachmentKind === "image") {
       const link = document.createElement("a");
       link.className = "chat-attachment";
@@ -224,13 +226,41 @@ function renderMessages(chat) {
     const time = document.createElement("time");
     time.className = "message-time";
     time.textContent = formatDate(message.createdAt, true);
-    bubble.append(author, text);
+    bubble.appendChild(author);
+    const genericAttachmentText = message.attachmentPath && (message.text === "Imagen adjunta" || message.text === "Archivo adjunto");
+    if (!genericAttachmentText && message.text) bubble.appendChild(text);
     appendAttachment(message, bubble);
     bubble.append(time);
     row.appendChild(bubble);
     container.appendChild(row);
   });
   requestAnimationFrame(() => { container.scrollTop = container.scrollHeight; });
+}
+
+function renderTyping(typing = {}) {
+  window.clearTimeout(typingRefreshTimer);
+  const now = Date.now();
+  const people = Object.entries(typing).filter(([uid, value]) => uid !== currentUser?.uid && Number(value?.at || 0) > now - 4500).map(([, value]) => value);
+  if (!people.length) {
+    $("typingIndicator").classList.add("hidden");
+    return;
+  }
+  const person = people[0];
+  $("typingText").textContent = person.role === "staff" ? "Soporte está escribiendo..." : `${person.name || "El usuario"} está escribiendo...`;
+  $("typingIndicator").classList.remove("hidden");
+  typingRefreshTimer = window.setTimeout(() => renderTyping(typing), 4600);
+}
+
+function setTyping(active) {
+  if (!currentUser || !chatId || !currentChat) return;
+  const typingRef = ref(database, `contactChats/${chatId}/typing/${currentUser.uid}`);
+  window.clearTimeout(typingTimer);
+  if (!active) {
+    remove(typingRef).catch(() => {});
+    return;
+  }
+  set(typingRef, { name: currentUser.displayName || "Usuario", role: staff ? "staff" : "user", at: Date.now() }).catch(() => {});
+  typingTimer = window.setTimeout(() => remove(typingRef).catch(() => {}), 1500);
 }
 
 function openConversation() {
@@ -250,7 +280,12 @@ function openConversation() {
     $("sendMessageButton").disabled = chat.status === "closed" && !staff;
     $("attachButton").disabled = chat.status === "closed" && !staff;
     $("messageInput").placeholder = chat.status === "closed" && !staff ? "El soporte cerró esta conversación" : "Escribe un mensaje...";
-    renderMessages(chat);
+    const messagesSignature = JSON.stringify(chat.messages || {});
+    if (messagesSignature !== lastMessagesSignature) {
+      lastMessagesSignature = messagesSignature;
+      renderMessages(chat);
+    }
+    renderTyping(chat.typing || {});
     showOnly("conversationView");
     const unreadField = staff ? "unreadByStaff" : "unreadByUser";
     if (chat[unreadField]) update(chatRef, { [unreadField]: false }).catch(() => {});
@@ -262,6 +297,7 @@ $("messageForm").addEventListener("submit", async (event) => {
   const input = $("messageInput");
   const text = input.value.trim();
   if ((!text && !pendingFile) || !currentChat) return;
+  setTyping(false);
   const button = $("sendMessageButton");
   button.disabled = true;
   $("chatError").classList.add("hidden");
@@ -297,6 +333,8 @@ $("attachmentInput").addEventListener("change", (event) => {
   catch (error) { clearPendingAttachment(); $("chatError").textContent = error.message; $("chatError").classList.remove("hidden"); }
 });
 $("removePendingAttachment").addEventListener("click", clearPendingAttachment);
+$("messageInput").addEventListener("input", (event) => setTyping(Boolean(event.target.value.trim())));
+$("messageInput").addEventListener("blur", () => setTyping(false));
 
 $("statusButton").addEventListener("click", async () => {
   if (!staff || !currentChat) return;
@@ -332,6 +370,11 @@ onAuthStateChanged(auth, async (user) => {
   staff = STAFF_EMAILS.has((user.email || "").toLowerCase());
   $("chatAccountEmail").textContent = user.email || "Cuenta de Google";
   $("chatAccount").classList.remove("hidden");
-  if (chatId) openConversation();
+  if (chatId) {
+    onDisconnect(ref(database, `contactChats/${chatId}/typing/${user.uid}`)).remove().catch(() => {});
+    openConversation();
+  }
   else openInbox();
 });
+
+window.addEventListener("beforeunload", () => setTyping(false));
