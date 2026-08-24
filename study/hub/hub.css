@@ -2061,6 +2061,250 @@ html.dark-theme,body.dark-theme{
     .drive-info small{font-size:8px}
 }
 
+/* =========================================================
+   HUB GRIS — interfaz fija, simple y dinámica
+   Inspirada en barras laterales de herramientas de trabajo.
+   ========================================================= */
+html.dark-theme,
+body.dark-theme{
+    --hub-bg:#202020;
+    --hub-surface:#252525;
+    --hub-surface-solid:#252525;
+    --hub-soft:#2b2b2b;
+    --hub-soft-2:#323232;
+    --hub-text:#ededed;
+    --hub-muted:#9b9b9b;
+    --hub-line:#343434;
+    --hub-line-strong:#484848;
+    --hub-black:#f2f2f2;
+    --hub-accent:#d7d7d7;
+    --hub-accent-2:#d7d7d7;
+    --hub-accent-soft:#303030;
+    background:#202020;
+    color:#ededed;
+}
+
+body.dark-theme::before{display:none}
+.dark-theme .hub-main{margin-left:282px;background:#202020}
+.dark-theme .hub-main.sidebar-hidden{margin-left:0}
+
+.dark-theme .sidebar{
+    width:282px;
+    padding:12px 10px 10px;
+    border-right:1px solid #303030;
+    background:#191919;
+    box-shadow:none;
+}
+.dark-theme .sidebar.fully-hidden{width:282px}
+.dark-theme .sidebar-brand{height:46px;padding:0 7px;gap:10px}
+.dark-theme .brand-mark{
+    width:28px;
+    height:28px;
+    flex-basis:28px;
+    border-radius:6px;
+    background:#2d2d2d;
+    box-shadow:none;
+}
+.dark-theme .brand-mark img{width:100%;height:100%;object-fit:cover;border-radius:6px}
+.dark-theme .brand-text{font-size:14px;font-weight:600;letter-spacing:-.01em;color:#f0f0f0}
+.dark-theme .collapse-button{
+    width:28px;
+    height:28px;
+    flex-basis:28px;
+    border:0;
+    border-radius:6px;
+    background:transparent;
+    color:#777;
+    box-shadow:none;
+}
+.dark-theme .collapse-button:hover{background:#292929;color:#ddd}
+
+.dark-theme .sidebar-menu-head{
+    margin:21px 7px 4px;
+    padding:0;
+    color:#858585;
+    font-size:11px;
+    font-weight:400;
+    letter-spacing:0;
+    text-transform:none;
+}
+.dark-theme .sidebar-menu-head button{color:#666}
+.dark-theme .sidebar-menu-head button:hover{background:#292929;color:#bbb}
+.dark-theme .sidebar-nav{margin-top:4px;gap:2px;max-height:230px}
+.dark-theme .nav-item{
+    min-height:43px;
+    padding:0 10px;
+    gap:11px;
+    border:0;
+    border-radius:7px;
+    background:transparent;
+    color:#b5b5b5;
+    font-size:14px;
+    font-weight:400;
+    letter-spacing:0;
+    box-shadow:none;
+    transition:background .16s ease,color .16s ease,transform .16s ease;
+}
+.dark-theme .nav-item i,
+.dark-theme .nav-item:nth-child(1) i,
+.dark-theme .nav-item:nth-child(2) i,
+.dark-theme .nav-item:nth-child(3) i,
+.dark-theme .nav-item:nth-child(4) i{
+    width:20px;
+    flex-basis:20px;
+    padding:0;
+    border:0;
+    border-radius:0;
+    background:transparent!important;
+    color:#a5a5a5!important;
+    font-size:16px;
+    box-shadow:none;
+}
+.dark-theme .nav-item:hover{background:#262626;color:#ececec;transform:translateX(2px)}
+.dark-theme .nav-item.active,
+.dark-theme .nav-item.active:nth-child(1),
+.dark-theme .nav-item.active:nth-child(2),
+.dark-theme .nav-item.active:nth-child(3),
+.dark-theme .nav-item.active:nth-child(4){
+    border:0;
+    background:#303030;
+    color:#fff;
+    box-shadow:none;
+}
+.dark-theme .nav-item.active i{color:#e8e8e8!important}
+
+.dark-theme .sidebar-user{
+    margin-top:auto;
+    padding:10px 7px 2px;
+    border-top:1px solid #2b2b2b;
+    gap:9px;
+}
+.dark-theme .user-avatar{width:30px;height:30px;flex-basis:30px;background:#303030;box-shadow:none}
+.dark-theme .user-data strong{font-size:12px;font-weight:500;color:#e3e3e3}
+.dark-theme .user-data span{font-size:10px;color:#777}
+.dark-theme .user-action{border:0;background:transparent;color:#888;box-shadow:none}
+.dark-theme .user-action:hover{background:#292929;color:#ddd}
+.dark-theme .user-action.logout:hover{background:#342525;color:#e99a9a}
+
+.dark-theme .sidebar-open-button{
+    width:38px;
+    height:38px;
+    border:1px solid #343434;
+    border-radius:8px;
+    background:#242424;
+    color:#bdbdbd;
+    box-shadow:0 8px 24px rgba(0,0,0,.2);
+}
+.dark-theme .sidebar-open-button:hover{background:#2c2c2c;color:#fff}
+
+.dark-theme .welcome-view,
+.dark-theme .reminders-view,
+.dark-theme .calendar-view,
+.dark-theme .files-view{animation:hubSectionIn .28s cubic-bezier(.2,.75,.25,1)}
+@keyframes hubSectionIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+
+.dark-theme .welcome-hero{
+    border:1px solid #343434;
+    background:#242424;
+    box-shadow:none;
+}
+.dark-theme .welcome-kicker,
+.dark-theme .files-kicker,
+.dark-theme .file-editor-type,
+.dark-theme .pdf-panel-kicker{color:#9a9a9a}
+.dark-theme .welcome-orb{border:1px solid #383838;background:#292929;box-shadow:none}
+.dark-theme .welcome-orb::before,.dark-theme .welcome-orb::after{opacity:.18;filter:grayscale(1)}
+.dark-theme .welcome-orb i{color:#bdbdbd}
+.dark-theme .quick-card:nth-child(1),
+.dark-theme .quick-card:nth-child(2),
+.dark-theme .quick-card:nth-child(3){
+    border:1px solid #343434;
+    background:#252525;
+    box-shadow:none;
+}
+.dark-theme .quick-card:hover{border-color:#494949;background:#2a2a2a;box-shadow:none;transform:translateY(-3px)}
+.dark-theme .quick-icon,
+.dark-theme .quick-card:nth-child(1) .quick-icon,
+.dark-theme .quick-card:nth-child(2) .quick-icon,
+.dark-theme .quick-card:nth-child(3) .quick-icon{
+    border:0;
+    background:transparent;
+    color:#aaa;
+    box-shadow:none;
+}
+
+.dark-theme .new-reminder-button,
+.dark-theme .new-calendar-event,
+.dark-theme .save-reminder,
+.dark-theme .files-primary-button,
+.dark-theme .files-modal-save,
+.dark-theme .pdf-add-annotation{
+    border:1px solid #e4e4e4;
+    background:#e4e4e4;
+    color:#1f1f1f;
+    box-shadow:none;
+}
+.dark-theme .new-reminder-button:hover,
+.dark-theme .new-calendar-event:hover,
+.dark-theme .save-reminder:hover,
+.dark-theme .files-primary-button:hover,
+.dark-theme .files-modal-save:hover,
+.dark-theme .pdf-add-annotation:hover{background:#fff;border-color:#fff;box-shadow:none;transform:translateY(-1px)}
+
+.dark-theme .reminder-form,
+.dark-theme .reminder-card,
+.dark-theme .calendar-shell,
+.dark-theme .calendar-event-form,
+.dark-theme .files-toolbar,
+.dark-theme .drive-card,
+.dark-theme .files-empty,
+.dark-theme .files-drop-zone,
+.dark-theme .files-modal-card,
+.dark-theme .file-editor-card{
+    border-color:#343434;
+    background:#252525;
+    box-shadow:none;
+}
+.dark-theme .reminder-card{border-left-color:#343434!important}
+.dark-theme .reminder-card:hover,.dark-theme .drive-card:hover{border-color:#484848;background:#292929;box-shadow:none;transform:translateY(-2px)}
+.dark-theme .cleanup-note,.dark-theme .calendar-help{border-color:#353535;background:#272727;color:#999}
+.dark-theme .cleanup-note i,.dark-theme .calendar-help i{color:#999}
+.dark-theme .reminder-filters,.dark-theme .today-button,.dark-theme .month-controls{border-color:#383838;background:#262626}
+.dark-theme .reminder-filters button.active{background:#3a3a3a;color:#fff}
+.dark-theme .calendar-day.today{border-color:#777;background:#303030}
+.dark-theme .calendar-day.today .calendar-day-head>span{background:#e5e5e5;color:#202020}
+.dark-theme .files-secondary-button{border-color:#3b3b3b;background:#272727;color:#ddd}
+.dark-theme .files-secondary-button:hover{border-color:#505050;background:#303030}
+.dark-theme .files-drop-zone>i,.dark-theme .files-empty>span{border:0;background:transparent;color:#aaa}
+.dark-theme .drive-card::before{display:none}
+.dark-theme .drive-icon.folder,.dark-theme .drive-icon.pdf,.dark-theme .drive-icon.word{background:transparent;color:#aaa}
+.dark-theme .drive-actions button,.dark-theme .file-editor-head-actions button{border:0;background:transparent;color:#999}
+.dark-theme .drive-actions button:hover,.dark-theme .file-editor-head-actions button:hover{background:#333;color:#fff;transform:none}
+.dark-theme .files-search,.dark-theme .files-view-toggle.active,
+.dark-theme .files-field input,.dark-theme .files-field select,
+.dark-theme .files-modal-cancel,.dark-theme .pdf-edit-panel textarea,
+.dark-theme .pdf-edit-panel input,.dark-theme .pdf-edit-panel select,
+.dark-theme .docx-editor{border-color:#3a3a3a;background:#202020;color:#e7e7e7}
+.dark-theme .file-editor-head,.dark-theme .pdf-edit-panel,.dark-theme .file-editor-footer,.dark-theme .docx-toolbar{border-color:#343434;background:#242424}
+.dark-theme .pdf-preview{border-color:#343434;background:#1d1d1d}
+.dark-theme .pdf-annotation-chip{border-color:#3a3a3a;background:#292929}
+.dark-theme .files-upload-toast{border-color:#3b3b3b;background:rgba(35,35,35,.97)}
+.dark-theme .files-tooltip{border-color:#ececec;background:#ececec;color:#222}
+
+@media(max-width:760px){
+    .dark-theme .sidebar{width:282px}
+    .dark-theme .hub-main{margin-left:0}
+    .dark-theme .mobile-header{height:58px;border-color:#303030;background:#191919}
+    .dark-theme .mobile-header button{border:0;background:#292929;color:#ddd}
+    .dark-theme .mobile-header strong{font-size:14px;font-weight:600;color:#eee}
+    .dark-theme .nav-item{min-height:44px;font-size:14px}
+}
+
+@media(prefers-reduced-motion:reduce){
+    .dark-theme .welcome-view,.dark-theme .reminders-view,.dark-theme .calendar-view,.dark-theme .files-view{animation:none}
+    .dark-theme .nav-item,.dark-theme .quick-card,.dark-theme .reminder-card,.dark-theme .drive-card{transition:none}
+}
+
 /* Paleta definitiva: azul, naranja, rojo y verde. */
 :root{
     --hub-accent:#2583e8;
@@ -2104,3 +2348,19 @@ html.dark-theme,body.dark-theme{
 .dark-theme .drive-icon.pdf{background:rgba(214,83,77,.14);color:#ee8b86}
 .dark-theme .drive-icon.word{background:rgba(37,131,232,.16);color:#75b7f4}
 .dark-theme .drive-actions button:hover,.dark-theme .file-editor-head-actions button:hover{border-color:rgba(74,157,240,.25);background:rgba(74,157,240,.12);color:#84c2f8}
+
+/* Cierre de especificidad: la paleta del Hub es exclusivamente gris. */
+html.dark-theme,body.dark-theme{--hub-accent:#d7d7d7;--hub-accent-2:#d7d7d7;--hub-accent-soft:#303030}
+.dark-theme .nav-item:hover{border:0;background:#262626;color:#ececec;box-shadow:none}
+.dark-theme .nav-item.active,.dark-theme .nav-item.active:nth-child(1),.dark-theme .nav-item.active:nth-child(2),.dark-theme .nav-item.active:nth-child(3),.dark-theme .nav-item.active:nth-child(4){border:0;background:#303030;color:#fff;box-shadow:none}
+.dark-theme .nav-item i,.dark-theme .nav-item:nth-child(1) i,.dark-theme .nav-item:nth-child(2) i,.dark-theme .nav-item:nth-child(3) i,.dark-theme .nav-item:nth-child(4) i,.dark-theme .nav-item.active i{background:transparent!important;color:#aaa!important}
+.dark-theme .nav-item.active i{color:#eee!important}
+.dark-theme .welcome-kicker,.dark-theme .files-kicker,.dark-theme .welcome-orb i,.dark-theme .file-editor-type,.dark-theme .pdf-panel-kicker{color:#aaa}
+.dark-theme .quick-card:nth-child(1) .quick-icon,.dark-theme .quick-card:nth-child(2) .quick-icon,.dark-theme .quick-card:nth-child(3) .quick-icon{border:0;background:transparent;color:#aaa}
+.dark-theme .new-reminder-button,.dark-theme .new-calendar-event,.dark-theme .save-reminder,.dark-theme .files-primary-button,.dark-theme .files-modal-save,.dark-theme .pdf-add-annotation{border-color:#e4e4e4;background:#e4e4e4;color:#1f1f1f;box-shadow:none}
+.dark-theme .new-reminder-button:hover,.dark-theme .new-calendar-event:hover,.dark-theme .save-reminder:hover,.dark-theme .files-primary-button:hover,.dark-theme .files-modal-save:hover,.dark-theme .pdf-add-annotation:hover{border-color:#fff;background:#fff;color:#171717;box-shadow:none}
+.dark-theme .reminder-filters button.active,.dark-theme .files-breadcrumbs button.current{background:#3a3a3a;color:#fff}
+.dark-theme .calendar-day.today{border-color:#777;background:#303030}
+.dark-theme .calendar-day.today .calendar-day-head>span{background:#e5e5e5;color:#202020}
+.dark-theme .files-drop-zone>i,.dark-theme .drive-icon.folder,.dark-theme .drive-icon.pdf,.dark-theme .drive-icon.word{border-color:transparent;background:transparent;color:#aaa}
+.dark-theme .drive-actions button:hover,.dark-theme .file-editor-head-actions button:hover{border-color:transparent;background:#333;color:#fff}
