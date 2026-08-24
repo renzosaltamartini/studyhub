@@ -20,6 +20,37 @@
           ".write": "auth != null && auth.uid === $uid && root.child('users').child($uid).child('profile').child('emailVerified').val() === true"
         }
       }
+    },
+    "contactChats": {
+      ".read": "auth != null && (auth.token.email === 'renzosaltamartini2008@gmail.com' || auth.token.email === 'studyhubyrenzo@gmail.com')",
+      "$chatId": {
+        ".read": "auth != null && ((auth.token.email === 'renzosaltamartini2008@gmail.com' || auth.token.email === 'studyhubyrenzo@gmail.com') || data.child('ownerUid').val() === auth.uid)",
+        ".write": "auth != null && newData.exists() && ((auth.token.email === 'renzosaltamartini2008@gmail.com' || auth.token.email === 'studyhubyrenzo@gmail.com') || data.child('ownerUid').val() === auth.uid)",
+        "ownerUid": {
+          ".validate": "newData.val() === data.val()"
+        },
+        "ownerEmail": {
+          ".validate": "newData.val() === data.val()"
+        },
+        "chatId": {
+          ".validate": "newData.val() === data.val()"
+        },
+        "messages": {
+          "$messageId": {
+            ".validate": "newData.hasChildren(['senderUid','senderEmail','senderName','senderRole','text','createdAt']) && newData.child('senderUid').val() === auth.uid && newData.child('senderEmail').val() === auth.token.email && newData.child('text').isString() && newData.child('text').val().length > 0 && newData.child('text').val().length <= 2000 && ((auth.token.email === 'renzosaltamartini2008@gmail.com' || auth.token.email === 'studyhubyrenzo@gmail.com') ? newData.child('senderRole').val() === 'staff' : newData.child('senderRole').val() === 'user')"
+          }
+        }
+      }
+    },
+    "userChats": {
+      "$uid": {
+        ".read": "auth != null && (auth.uid === $uid || auth.token.email === 'renzosaltamartini2008@gmail.com' || auth.token.email === 'studyhubyrenzo@gmail.com')",
+        ".write": false
+      }
+    },
+    "contactChatCounter": {
+      ".read": false,
+      ".write": false
     }
   }
 }

@@ -8,7 +8,7 @@ import {
     onAuthStateChanged,
     signOut
 } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
-import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
+import { getDatabase, ref, get, onValue } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
 
 import { firebaseConfig } from "../firebase-config.js";
 const app = initializeApp(firebaseConfig);
@@ -20,6 +20,7 @@ provider.setCustomParameters({ prompt: "select_account" });
 const $ = (id) => document.getElementById(id);
 const loadingView = $("loadingView");
 const panelView = $("panelView");
+const STAFF_EMAILS = new Set(["renzosaltamartini2008@gmail.com", "studyhubyrenzo@gmail.com"]);
 
 const spaceWords = [
     { text: "estudio", background: "#eff6ff", color: "#2563eb", border: "#dbeafe" },
@@ -132,6 +133,47 @@ function renderLoggedIn(user, displayName, profile) {
     if ($("hubLink")) $("hubLink").href = new URL("hub/", studyBaseURL).href;
     $("loginButton")?.classList.add("hidden");
     $("loggedActions")?.classList.remove("hidden");
+    loadContactPanelState(user);
+}
+
+function setContactPanel({ title, status, href, badge = 0 }) {
+    const link = $("contactPanelLink");
+    if (!link) return;
+    $("contactPanelTitle").textContent = title;
+    $("contactPanelStatus").textContent = status;
+    link.href = href;
+    const badgeElement = $("contactPanelBadge");
+    badgeElement.textContent = String(badge);
+    badgeElement.classList.toggle("hidden", badge < 1);
+}
+
+async function loadContactPanelState(user) {
+    const email = (user.email || "").toLowerCase();
+    if (STAFF_EMAILS.has(email)) {
+        onValue(ref(database, "contactChats"), (snapshot) => {
+            const chats = Object.values(snapshot.val() || {});
+            const open = chats.filter((chat) => chat.status === "open").length;
+            const unread = chats.filter((chat) => chat.unreadByStaff === true).length;
+            setContactPanel({ title: "Centro de chats", status: `${open} abiertos${unread ? ` · ${unread} con novedades` : ""}`, href: "/contacto/chat", badge: unread });
+        }, () => setContactPanel({ title: "Centro de chats", status: "No se pudo cargar el estado", href: "/contacto/chat" }));
+        return;
+    }
+    try {
+        const mapping = (await get(ref(database, `userChats/${user.uid}`))).val();
+        if (!mapping?.chatId) {
+            setContactPanel({ title: "Contacto", status: "No tienes un chat abierto", href: "/?contacto=1" });
+            return;
+        }
+        onValue(ref(database, `contactChats/${mapping.chatId}`), (snapshot) => {
+            const chat = snapshot.val();
+            if (!chat) return setContactPanel({ title: "Contacto", status: "No tienes un chat abierto", href: "/?contacto=1" });
+            const hasNews = chat.unreadByUser === true;
+            const state = chat.status === "closed" ? "Chat cerrado" : "Chat abierto";
+            setContactPanel({ title: `Mi chat #${mapping.chatId}`, status: hasNews ? `${state} · Hay novedades` : `${state} · Sin novedades`, href: `/contacto/chat/${mapping.chatId}`, badge: hasNews ? 1 : 0 });
+        });
+    } catch (error) {
+        setContactPanel({ title: "Contacto", status: "No se pudo cargar el estado", href: "/?contacto=1" });
+    }
 }
 
 function renderLoggedOut() {

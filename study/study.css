@@ -135,6 +135,14 @@ button, input, select { font: inherit; }
 .profile-detail i { width: 15px; color: #9ca19c; text-align: center; }
 #loggedOutMessage { margin: 14px 0 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
 #loggedActions { margin-top: 24px; }
+.contact-panel-link { min-height: 58px; margin-top: 9px; padding: 9px 10px; display: flex; align-items: center; gap: 10px; border: 1px solid var(--border); border-radius: 11px; background: #f7f8f6; color: #5d625d; transition: background .2s ease, border-color .2s ease; }
+.contact-panel-link:hover { border-color: var(--border-strong); background: #f0f2ef; }
+.contact-panel-icon { width: 34px; height: 34px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 9px; background: #e7edf9; color: #3464b5; }
+.contact-panel-copy { min-width: 0; flex: 1; display: grid; gap: 2px; }
+.contact-panel-copy strong { color: #3f443f; font-size: 11px; font-weight: 700; }
+.contact-panel-copy small { overflow: hidden; color: #8a908a; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+.contact-panel-badge { min-width: 20px; height: 20px; padding: 0 6px; display: grid; place-items: center; border-radius: 10px; background: #d94b45; color: #fff; font-size: 9px; font-weight: 700; }
+.contact-panel-arrow { color: #a1a6a1; font-size: 9px; }
 .hub-button,
 .logout-button,
 .submit-button {

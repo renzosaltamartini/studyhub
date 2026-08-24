@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="description" content="Centro privado de contacto de StudyHub.">
+  <title>Contacto | StudyHub</title>
+  <link rel="icon" href="/sh.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="/contacto/chat/chat.css">
+</head>
+<body>
+  <header class="chat-header">
+    <div class="chat-header-inner">
+      <a class="chat-brand" href="/"><img src="/sh.png" alt=""><span>StudyHub</span></a>
+      <div class="chat-header-actions">
+        <span class="chat-account hidden" id="chatAccount"><i class="fa-solid fa-user"></i><span id="chatAccountEmail"></span></span>
+        <a class="panel-link" href="/study/panel"><i class="fa-solid fa-arrow-left"></i><span>Volver al Panel</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main class="chat-main">
+    <section class="state-card" id="loadingView"><span class="chat-loader"></span><p>Comprobando acceso...</p></section>
+
+    <section class="state-card hidden" id="deniedView">
+      <span class="state-icon denied"><i class="fa-solid fa-lock"></i></span>
+      <h1>No puedes acceder a esta página</h1>
+      <p id="deniedMessage">Esta sección está disponible únicamente para las cuentas autorizadas.</p>
+      <a class="primary-link" href="/study/panel">Ir al Panel</a>
+    </section>
+
+    <section class="inbox-shell hidden" id="inboxView">
+      <div class="inbox-heading">
+        <div><span class="section-label"><i class="fa-regular fa-comments"></i> Soporte</span><h1>Chats disponibles</h1><p>Conversaciones de usuarios que solicitaron ayuda.</p></div>
+        <div class="inbox-count"><strong id="openChatCount">0</strong><span>abiertos</span></div>
+      </div>
+      <div class="inbox-filters"><button class="filter-button active" data-filter="all" type="button">Todos</button><button class="filter-button" data-filter="unread" type="button">Con novedades</button><button class="filter-button" data-filter="open" type="button">Abiertos</button><button class="filter-button" data-filter="closed" type="button">Cerrados</button></div>
+      <div class="chat-list" id="chatList"></div>
+      <div class="empty-inbox hidden" id="emptyInbox"><i class="fa-regular fa-comment-dots"></i><p>No hay chats en esta sección.</p></div>
+    </section>
+
+    <section class="conversation-shell hidden" id="conversationView">
+      <div class="conversation-top">
+        <a class="back-to-inbox hidden" id="backToInbox" href="/contacto/chat"><i class="fa-solid fa-chevron-left"></i></a>
+        <div class="conversation-title"><span id="conversationNumber">Chat</span><h1 id="conversationSubject">Conversación</h1><p id="conversationPerson"></p></div>
+        <button class="status-button hidden" id="statusButton" type="button"></button>
+      </div>
+      <div class="messages" id="messages" aria-live="polite"></div>
+      <form class="message-form" id="messageForm">
+        <textarea id="messageInput" rows="2" maxlength="2000" placeholder="Escribe un mensaje..." required></textarea>
+        <button id="sendMessageButton" type="submit" aria-label="Enviar mensaje"><i class="fa-solid fa-paper-plane"></i></button>
+      </form>
+      <p class="chat-error hidden" id="chatError" role="alert"></p>
+    </section>
+  </main>
+  <script type="module" src="/contacto/chat/chat.js"></script>
+</body>
+</html>
