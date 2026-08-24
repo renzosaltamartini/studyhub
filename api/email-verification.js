@@ -2,6 +2,7 @@ import { createHash, randomInt, randomUUID, timingSafeEqual } from "node:crypto"
 import { cert, getApps, initializeApp } from "firebase-admin/app";
 import { getAuth } from "firebase-admin/auth";
 import { getDatabase } from "firebase-admin/database";
+import nodemailer from "nodemailer";
 
 const COOLDOWN_MS = 30_000;
 const CODE_TTL_MS = 10 * 60_000;
@@ -65,33 +66,40 @@ async function authenticatedUser(req) {
 }
 
 async function sendEmail({ email, name, code, requestId }) {
-  const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.EMAIL_FROM;
-  if (!apiKey || !from) throw new HttpError(500, "Faltan las variables de correo en Vercel.");
+  const gmailUser = (process.env.GMAIL_USER || "").trim();
+  const gmailPassword = (process.env.GMAIL_APP_PASSWORD || "").replace(/\s/g, "");
+  const fromName = (process.env.EMAIL_FROM_NAME || "StudyHub").trim();
+  if (!gmailUser || !gmailPassword) {
+    throw new HttpError(500, "Configura GMAIL_USER y GMAIL_APP_PASSWORD en Vercel.");
+  }
   const safeName = escapeHTML(name || "estudiante");
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-      "Idempotency-Key": `studyhub-${requestId}`
-    },
-    body: JSON.stringify({
-      from,
-      to: [email],
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: { user: gmailUser, pass: gmailPassword },
+    connectionTimeout: 10_000,
+    greetingTimeout: 10_000,
+    socketTimeout: 15_000
+  });
+  try {
+    await transporter.sendMail({
+      from: { name: fromName || "StudyHub", address: gmailUser },
+      to: email,
       subject: `${code} es tu código de StudyHub`,
       text: `Hola ${name || "estudiante"}. Tu código de verificación es ${code}. Vence en 10 minutos.`,
-      html: `<div style="font-family:Arial,sans-serif;max-width:520px;margin:auto;padding:28px;color:#202124"><p>Hola ${safeName},</p><h1 style="font-size:22px">Verifica tu correo</h1><p style="color:#5f6368">Usa este código para terminar tu primer ingreso a StudyHub:</p><div style="margin:24px 0;padding:18px;border-radius:12px;background:#f1f3f4;text-align:center;font-size:32px;font-weight:700;letter-spacing:8px">${code}</div><p style="color:#777;font-size:13px">El código vence en 10 minutos. Si no solicitaste este mensaje, puedes ignorarlo.</p></div>`
-    })
-  });
-  if (!response.ok) {
-    const body = await response.json().catch(() => ({}));
-    throw new HttpError(502, body.message || "No se pudo enviar el correo de verificación.");
+      html: `<div style="font-family:Arial,sans-serif;max-width:520px;margin:auto;padding:28px;color:#202124"><p>Hola ${safeName},</p><h1 style="font-size:22px">Verifica tu correo</h1><p style="color:#5f6368">Usa este código para terminar tu primer ingreso a StudyHub:</p><div style="margin:24px 0;padding:18px;border-radius:12px;background:#f1f3f4;text-align:center;font-size:32px;font-weight:700;letter-spacing:8px">${code}</div><p style="color:#777;font-size:13px">El código vence en 10 minutos. Si no solicitaste este mensaje, puedes ignorarlo.</p><p style="display:none">${escapeHTML(requestId)}</p></div>`
+    });
+  } catch (error) {
+    console.error("Gmail:", error?.code || error?.message || error);
+    if (/Invalid login|Username and Password not accepted|EAUTH/i.test(`${error?.code || ""} ${error?.message || ""}`)) {
+      throw new HttpError(502, "Gmail rechazó las credenciales. Revisa la contraseña de aplicación.");
+    }
+    throw new HttpError(502, "No se pudo enviar el código mediante Gmail.");
   }
 }
 
 export default async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");
+  if (req.method === "GET") return res.status(200).json({ ok: true, service: "email-verification" });
   if (req.method !== "POST") return res.status(405).json({ error: "Método no permitido." });
   try {
     const decoded = await authenticatedUser(req);
