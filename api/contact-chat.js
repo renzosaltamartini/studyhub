@@ -2,6 +2,7 @@ import { cert, getApps, initializeApp } from "firebase-admin/app";
 import { getAuth } from "firebase-admin/auth";
 import { getDatabase } from "firebase-admin/database";
 import nodemailer from "nodemailer";
+import { createClient } from "@supabase/supabase-js";
 
 const ADMIN_APP_NAME = "studyhub-contact-chat";
 const STAFF_EMAILS = new Set([
@@ -81,6 +82,18 @@ async function nextChatId(database) {
   return String(result.snapshot.val()).padStart(6, "0");
 }
 
+async function removeChatAttachments(chat) {
+  const paths = [...new Set(Object.values(chat?.messages || {}).map((message) => message?.attachmentPath).filter(Boolean))];
+  if (!paths.length) return;
+  if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    throw new HttpError(500, "No se pudieron eliminar los adjuntos: faltan variables de Supabase.");
+  }
+  const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
+  const bucket = process.env.SUPABASE_BUCKET || "studyhub-files";
+  const { error } = await supabase.storage.from(bucket).remove(paths);
+  if (error) throw new HttpError(500, "No se pudieron eliminar todos los adjuntos del chat.");
+}
+
 export default async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");
   if (req.method === "GET") return res.status(200).json({ ok: true, service: "contact-chat" });
@@ -103,6 +116,21 @@ export default async function handler(req, res) {
         unread: Boolean(chat?.unreadByUser),
         isStaff: STAFF_EMAILS.has(user.email)
       });
+    }
+
+    if (action === "delete") {
+      if (!STAFF_EMAILS.has(user.email)) throw new HttpError(403, "Solo el equipo de soporte puede eliminar chats.");
+      const targetChatId = String(req.body?.chatId || "").trim();
+      if (!/^\d+$/.test(targetChatId)) throw new HttpError(400, "Número de chat inválido.");
+      const targetRef = database.ref(`contactChats/${targetChatId}`);
+      const chat = (await targetRef.get()).val();
+      if (!chat) return res.status(200).json({ deleted: true });
+      await removeChatAttachments(chat);
+      await database.ref().update({
+        [`contactChats/${targetChatId}`]: null,
+        [`userChats/${chat.ownerUid}`]: null
+      });
+      return res.status(200).json({ deleted: true });
     }
 
     if (action === "create") {

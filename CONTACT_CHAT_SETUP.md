@@ -18,3 +18,13 @@ Los usuarios normales solo pueden abrir la URL de su propio chat. Cada cuenta ti
 ## Correo
 
 Cuando se abre o reabre una conversación, el aviso se envía a `GMAIL_USER` usando `GMAIL_APP_PASSWORD`.
+
+## Adjuntos
+
+Los adjuntos usan el mismo bucket privado de Supabase. En **Storage > studyhub-files > Configuration**, elimina la restricción de tipos MIME o permite:
+
+- `image/jpeg`, `image/png`, `image/gif`, `image/webp`
+- `application/pdf`, formatos Word, Excel y PowerPoint
+- `text/plain`, `text/csv`, `application/zip`, `application/x-rar-compressed`
+
+El límite del chat es de 25 MB por archivo. Solo el usuario propietario del chat y las cuentas de soporte pueden obtener enlaces temporales para abrirlos.

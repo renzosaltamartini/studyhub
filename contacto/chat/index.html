@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="chat-preload">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow, noarchive">
   <meta name="description" content="Centro privado de contacto de StudyHub.">
   <title>Contacto | StudyHub</title>
+  <style>.chat-preload body{visibility:hidden;opacity:0}.chat-ready body{visibility:visible;opacity:1;transition:opacity .12s ease}</style>
   <link rel="icon" href="/sh.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-  <link rel="stylesheet" href="/contacto/chat/chat.css">
+  <link rel="stylesheet" href="/contacto/chat/chat.css" onload="document.documentElement.classList.remove('chat-preload');document.documentElement.classList.add('chat-ready')">
+  <noscript><style>body{visibility:visible!important;opacity:1!important}</style></noscript>
 </head>
 <body>
   <header class="chat-header">
@@ -47,12 +49,18 @@
       <div class="conversation-top">
         <a class="back-to-inbox hidden" id="backToInbox" href="/contacto/chat"><i class="fa-solid fa-chevron-left"></i></a>
         <div class="conversation-title"><span id="conversationNumber">Chat</span><h1 id="conversationSubject">Conversación</h1><p id="conversationPerson"></p></div>
-        <button class="status-button hidden" id="statusButton" type="button"></button>
+        <div class="conversation-actions hidden" id="conversationActions">
+          <button class="status-button" id="statusButton" type="button"></button>
+          <button class="delete-chat-button" id="deleteChatButton" type="button" aria-label="Eliminar chat para siempre"><i class="fa-regular fa-trash-can"></i></button>
+        </div>
       </div>
       <div class="messages" id="messages" aria-live="polite"></div>
       <form class="message-form" id="messageForm">
-        <textarea id="messageInput" rows="2" maxlength="2000" placeholder="Escribe un mensaje..." required></textarea>
-        <button id="sendMessageButton" type="submit" aria-label="Enviar mensaje"><i class="fa-solid fa-paper-plane"></i></button>
+        <div class="pending-attachment hidden" id="pendingAttachment"><span class="pending-attachment-icon" id="pendingAttachmentIcon"><i class="fa-regular fa-file"></i></span><span class="pending-attachment-copy"><strong id="pendingAttachmentName"></strong><small id="pendingAttachmentSize"></small></span><button id="removePendingAttachment" type="button" aria-label="Quitar archivo"><i class="fa-solid fa-xmark"></i></button></div>
+        <input class="hidden" id="attachmentInput" type="file" accept="image/jpeg,image/png,image/gif,image/webp,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.zip,.rar">
+        <button class="composer-button attach-button" id="attachButton" type="button" aria-label="Adjuntar archivo o imagen"><i class="fa-solid fa-paperclip"></i></button>
+        <textarea id="messageInput" rows="1" maxlength="2000" placeholder="Escribe un mensaje..."></textarea>
+        <button class="composer-button send-button" id="sendMessageButton" type="submit" aria-label="Enviar mensaje"><i class="fa-solid fa-paper-plane"></i></button>
       </form>
       <p class="chat-error hidden" id="chatError" role="alert"></p>
     </section>
