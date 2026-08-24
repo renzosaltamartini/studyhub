@@ -117,6 +117,13 @@ $("filesSearch").addEventListener("input",renderDriveItems);$("filesGridToggle")
 $("filesEmpty").addEventListener("click",event=>{const action=event.target.closest("[data-files-action]")?.dataset.filesAction;if(action==="new-folder")openNewFolderModal();else if(action==="upload")$("fileUploadInput").click()});
 const dropZone=$("filesDropZone");["dragenter","dragover"].forEach(type=>dropZone.addEventListener(type,event=>{event.preventDefault();dropZone.classList.add("dragging")}));["dragleave","drop"].forEach(type=>dropZone.addEventListener(type,event=>{event.preventDefault();dropZone.classList.remove("dragging")}));dropZone.addEventListener("drop",event=>uploadFiles(event.dataTransfer.files));
 
+/* Tooltips accesibles para los controles con iconos de Archivos */
+const filesTooltip=document.createElement("div");filesTooltip.className="files-tooltip";filesTooltip.setAttribute("role","tooltip");document.body.appendChild(filesTooltip);let tooltipTarget=null;
+function isFilesIconControl(button){return button&&!button.classList.contains("files-modal-backdrop")&&Boolean(button.closest(".files-view,.files-modal-card,.file-editor-card"))&&Boolean(button.getAttribute("aria-label")||button.dataset.tooltip)}
+function showFilesTooltip(button){if(!isFilesIconControl(button))return;tooltipTarget=button;filesTooltip.textContent=button.dataset.tooltip||button.getAttribute("aria-label");filesTooltip.classList.add("visible");const rect=button.getBoundingClientRect(),half=filesTooltip.offsetWidth/2,left=Math.min(window.innerWidth-half-10,Math.max(half+10,rect.left+rect.width/2));filesTooltip.style.left=`${left}px`;filesTooltip.style.top=`${Math.max(10,rect.top-9)}px`}
+function hideFilesTooltip(){tooltipTarget=null;filesTooltip.classList.remove("visible")}
+document.addEventListener("pointerover",event=>{const button=event.target.closest("button");if(button!==tooltipTarget)showFilesTooltip(button)});document.addEventListener("pointerout",event=>{if(tooltipTarget&&!tooltipTarget.contains(event.relatedTarget))hideFilesTooltip()});document.addEventListener("focusin",event=>showFilesTooltip(event.target.closest("button")));document.addEventListener("focusout",hideFilesTooltip);window.addEventListener("scroll",hideFilesTooltip,true);window.addEventListener("resize",hideFilesTooltip);
+
 
 /* Editor básico de contenido para Word (.docx) y PDF */
 function setFileEditorLoading(loading){$("fileEditorLoading").classList.toggle("hidden",!loading);$("docxEditorWrap").classList.add("hidden");$("pdfEditorWrap").classList.add("hidden");$("saveFileContentButton").disabled=loading}
