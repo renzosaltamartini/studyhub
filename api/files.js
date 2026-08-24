@@ -81,7 +81,7 @@ export default async function handler(req,res){
     if(action==="signed-url"){
       if(!ownsPath&&!(await canReadChatAttachment(services.database,decoded,path,chatId)))return res.status(403).json({error:"No tienes acceso a este adjunto."});
       const options=download?{download:String(download).slice(0,160)}:undefined;
-      const {data,error}=await storage.createSignedUrl(path,120,options);
+      const {data,error}=await storage.createSignedUrl(path,3600,options);
       if(error)throw error;
       return res.status(200).json({url:data.signedUrl});
     }
