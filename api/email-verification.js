@@ -35,8 +35,14 @@ function adminServices() {
 }
 
 function codeHash(uid, code) {
-  const secret = process.env.EMAIL_CODE_SECRET || "";
-  if (secret.length < 16) throw new HttpError(500, "EMAIL_CODE_SECRET no está configurado correctamente.");
+  const configuredSecret = (process.env.EMAIL_CODE_SECRET || "").trim();
+  const firebasePrivateKey = (process.env.FIREBASE_PRIVATE_KEY || "").replace(/\\n/g, "\n");
+  const secret = configuredSecret.length >= 16
+    ? configuredSecret
+    : createHash("sha256").update(`studyhub-email-code-v1:${firebasePrivateKey}`).digest("hex");
+  if (!firebasePrivateKey && configuredSecret.length < 16) {
+    throw new HttpError(500, "No hay una clave privada disponible para proteger los códigos.");
+  }
   return createHash("sha256").update(`${uid}:${code}:${secret}`).digest("hex");
 }
 

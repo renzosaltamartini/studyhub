@@ -12,7 +12,7 @@ Agrega en **Project Settings > Environment Variables**:
 - `FIREBASE_DATABASE_URL` (por ejemplo, `https://tu-proyecto-default-rtdb.firebaseio.com`)
 - `RESEND_API_KEY`
 - `EMAIL_FROM` (por ejemplo, `StudyHub <verificacion@tudominio.com>`)
-- `EMAIL_CODE_SECRET` (una cadena aleatoria privada de al menos 16 caracteres; se recomiendan 32 o más)
+- `EMAIL_CODE_SECRET` es opcional. Si decides agregarlo, usa una cadena aleatoria privada de al menos 16 caracteres. Cuando no está definido, el servidor deriva de forma automática una clave estable desde `FIREBASE_PRIVATE_KEY`.
 
 ## Resend
 

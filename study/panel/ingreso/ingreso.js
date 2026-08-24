@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
-import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 import { getDatabase, ref, get, set, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
 import { firebaseConfig } from "/firebase-config.js";
 
@@ -92,12 +92,18 @@ async function changeGoogleAccount(button) {
     button.disabled = true;
     button.textContent = "Abriendo cuentas...";
     try {
+        currentUser = null;
+        await signOut(auth);
         await signInWithPopup(auth, googleProvider);
         window.location.replace("/study/panel/ingreso");
     } catch (error) {
         isSwitchingAccount = false;
         button.disabled = false;
         button.innerHTML = originalContent;
+        if (!auth.currentUser) {
+            window.location.replace("/study/panel");
+            return;
+        }
         if (error?.code !== "auth/popup-closed-by-user" && error?.code !== "auth/cancelled-popup-request") {
             const target = $("formView").classList.contains("hidden") ? "verificationError" : "formError";
             showError("No pudimos abrir el selector de cuentas. Inténtalo nuevamente.", target);
