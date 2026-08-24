@@ -833,3 +833,42 @@ button.subitem:hover{background:var(--surface-hover)}
 .hub-spinner,.files-upload-spinner{border-top-color:var(--blue)}
 
 @media(prefers-reduced-motion:reduce){.hub-loader i{animation:none;opacity:1;transform:none}}
+
+
+/* =========================================================
+   AJUSTE V5 — loader de arcos y controles simétricos
+   ========================================================= */
+/* El botón para mostrar replica exactamente al de ocultar. */
+.sidebar-open-button{
+  width:28px;
+  height:28px;
+  padding:0;
+  border:0;
+  border-radius:var(--radius-sm);
+  background:transparent;
+  color:#fff;
+  box-shadow:none;
+  transition:background .15s,color .15s;
+}
+.sidebar-open-button:hover{background:var(--surface-hover);color:#fff;transform:none}
+.sidebar-open-button i{color:#fff;font-size:11px}
+
+/* Nuevo loader: arcos concéntricos, silencioso y liviano. */
+.hub-loader-ring{position:relative;width:42px;height:42px;display:block}
+.hub-loader-ring i{position:absolute;border-radius:50%}
+.hub-loader-ring i:first-child{
+  inset:0;
+  border:2px solid #4a4b4f;
+  border-top-color:var(--blue);
+  border-right-color:var(--blue);
+  animation:hubRing 1s cubic-bezier(.55,.2,.45,.8) infinite;
+}
+.hub-loader-ring i:last-child{
+  inset:9px;
+  border:2px solid #414246;
+  border-bottom-color:var(--orange);
+  animation:hubRingReverse .78s cubic-bezier(.55,.2,.45,.8) infinite;
+}
+@keyframes hubRing{to{transform:rotate(360deg)}}
+@keyframes hubRingReverse{to{transform:rotate(-360deg)}}
+@media(prefers-reduced-motion:reduce){.hub-loader-ring i:first-child,.hub-loader-ring i:last-child{animation-duration:2.4s}}
