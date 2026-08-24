@@ -5,6 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Página no encontrada · StudyHub</title>
 <meta name="robots" content="noindex">
+<script>
+    (function () {
+        if (!/^\/contacto\/chat\/\d+\/?$/.test(window.location.pathname)) return;
+        document.documentElement.style.visibility = "hidden";
+        fetch("/contacto/chat/", { cache: "no-store" })
+            .then(function (response) {
+                if (!response.ok) throw new Error("No se pudo cargar el chat");
+                return response.text();
+            })
+            .then(function (html) {
+                document.open();
+                document.write(html);
+                document.close();
+            })
+            .catch(function () {
+                document.documentElement.style.visibility = "visible";
+            });
+    })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">

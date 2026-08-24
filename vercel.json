@@ -17,7 +17,7 @@
     { "source": "/study/hub/", "destination": "/study/hub/index.html" },
     { "source": "/contacto/chat", "destination": "/contacto/chat/index.html" },
     { "source": "/contacto/chat/", "destination": "/contacto/chat/index.html" },
-    { "source": "/contacto/chat/:chatId", "destination": "/contacto/chat/index.html" },
+    { "source": "/contacto/chat/:chatId([0-9]+)", "destination": "/contacto/chat/index.html" },
     { "source": "/:path*", "destination": "/404.html" }
   ]
 }
