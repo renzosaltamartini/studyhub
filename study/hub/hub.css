@@ -133,7 +133,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 .space-head{margin-top:20px}
 .empty-nav{margin-top:0}
 .space-head-actions{display:flex;align-items:center;gap:2px}
-.sidebar-menu-head .space-add-button.active{background:var(--surface-hover);color:var(--text)}
+.sidebar-menu-head .space-add-button.active,.sidebar-menu-head .space-settings-button.active{background:var(--surface-hover);color:var(--text)}
 .space-page-form{
   margin:7px 6px 4px;padding:10px;
   border:1px solid var(--border);border-radius:11px;
@@ -174,6 +174,23 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 .space-parent-field{margin-bottom:0!important}
 .space-parent-field select{display:block;margin-top:6px;text-transform:none;letter-spacing:0;font-weight:500}
 .space-page-error{margin:7px 0 0;color:#ef4444;font-size:10px;line-height:1.35}
+.space-manage-panel{
+  margin:7px 6px 5px;padding:10px;border:1px solid var(--border);border-radius:11px;
+  background:var(--surface);box-shadow:var(--shadow-sm);animation:spaceFormIn .18s ease both;
+}
+.space-manage-panel>.space-form-head{margin-bottom:4px}
+.space-manage-panel>p{margin:0 0 9px;color:var(--faint);font-size:9.5px;line-height:1.4}
+.space-manage-list{max-height:260px;display:grid;gap:3px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--border-strong) transparent}
+.space-manage-row{padding-left:calc(var(--manage-depth,0) * 10px);display:grid;gap:5px;border-top:1px solid var(--border)}
+.space-manage-row:first-child{border-top:0}
+.space-manage-row>span{min-width:0;padding:7px 2px 3px;display:flex;align-items:center;gap:7px;color:var(--muted)}
+.space-manage-row>span i{width:14px;text-align:center;color:var(--faint);font-size:11px}
+.space-manage-row>span b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10.5px;font-weight:550}
+.space-manage-row>div{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:0 0 6px 21px}
+.space-manage-row>div button{height:25px;padding:0 6px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--muted);font-size:9.5px;cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+.space-manage-row>div button:hover{background:var(--surface-hover);color:var(--text)}
+.space-manage-row>div button.danger:hover{border-color:rgba(243,106,99,.35);background:var(--red-soft);color:var(--red)}
+.space-manage-empty{margin:4px 0!important;padding:10px;border:1px dashed var(--border);border-radius:7px;text-align:center!important}
 .space-page-item span{overflow:hidden;text-overflow:ellipsis}
 .space-tree-node{position:relative;border-radius:var(--radius-sm);transition:opacity .15s,box-shadow .15s}
 .space-node-row{display:flex;align-items:center;gap:2px}
@@ -182,13 +199,11 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 .space-node-row.space:hover{background:var(--surface-hover)}
 .space-node-row.space .nav-item{min-height:32px;padding-left:7px;background:transparent!important;color:var(--muted);cursor:default}
 .space-node-row.space .nav-item:hover{background:transparent;color:var(--text)}
-.space-node-delete,.space-node-add,.space-node-edit,.space-node-toggle{
+.space-node-add,.space-node-toggle{
   width:25px;height:25px;flex:0 0 25px;border:0;border-radius:6px;display:grid;place-items:center;
   background:transparent;color:var(--faint);font-size:11px;cursor:pointer;transition:background .15s,color .15s;
 }
-.space-node-delete:hover{background:var(--red-soft);color:var(--red)!important}
 .space-node-add:hover{background:rgba(59,130,246,.14);color:#93c5fd}
-.space-node-edit:hover{background:rgba(245,180,88,.13);color:var(--amber)}
 .space-node-toggle:hover{background:rgba(255,255,255,.07);color:var(--text)}
 .space-node-toggle i{font-size:8px;transition:transform .18s}
 .space-node-toggle i.closed{transform:rotate(-90deg)}
@@ -329,7 +344,6 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   .mobile-header strong{font-size:16px;font-weight:700}
   .sidebar-overlay{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.55)}
   .sidebar-overlay.visible{display:block}
-  .space-node-delete{color:var(--faint)}
   .hub-placeholder{min-height:calc(100svh - 60px)}
   .space-page-view{min-height:calc(100svh - 60px);padding:58px 24px}
 }
