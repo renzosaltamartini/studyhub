@@ -421,6 +421,11 @@ if (error.code !== "auth/popup-closed-by-user") {
 console.error("No se pudo iniciar sesión con Google:", error);
 window.alert("No pudimos iniciar sesión con Google. Inténtalo nuevamente.");
 }
+} finally {
+btnComenzar.classList.remove("loading");
+btnComenzar.removeAttribute("aria-busy");
+}
+}
 
 function showContactToast(message) {
 const toast = document.getElementById("contactToast");
@@ -456,6 +461,7 @@ showContactToast("Inicia sesión con Google para utilizar el contacto.");
 return;
 }
 contactButton.disabled = true;
+contactButton.classList.add("is-loading");
 try {
 const status = await contactAPI("status");
 if (status.hasChat) {
@@ -470,6 +476,7 @@ window.setTimeout(() => document.getElementById("contactSubject").focus(), 60);
 showContactToast(error.message);
 } finally {
 contactButton.disabled = false;
+contactButton.classList.remove("is-loading");
 }
 }
 
@@ -502,11 +509,6 @@ button.disabled = false;
 button.querySelector("span").textContent = "Enviar y abrir chat";
 }
 });
-} finally {
-btnComenzar.classList.remove("loading");
-btnComenzar.removeAttribute("aria-busy");
-}
-}
 
 btnComenzar.addEventListener("click", (event) => {
 if (currentUser) return;

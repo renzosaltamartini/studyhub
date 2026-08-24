@@ -77,8 +77,9 @@ button { font: inherit; }
     color: #4f544f;
     cursor: pointer;
 }
-.contact-button:hover { background: #fff; border-color: var(--line-strong); }
-.contact-button:disabled { opacity: .55; cursor: wait; }
+.contact-button:hover:not(:disabled) { background: #fff; border-color: var(--line-strong); }
+.contact-button:disabled { opacity: .55; cursor: not-allowed; }
+.contact-button.is-loading:disabled { cursor: wait; }
 .login-button {
     border: 1px solid var(--black);
     background: var(--black);
