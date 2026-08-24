@@ -4,14 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>StudyHub</title>
-<meta name="theme-color" content="#111113">
 
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-<!-- Tipografía -->
+<!-- Tipografía limpia -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <!-- CSS -->
 <link rel="stylesheet" href="styles.css">
 <!-- Si JS está deshabilitado, el contenido no debe quedar oculto -->
@@ -210,11 +208,11 @@ referrerpolicy="no-referrer"
 <!-- JS de la animación de texto -->
 <script>
 const words = [
-{ text: "crear", gradient: "linear-gradient(115deg, #4d8bf5, #7c9bf0)" },
-{ text: "imaginar", gradient: "linear-gradient(115deg, #7c9bf0, #9a6fd6)" },
-{ text: "estudiar", gradient: "linear-gradient(115deg, #9a6fd6, #c583c9)" },
-{ text: "aprender", gradient: "linear-gradient(115deg, #c583c9, #e07a92)" },
-{ text: "organizar", gradient: "linear-gradient(115deg, #e07a92, #4d8bf5)" }
+{ text: "crear", background: "#eff6ff", color: "#2563eb" },
+{ text: "imaginar", background: "#fff4e6", color: "#d97706" },
+{ text: "estudiar", background: "#ecfdf5", color: "#059669" },
+{ text: "aprender", background: "#fffbeb", color: "#d97706" },
+{ text: "organizar", background: "#fff1f2", color: "#e11d48" }
 ];
 
 let index = 0;
@@ -222,9 +220,10 @@ const dynamicWord = document.getElementById("dynamicWord");
 const wordText = document.getElementById("wordText");
 
 function applyDynamicWordColors(word) {
-    // El degradé es propio de cada palabra y debe conservarse
-    // por encima de los estilos globales del tema.
-    dynamicWord.style.setProperty("background-image", word.gradient, "important");
+    // Estos colores son propios de la palabra animada y deben conservarse
+    // tanto en light como en dark, por encima de los estilos globales del tema.
+    dynamicWord.style.setProperty("background-color", word.background, "important");
+    dynamicWord.style.setProperty("color", word.color, "important");
 }
 
 applyDynamicWordColors(words[index]);

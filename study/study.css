@@ -227,3 +227,16 @@ select:focus-visible { outline: 3px solid rgba(85,103,242,.18); outline-offset: 
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* NUEVA IDENTIDAD — panel e ingreso */
+:root{--background:#f4f7fb;--surface:#fff;--surface-soft:#edf3f8;--text:#132238;--muted:#65748a;--black:#10233f;--border:#dbe4ed;--border-strong:#c8d5e2;--accent:#1677ff;--accent-soft:#e8f2ff;--green:#198754;--red:#e5484d}
+body{font-family:"Manrope",sans-serif;background:var(--background);background-image:radial-gradient(circle at 8% 8%,rgba(22,119,255,.09),transparent 27%),radial-gradient(circle at 92% 86%,rgba(245,158,11,.07),transparent 25%)}
+.auth-header{border-color:rgba(200,213,226,.75);background:rgba(244,247,251,.84)}
+.brand-mark{border:1px solid #dbe4ed;border-radius:11px;background:#fff;box-shadow:0 5px 18px rgba(30,66,104,.09)}
+.back-button{border-radius:999px;background:#fff}.back-button:hover{border-color:#9eb6ce}
+.space-eyebrow,.eyebrow{border-radius:999px;background:#fff;color:#286398}.intro h1{color:#10233f;font-weight:750}
+.auth-card,.intake-card{border-color:#d6e2ed;border-radius:28px;box-shadow:0 25px 65px rgba(30,66,104,.11)}
+.avatar{border-radius:20px;background:#e8f2ff;color:#1677ff}.profile-detail{border:1px solid #e5edf4;border-radius:13px;background:#f6f9fc}
+.hub-button,.submit-button{border-color:#1677ff;border-radius:14px;background:#1677ff;box-shadow:0 10px 22px rgba(22,119,255,.18)}.hub-button:hover,.submit-button:hover:not(:disabled){background:#0868e8}.logout-button{border-radius:14px}
+.intake-head .eyebrow{border-color:#c9dcf2;background:#e8f2ff;color:#1677ff}.form-field input,.form-field select{height:48px;border-radius:13px;background:#f8fafc}.form-field input:focus,.form-field select:focus{border-color:#1677ff;box-shadow:0 0 0 4px rgba(22,119,255,.10)}
+@media(max-width:620px){.intro h1{font-size:43px}.auth-card,.intake-card{border-radius:22px}}

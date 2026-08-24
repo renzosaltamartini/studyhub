@@ -24,7 +24,7 @@ const panelView = $("panelView");
 const spaceWords = [
     { text: "estudio", background: "#eff6ff", color: "#2563eb", border: "#dbeafe" },
     { text: "aprendizaje", background: "#ecfdf5", color: "#059669", border: "#d1fae5" },
-    { text: "comodidad", background: "#f5f3ff", color: "#7c3aed", border: "#ede9fe" },
+    { text: "comodidad", background: "#fff4e6", color: "#d97706", border: "#fed7aa" },
     { text: "organización", background: "#fff7ed", color: "#ea580c", border: "#fed7aa" },
     { text: "facilidad", background: "#fff1f2", color: "#e11d48", border: "#fecdd3" }
 ];
