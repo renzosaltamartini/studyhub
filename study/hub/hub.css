@@ -2060,3 +2060,47 @@ html.dark-theme,body.dark-theme{
     .drive-info strong{font-size:11px}
     .drive-info small{font-size:8px}
 }
+
+/* Paleta definitiva: azul, naranja, rojo y verde. */
+:root{
+    --hub-accent:#2583e8;
+    --hub-accent-2:#1674c9;
+    --hub-accent-soft:#eaf4ff;
+}
+.user-avatar{background:linear-gradient(145deg,#2583e8,#27a867);box-shadow:0 3px 10px rgba(37,131,232,.18)}
+.event-colors button:nth-child(1){--swatch:#2583e8}
+.event-colors button:nth-child(2){--swatch:#22c55e}
+.event-colors button:nth-child(3){--swatch:#ef4444}
+.event-colors button:nth-child(4){--swatch:#f59e0b}
+.event-colors button:nth-child(5){--swatch:#1674c9}
+.nav-item.active,.nav-item.active:nth-child(1),.nav-item.active:nth-child(2),.nav-item.active:nth-child(3),.nav-item.active:nth-child(4){border-color:transparent;background:#f5f5f6;color:#111;box-shadow:none}
+.nav-item.active i{color:#70737a!important}
+.welcome-kicker,.files-kicker,.welcome-orb i,.file-editor-type,.pdf-panel-kicker{color:#2583e8}
+.quick-card:nth-child(1) .quick-icon{background:#eaf4ff;color:#2583e8}
+.quick-card:nth-child(2) .quick-icon{background:#edf7f1;color:#27a867}
+.quick-card:nth-child(3) .quick-icon{background:#fff3e3;color:#d98218}
+.new-reminder-button,.new-calendar-event,.save-reminder,.files-primary-button,.files-modal-save,.pdf-add-annotation{border-color:#1674c9;background:#2583e8;color:#fff;box-shadow:none}
+.new-reminder-button:hover,.new-calendar-event:hover,.save-reminder:hover,.files-primary-button:hover,.files-modal-save:hover,.pdf-add-annotation:hover{background:#1674c9;box-shadow:0 8px 18px rgba(37,131,232,.16)}
+.reminder-filters button.active,.files-breadcrumbs button.current{background:#eaf4ff;color:#1674c9}
+.calendar-day.today{border-color:#9dccf5;background:#eff7ff}
+.calendar-day.today .calendar-day-head>span{background:#2583e8;color:#fff}
+.files-drop-zone>i{border-color:#cfe6fb;background:#eaf4ff;color:#2583e8}
+.drive-icon.folder{background:#fff3e3;color:#d98218}
+.drive-icon.pdf{background:#fff0ef;color:#d6534d}
+.drive-icon.word{background:#eaf4ff;color:#2583e8}
+.drive-actions button:hover,.file-editor-head-actions button:hover{border-color:#cfe6fb;background:#eaf4ff;color:#2583e8}
+
+html.dark-theme,body.dark-theme{
+    --hub-accent:#4a9df0;
+    --hub-accent-2:#2583e8;
+    --hub-accent-soft:rgba(74,157,240,.13);
+}
+.dark-theme .nav-item:hover,.dark-theme .nav-item.active,.dark-theme .nav-item.active:nth-child(1),.dark-theme .nav-item.active:nth-child(2),.dark-theme .nav-item.active:nth-child(3),.dark-theme .nav-item.active:nth-child(4){border-color:transparent;background:#292d29;color:var(--hub-text);box-shadow:none}
+.dark-theme .nav-item.active i{color:inherit!important}
+.dark-theme .welcome-kicker,.dark-theme .files-kicker,.dark-theme .welcome-orb i,.dark-theme .file-editor-type,.dark-theme .pdf-panel-kicker{color:#69aff2}
+.dark-theme .files-primary-button,.dark-theme .files-modal-save,.dark-theme .pdf-add-annotation{border-color:#2583e8;background:#2583e8;color:#fff;box-shadow:none}
+.dark-theme .files-primary-button:hover,.dark-theme .files-modal-save:hover,.dark-theme .pdf-add-annotation:hover{background:#1674c9}
+.dark-theme .drive-icon.folder{background:rgba(217,130,24,.14);color:#efac57}
+.dark-theme .drive-icon.pdf{background:rgba(214,83,77,.14);color:#ee8b86}
+.dark-theme .drive-icon.word{background:rgba(37,131,232,.16);color:#75b7f4}
+.dark-theme .drive-actions button:hover,.dark-theme .file-editor-head-actions button:hover{border-color:rgba(74,157,240,.25);background:rgba(74,157,240,.12);color:#84c2f8}
