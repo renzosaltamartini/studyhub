@@ -768,3 +768,68 @@ button.subitem:hover{background:var(--surface-hover)}
   opacity:0;visibility:hidden;transition:opacity .12s;pointer-events:none;
 }
 .files-tooltip.visible{opacity:1;visibility:visible}
+
+
+/* =========================================================
+   PULIDO FINAL — contraste, loader y acentos controlados
+   ========================================================= */
+:root{
+  --blue:#4b9cff;
+  --red-accent:#ef6b6b;
+  --orange:#f3a252;
+  --green-accent:#55b982;
+  --yellow:#dfc35a;
+}
+
+/* Loader sin texto: tres puntos con movimiento orgánico. */
+.hub-loading{background:var(--bg)}
+.hub-loader{height:22px;display:flex;align-items:center;gap:7px}
+.hub-loader i{width:8px;height:8px;border-radius:50%;background:var(--muted);animation:hubDot 1.05s ease-in-out infinite}
+.hub-loader i:nth-child(1){background:var(--blue)}
+.hub-loader i:nth-child(2){background:var(--orange);animation-delay:.13s}
+.hub-loader i:nth-child(3){background:var(--green-accent);animation-delay:.26s}
+@keyframes hubDot{0%,70%,100%{opacity:.35;transform:translateY(0) scale(.82)}35%{opacity:1;transform:translateY(-7px) scale(1)}}
+
+/* Cuenta superior e iconografía del sidebar. */
+.sidebar-account-icon{width:28px;height:28px;flex:0 0 28px;border-radius:7px;display:grid;place-items:center;background:#3a3b3e;color:#fff;font-size:12px}
+.brand-text{min-width:0;flex:1}
+.sidebar-brand-actions{margin-left:0}
+.nav-item{min-height:43px;gap:10px;font-weight:500}
+.nav-item i{width:28px;height:28px;flex:0 0 28px;border-radius:7px;display:grid;place-items:center;background:#3b3c3f;color:#fff;font-size:13px}
+.nav-item:hover i,.nav-item.active i{background:#4a4b4f;color:#fff}
+.nav-item.active{background:var(--surface-hover);color:var(--text)}
+.user-action,.collapse-button{color:#fff}
+.user-action i,.collapse-button i{color:#fff}
+.sidebar-open-button{color:#fff}
+.sidebar-open-button i{color:#fff;font-size:13px}
+.mobile-header button{color:#fff}
+.mobile-header button i{color:#fff}
+
+/* Acentos puntuales: rojo, azul y naranja para cada herramienta. */
+.quick-card{overflow:hidden}
+.quick-card::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;opacity:.82}
+.quick-card:nth-child(1)::before{background:var(--red-accent)}
+.quick-card:nth-child(2)::before{background:var(--blue)}
+.quick-card:nth-child(3)::before{background:var(--orange)}
+.quick-card:nth-child(1) .quick-icon{color:var(--red-accent);background:rgba(239,107,107,.11)}
+.quick-card:nth-child(2) .quick-icon{color:var(--blue);background:rgba(75,156,255,.11)}
+.quick-card:nth-child(3) .quick-icon{color:var(--orange);background:rgba(243,162,82,.11)}
+.quick-meta b{color:var(--green-accent)}
+.welcome-kicker{color:var(--yellow)}
+
+/* Acciones principales en azul, estados semánticos conservados. */
+.new-reminder-button,.new-calendar-event,.files-primary-button,.save-reminder,.files-modal-save,.pdf-add-annotation{background:#397fc7;border-color:#397fc7;color:#fff}
+.new-reminder-button:hover,.new-calendar-event:hover,.files-primary-button:hover,.save-reminder:hover,.files-modal-save:hover,.pdf-add-annotation:hover{background:#468fd9;border-color:#468fd9}
+.complete-reminder:hover{border-color:var(--green-accent)}
+.reminder-card.completed .complete-reminder{border-color:var(--green-accent);background:var(--green-accent)}
+.reminder-card.overdue{border-left-color:var(--red-accent)}
+.reminder-card.overdue .reminder-date{color:var(--red-accent)}
+.calendar-day.today .calendar-day-head>span{background:#397fc7;color:#fff}
+.drive-icon.folder{background:rgba(243,162,82,.12);color:var(--orange)}
+.drive-icon.pdf{background:rgba(239,107,107,.12);color:var(--red-accent)}
+.drive-icon.word{background:rgba(75,156,255,.12);color:var(--blue)}
+.files-drop-zone.dragging{border-color:var(--blue);background:rgba(75,156,255,.07)}
+.files-view-toggle.active{background:#397fc7;border-color:#397fc7;color:#fff}
+.hub-spinner,.files-upload-spinner{border-top-color:var(--blue)}
+
+@media(prefers-reduced-motion:reduce){.hub-loader i{animation:none;opacity:1;transform:none}}
