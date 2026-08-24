@@ -872,3 +872,26 @@ button.subitem:hover{background:var(--surface-hover)}
 @keyframes hubRing{to{transform:rotate(360deg)}}
 @keyframes hubRingReverse{to{transform:rotate(-360deg)}}
 @media(prefers-reduced-motion:reduce){.hub-loader-ring i:first-child,.hub-loader-ring i:last-child{animation-duration:2.4s}}
+
+
+/* AJUSTE V6 — controles idénticos y carga simple. */
+.collapse-button i,.sidebar-open-button i{
+  width:12px;
+  height:12px;
+  display:grid;
+  place-items:center;
+  font-size:10px;
+  line-height:1;
+}
+.hub-loading{gap:10px;color:#fff;font-size:13px;font-weight:500}
+.hub-simple-spinner{
+  width:18px;
+  height:18px;
+  flex:0 0 18px;
+  border:2px solid rgba(255,255,255,.24);
+  border-top-color:#fff;
+  border-radius:50%;
+  animation:hubSimpleSpin .72s linear infinite;
+}
+.hub-loading-label{color:#fff}
+@keyframes hubSimpleSpin{to{transform:rotate(360deg)}}
