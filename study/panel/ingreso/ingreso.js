@@ -11,6 +11,7 @@ let currentUser = null;
 let cooldownTimer = null;
 let cooldownEndsAt = 0;
 let isSwitchingAccount = false;
+const FORCE_INTAKE_KEY = "studyhub_force_intake_uid";
 
 const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({ prompt: "select_account" });
@@ -94,7 +95,8 @@ async function changeGoogleAccount(button) {
     try {
         currentUser = null;
         await signOut(auth);
-        await signInWithPopup(auth, googleProvider);
+        const result = await signInWithPopup(auth, googleProvider);
+        localStorage.setItem(FORCE_INTAKE_KEY, result.user.uid);
         window.location.replace("/study/panel/ingreso");
     } catch (error) {
         isSwitchingAccount = false;
@@ -158,13 +160,16 @@ onAuthStateChanged(auth, async (user) => {
     try {
         const snapshot = await get(ref(database, `users/${user.uid}/profile`));
         const profile = snapshot.val() || {};
-        if (profile.completed && profile.emailVerified === true && profile.emailVerifiedAddress === (user.email || "").toLowerCase()) {
+        const mustCompleteIntake = localStorage.getItem(FORCE_INTAKE_KEY) === user.uid;
+        if (!mustCompleteIntake && profile.completed && profile.emailVerified === true && profile.emailVerifiedAddress === (user.email || "").toLowerCase()) {
             window.location.replace("/study/panel");
             return;
         }
         $("fullName").value = user.displayName || "Usuario de Google";
         $("email").value = user.email || "Sin email disponible";
-        if (profile.completed) {
+        if (mustCompleteIntake) {
+            showView("form");
+        } else if (profile.completed) {
             showVerification(user.email);
             await restoreVerificationState();
         } else {
@@ -201,6 +206,9 @@ $("intakeForm").addEventListener("submit", async (event) => {
             age, country, address, occupation, occupationDetail,
             completedAt: serverTimestamp()
         });
+        if (localStorage.getItem(FORCE_INTAKE_KEY) === currentUser.uid) {
+            localStorage.removeItem(FORCE_INTAKE_KEY);
+        }
         showVerification(currentUser.email);
         await requestCode(true);
     } catch (error) {
