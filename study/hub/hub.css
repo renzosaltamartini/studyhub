@@ -1920,3 +1920,143 @@ html.dark-theme,body.dark-theme{
 .dark-theme .files-tooltip{background:#f0f2ff;color:#24263d;border-color:#fff}
 
 @media(max-width:760px){.files-tooltip{display:none}.files-header::before{display:none}}
+
+/* =========================================================
+   AJUSTE FINAL — interfaz simple, acentos suaves y responsive
+   ========================================================= */
+:root{
+    --hub-bg:#f5f6f4;
+    --hub-surface:rgba(255,255,255,.82);
+    --hub-surface-solid:#fff;
+    --hub-soft:#f0f2ef;
+    --hub-soft-2:#e7eae6;
+    --hub-text:#343834;
+    --hub-muted:#777d77;
+    --hub-line:#e0e4df;
+    --hub-line-strong:#cdd3cc;
+    --hub-black:#1f221f;
+    --hub-accent:#5574d8;
+    --hub-accent-2:#5574d8;
+    --hub-accent-soft:#eef2ff;
+}
+
+body::before{background:radial-gradient(circle at 82% 4%,rgba(85,116,216,.055),transparent 30%)}
+.sidebar{border-color:var(--hub-line);background:rgba(255,255,255,.84)}
+.brand-mark{box-shadow:none}
+.nav-item i,.nav-item:nth-child(2) i,.nav-item:nth-child(3) i,.nav-item:nth-child(4) i{color:#7b817b}
+.nav-item.active,.nav-item.active:nth-child(1),.nav-item.active:nth-child(2),.nav-item.active:nth-child(3),.nav-item.active:nth-child(4){border-color:#dce3fa;background:#eef2ff;color:#405cae;box-shadow:none}
+.nav-item.active i{color:#5574d8!important}
+
+.welcome-hero{border-color:var(--hub-line);background:linear-gradient(135deg,rgba(85,116,216,.055),rgba(255,255,255,.72) 56%,rgba(80,153,117,.045))}
+.welcome-kicker,.files-kicker{color:#5574d8}
+.welcome-orb{background:rgba(255,255,255,.56);box-shadow:inset 0 0 30px rgba(255,255,255,.65),0 20px 50px rgba(31,34,31,.07)}
+.welcome-orb i{color:#5574d8}
+.quick-card:nth-child(1),.quick-card:nth-child(2),.quick-card:nth-child(3){border-color:var(--hub-line);background:rgba(255,255,255,.76)}
+.quick-card:nth-child(1) .quick-icon{background:#eef2ff;color:#5574d8}
+.quick-card:nth-child(2) .quick-icon{background:#edf7f1;color:#498b69}
+.quick-card:nth-child(3) .quick-icon{background:#fff5e8;color:#b97a2f}
+.quick-card:hover{border-color:var(--hub-line-strong);box-shadow:0 18px 38px rgba(31,34,31,.07)}
+
+.new-reminder-button,.new-calendar-event,.save-reminder,.files-primary-button,.files-modal-save,.pdf-add-annotation{border-color:#4d68bf;background:#5574d8;color:#fff;box-shadow:none}
+.new-reminder-button:hover,.new-calendar-event:hover,.save-reminder:hover,.files-primary-button:hover,.files-modal-save:hover,.pdf-add-annotation:hover{filter:none;background:#4965c3;box-shadow:0 8px 18px rgba(85,116,216,.16)}
+.cleanup-note,.calendar-help{border-color:#dce7e1;background:#f0f7f3;color:#5d7467}
+.cleanup-note i,.calendar-help i{color:#579070}
+.reminder-card,.reminder-card:nth-child(3n+2),.reminder-card:nth-child(3n){border-left-color:var(--hub-line)}
+.reminder-filters button.active{background:#eef2ff;color:#4965c3}
+.calendar-day.today{border-color:#aebdea;background:#f2f5ff}
+.calendar-day.today .calendar-day-head>span{background:#5574d8;color:#fff}
+
+.files-header::before{display:none}
+.files-secondary-button{border-color:var(--hub-line);background:rgba(255,255,255,.76);color:var(--hub-text)}
+.files-secondary-button:hover{border-color:var(--hub-line-strong);background:#fff;box-shadow:none;filter:none}
+.files-toolbar{border-color:var(--hub-line);background:rgba(255,255,255,.74)}
+.files-breadcrumbs button.current{background:#eef2ff;color:#4965c3}
+.files-drop-zone{border-color:#d3d9d2;background:rgba(255,255,255,.45)}
+.files-drop-zone>i{border-color:#dce3fa;background:#eef2ff;color:#5574d8}
+.files-drop-zone strong{color:#5f645f}
+.drive-card{border-color:var(--hub-line);background:rgba(255,255,255,.82)}
+.drive-card::before{display:none}
+.drive-card:hover{border-color:var(--hub-line-strong);box-shadow:0 14px 30px rgba(31,34,31,.065)}
+.drive-icon.folder{background:#fff4df;color:#b47a2a}
+.drive-icon.pdf{background:#fff0ef;color:#cb5752}
+.drive-icon.word{background:#edf2ff;color:#5574d8}
+.drive-actions button,.file-editor-head-actions button{box-shadow:none}
+.drive-actions button:hover,.file-editor-head-actions button:hover{transform:none;border-color:#dce3fa;background:#eef2ff;color:#5574d8;box-shadow:none}
+.drive-actions button.danger:hover{border-color:#efd9d7;background:#fff1f0;color:#c64d47}
+.files-modal-card,.file-editor-card{border-color:var(--hub-line)}
+.files-modal-head>button:hover{background:var(--hub-soft);color:var(--hub-black)}
+.file-editor-type,.pdf-panel-kicker{color:#5574d8}
+.pdf-annotation-chip{border-color:var(--hub-line);background:#f7f8f6}
+.files-tooltip{background:#252925;color:#fff;border-color:#252925;box-shadow:0 8px 20px rgba(20,24,20,.16)}
+
+html.dark-theme,body.dark-theme{
+    --hub-bg:#1b1e1b;
+    --hub-surface:rgba(36,39,36,.9);
+    --hub-surface-solid:#252825;
+    --hub-soft:#2b2f2b;
+    --hub-soft-2:#333733;
+    --hub-text:#e8ebe8;
+    --hub-muted:#a2a7a2;
+    --hub-line:#383d38;
+    --hub-line-strong:#4a504a;
+    --hub-black:#f0f2f0;
+    --hub-accent:#7f98e8;
+    --hub-accent-2:#7f98e8;
+    --hub-accent-soft:rgba(127,152,232,.13);
+}
+.dark-theme body::before,body.dark-theme::before{background:radial-gradient(circle at 82% 5%,rgba(127,152,232,.07),transparent 30%)}
+.dark-theme .sidebar{border-color:var(--hub-line);background:rgba(31,34,31,.92)}
+.dark-theme .nav-item:hover{background:#292d29}
+.dark-theme .nav-item.active,.dark-theme .nav-item.active:nth-child(1),.dark-theme .nav-item.active:nth-child(2),.dark-theme .nav-item.active:nth-child(3),.dark-theme .nav-item.active:nth-child(4){border-color:rgba(127,152,232,.22);background:rgba(127,152,232,.12);color:#b8c7f5;box-shadow:none}
+.dark-theme .nav-item.active i{color:#9fb2ed!important}
+.dark-theme .welcome-hero{border-color:var(--hub-line);background:linear-gradient(135deg,rgba(127,152,232,.065),rgba(31,34,31,.82) 56%,rgba(87,144,112,.04))}
+.dark-theme .welcome-orb{border-color:var(--hub-line);background:rgba(255,255,255,.035);box-shadow:none}
+.dark-theme .welcome-orb i{color:#9fb2ed}
+.dark-theme .quick-card:nth-child(1),.dark-theme .quick-card:nth-child(2),.dark-theme .quick-card:nth-child(3){border-color:var(--hub-line);background:rgba(31,34,31,.78)}
+.dark-theme .quick-card:hover{border-color:var(--hub-line-strong);background:#272a27;box-shadow:0 18px 38px rgba(0,0,0,.14)}
+.dark-theme .cleanup-note,.dark-theme .calendar-help{border-color:rgba(102,157,126,.2);background:rgba(80,139,105,.09);color:#9ab9a7}
+.dark-theme .files-primary-button,.dark-theme .files-modal-save,.dark-theme .pdf-add-annotation{border-color:#647bc5;background:#6f86d2;color:#fff;box-shadow:none}
+.dark-theme .files-primary-button:hover,.dark-theme .files-modal-save:hover,.dark-theme .pdf-add-annotation:hover{background:#7b91d8;box-shadow:none}
+.dark-theme .files-secondary-button{border-color:var(--hub-line);background:#252825;color:var(--hub-text)}
+.dark-theme .files-secondary-button:hover{border-color:var(--hub-line-strong);background:#2b2f2b}
+.dark-theme .files-toolbar,.dark-theme .drive-card,.dark-theme .files-empty,.dark-theme .files-drop-zone{border-color:var(--hub-line);background:rgba(31,34,31,.76)}
+.dark-theme .files-search,.dark-theme .files-view-toggle.active,.dark-theme .files-drop-zone>i,.dark-theme .files-empty>span,.dark-theme .files-empty>div button{border-color:var(--hub-line);background:#292d29;color:var(--hub-text)}
+.dark-theme .drive-card:hover{border-color:var(--hub-line-strong);background:#272a27}
+.dark-theme .drive-icon.folder{background:rgba(190,134,49,.14);color:#ddb266}
+.dark-theme .drive-icon.pdf{background:rgba(203,87,82,.14);color:#e78b87}
+.dark-theme .drive-icon.word{background:rgba(85,116,216,.16);color:#9db0ed}
+.dark-theme .drive-actions button,.dark-theme .file-editor-head-actions button{border-color:transparent;background:#292d29;color:#adb2ad}
+.dark-theme .drive-actions button:hover,.dark-theme .file-editor-head-actions button:hover{border-color:rgba(127,152,232,.22);background:rgba(127,152,232,.12);color:#b8c7f5}
+.dark-theme .files-modal-card,.dark-theme .file-editor-card{border-color:var(--hub-line);background:#202320}
+.dark-theme .files-field input,.dark-theme .files-field select,.dark-theme .files-modal-cancel,.dark-theme .pdf-edit-panel textarea,.dark-theme .pdf-edit-panel input,.dark-theme .pdf-edit-panel select{border-color:var(--hub-line);background:#1c1f1c;color:var(--hub-text)}
+.dark-theme .file-editor-head,.dark-theme .pdf-edit-panel,.dark-theme .file-editor-footer,.dark-theme .docx-toolbar{border-color:var(--hub-line);background:#252825}
+.dark-theme .docx-toolbar button{color:#adb2ad}
+.dark-theme .docx-toolbar button:hover{background:#303430;color:#fff}
+.dark-theme .docx-editor{border-color:var(--hub-line);background:#1d201d;color:var(--hub-text)}
+.dark-theme .pdf-preview{border-color:var(--hub-line);background:#1c1f1c}
+.dark-theme .pdf-annotation-chip{border-color:var(--hub-line);background:#292d29}
+.dark-theme .files-upload-toast{border-color:var(--hub-line);background:rgba(37,40,37,.96)}
+.dark-theme .files-tooltip{border-color:#eef0ee;background:#eef0ee;color:#242724}
+
+.file-editor-head>div:first-child{min-width:0;overflow:hidden}
+.file-editor-head-actions{flex:0 0 auto}
+
+@media(max-width:760px){
+    .drive-card{display:flex;align-items:stretch;min-height:88px}
+    .drive-card-main,.files-grid.list-mode .drive-card-main{min-width:0;min-height:88px;flex:1;padding:13px 8px 13px 13px}
+    .drive-icon,.files-grid.list-mode .drive-icon{width:40px;height:40px;flex-basis:40px;border-radius:12px;font-size:16px}
+    .drive-info{min-width:0;overflow:hidden}
+    .drive-actions,.files-grid.list-mode .drive-actions{position:static;align-self:center;flex:0 0 auto;margin-right:9px;opacity:1;transform:none}
+    .drive-actions button{width:28px;height:30px;border-color:var(--hub-line);background:transparent}
+    .file-editor-head{gap:10px;padding-left:16px;padding-right:12px}
+    .file-editor-head h2{max-width:100%;font-size:15px}
+}
+
+@media(max-width:430px){
+    .drive-card-main,.files-grid.list-mode .drive-card-main{padding-left:10px;gap:9px}
+    .drive-icon,.files-grid.list-mode .drive-icon{width:36px;height:36px;flex-basis:36px;font-size:14px}
+    .drive-actions,.files-grid.list-mode .drive-actions{gap:2px;margin-right:7px}
+    .drive-actions button{width:26px;height:28px;border-radius:8px;font-size:9px}
+    .drive-info strong{font-size:11px}
+    .drive-info small{font-size:8px}
+}
