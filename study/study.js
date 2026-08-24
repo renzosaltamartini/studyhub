@@ -183,7 +183,7 @@ function renderLoggedOut() {
     $("sessionStatus").classList.add("session-error");
     $("greeting").textContent = "Debes iniciar sesión";
     $("profileDetails").classList.add("hidden");
-    $("loggedOutMessage").textContent = "Inicia sesión con Google para acceder a tu espacio.";
+    $("loggedOutMessage").textContent = "";
     $("loggedOutMessage").classList.remove("hidden");
     $("loggedActions")?.classList.add("hidden");
     $("loginButton")?.classList.remove("hidden");
